@@ -1,5 +1,7 @@
 package com.rbgt.jw.controller;
 
+import com.rbgt.jw.config.resoponse.ResponseResult;
+import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwConfigurationUser;
 import com.rbgt.jw.service.JwConfigurationUserService;
 import io.swagger.annotations.Api;
@@ -18,6 +20,7 @@ import java.util.List;
  * @version： 1.0
  * @description:
  */
+@BaseResponse
 @Api(value = "/user", description = "用户接口")
 @RestController
 public class JwConfigurationUserController {
@@ -27,19 +30,19 @@ public class JwConfigurationUserController {
 
     @ApiOperation(value = "查询 - 所有用户信息")
     @GetMapping("/user/get/all")
-    public List<JwConfigurationUser> getAll(){
-        return jwConfigurationUserService.queryAll();
+    public ResponseResult<List<JwConfigurationUser>> getAll(){
+        return new ResponseResult(jwConfigurationUserService.queryAll());
     }
 
     @ApiOperation(value = "新增 - 用户信息")
     @PostMapping("/user/add")
-    public JwConfigurationUser add(@RequestBody @ApiParam(name = "jwConfigurationUser", value = "创建用户实体类")JwConfigurationUser jwConfigurationUser){
-        return jwConfigurationUserService.add(jwConfigurationUser);
+    public ResponseResult<JwConfigurationUser> add(@RequestBody @ApiParam(name = "jwConfigurationUser", value = "创建用户实体类")JwConfigurationUser jwConfigurationUser){
+        return new ResponseResult(jwConfigurationUserService.add(jwConfigurationUser));
     }
 
     @ApiOperation(value = "删除 - 用户信息")
     @PutMapping("/user/delete/{userId}")
-    public JwConfigurationUser delete(@PathVariable("userId") @ApiParam(name = "userId", value = "用户ID") String userId){
-        return jwConfigurationUserService.delete(userId);
+    public ResponseResult<JwConfigurationUser> delete(@PathVariable("userId") @ApiParam(name = "userId", value = "用户ID") String userId){
+        return new ResponseResult(jwConfigurationUserService.delete(userId));
     }
 }
