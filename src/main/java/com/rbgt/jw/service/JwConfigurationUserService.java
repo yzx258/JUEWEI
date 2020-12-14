@@ -21,5 +21,18 @@ public interface  JwConfigurationUserService extends IService<JwConfigurationUse
      */
     List<JwConfigurationUser> queryAll();
 
+    /**
+     * 新增用户信息
+     * @param jwConfigurationUser
+     * @return
+     */
+    JwConfigurationUser add(JwConfigurationUser jwConfigurationUser);
+
+    /**
+     * 逻辑删除数据
+     * @param userId
+     * @return
+     */
+    JwConfigurationUser delete(String userId);
 }
 

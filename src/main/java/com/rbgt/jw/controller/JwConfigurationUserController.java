@@ -4,9 +4,9 @@ import com.rbgt.jw.entity.JwConfigurationUser;
 import com.rbgt.jw.service.JwConfigurationUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,9 +25,21 @@ public class JwConfigurationUserController {
     @Autowired
     private JwConfigurationUserService jwConfigurationUserService;
 
-    @ApiOperation(value = "新建线索与新建关注线索")
+    @ApiOperation(value = "查询 - 所有用户信息")
     @GetMapping("/user/get/all")
     public List<JwConfigurationUser> getAll(){
         return jwConfigurationUserService.queryAll();
+    }
+
+    @ApiOperation(value = "新增 - 用户信息")
+    @PostMapping("/user/add")
+    public JwConfigurationUser add(@RequestBody @ApiParam(name = "jwConfigurationUser", value = "创建用户实体类")JwConfigurationUser jwConfigurationUser){
+        return jwConfigurationUserService.add(jwConfigurationUser);
+    }
+
+    @ApiOperation(value = "删除 - 用户信息")
+    @PutMapping("/user/delete/{userId}")
+    public JwConfigurationUser delete(@PathVariable("userId") @ApiParam(name = "userId", value = "用户ID") String userId){
+        return jwConfigurationUserService.delete(userId);
     }
 }

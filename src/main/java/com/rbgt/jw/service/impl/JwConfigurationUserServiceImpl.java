@@ -1,5 +1,7 @@
 package com.rbgt.jw.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.dao.JwConfigurationUserDao;
 import com.rbgt.jw.entity.JwConfigurationUser;
@@ -9,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户表 业务逻辑接口实现类
@@ -23,13 +26,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationUserDao, JwConfigurationUser> implements JwConfigurationUserService {
 
-    /**
-     * 查询所有用户信息
-     * @return
-     */
     @Override
     public List<JwConfigurationUser> queryAll() {
         return this.baseMapper.selectList(null);
+    }
+
+    @Override
+    public JwConfigurationUser add(JwConfigurationUser jwConfigurationUser) {
+        this.baseMapper.insert(jwConfigurationUser);
+        return jwConfigurationUser;
+    }
+
+    @Override
+    public JwConfigurationUser delete(String userId) {
+        List<JwConfigurationUser> userIds = this.baseMapper.selectList(new QueryWrapper<JwConfigurationUser>().eq("user_id", userId));
+        if(CollectionUtil.isNotEmpty(userIds)){
+            JwConfigurationUser jwConfigurationUser = userIds.get(0);
+            jwConfigurationUser.setIsDel(1);
+            jwConfigurationUser.insertOrUpdate();
+            return jwConfigurationUser;
+        }
+        return null;
     }
 }
 

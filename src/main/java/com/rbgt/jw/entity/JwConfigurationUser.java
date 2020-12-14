@@ -1,11 +1,8 @@
 package com.rbgt.jw.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -16,6 +13,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 用户表 的实体类
@@ -36,6 +34,7 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
      * 更新人 更新人
      */
     @ApiModelProperty("主ID")
+    @TableId(value = "id", type = IdType.UUID)
     private String id;
 
 
@@ -43,7 +42,7 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
      * 更新人 更新人
      */
     @ApiModelProperty("创建人")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     /**
@@ -113,7 +112,8 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
      * 是否删除 是否删除
      */
     @ApiModelProperty("是否删除 是否删除")
-    private String isDel;
+    @TableLogic
+    private int isDel;
     
 
 }
