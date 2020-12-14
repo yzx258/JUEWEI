@@ -50,10 +50,8 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
      */
     @ApiModelProperty("创建时间 创建时间")
     @TableField(fill = FieldFill.INSERT)
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新人 更新人
@@ -67,10 +65,8 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
      */
     @ApiModelProperty("更新时间 更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 用户ID 用户ID

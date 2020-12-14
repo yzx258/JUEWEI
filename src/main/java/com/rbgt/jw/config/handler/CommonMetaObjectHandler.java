@@ -6,6 +6,7 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @title:
@@ -61,7 +62,7 @@ public class CommonMetaObjectHandler implements MetaObjectHandler {
      * @param metaObject 元数据
      */
     private void setUpdateTime(MetaObject metaObject) {
-        this.setFieldData("updateTime", LocalDateTime.now(), metaObject);
+        this.setFieldData("updateTime", new Date(), metaObject);
     }
 
     /**
@@ -70,7 +71,7 @@ public class CommonMetaObjectHandler implements MetaObjectHandler {
      * @param metaObject 元数据
      */
     private void setCreateTime(MetaObject metaObject) {
-        this.setFieldData("createTime", LocalDateTime.now(), metaObject);
+        this.setFieldData("createTime",  new Date(), metaObject);
     }
 
 
