@@ -28,7 +28,7 @@ public class SwaggerConfig {
                 .pathMapping("/")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.mp"))
+                .apis(RequestHandlerSelectors.basePackage("com.rbgt.jw"))
                 .paths(PathSelectors.any())
                 .build();
     }

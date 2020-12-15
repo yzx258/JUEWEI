@@ -3,6 +3,7 @@ package com.rbgt.jw.controller;
 import com.rbgt.jw.config.handler.BaseException;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.enums.ResponseCode;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @description: 描述
  */
 @BaseResponse
+@Api(value = "/test", tags = "测试接口")
 @RestController
 @RequestMapping("/test")
 public class TestController {

@@ -24,7 +24,7 @@ import java.util.List;
  * @description:
  */
 @BaseResponse
-@Api(value = "/user", description = "用户接口")
+@Api(value = "/user", tags = "用户接口")
 @RestController
 public class JwConfigurationUserController {
 

@@ -10,15 +10,15 @@ public enum ResponseCode {
     /**
      * 成功返回的状态码
      */
-    SUCCESS(10200, "success"),
+    SUCCESS(200, "success"),
     /**
      * 资源不存在的状态码
      */
-    RESOURCES_NOT_EXIST(10201, "资源不存在"),
+    RESOURCES_NOT_EXIST(100001, "资源不存在"),
     /**
      * 所有无法识别的异常默认的返回状态码
      */
-    SERVICE_ERROR(50000, "服务器异常");
+    SERVICE_ERROR(100002, "服务器异常");
     /**
      * 状态码
      */
