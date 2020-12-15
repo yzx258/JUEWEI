@@ -52,7 +52,7 @@ public class CommonMetaObjectHandler implements MetaObjectHandler {
      */
     private void setCreatorCode(MetaObject metaObject) {
         String operator = this.getOperator();
-        this.setFieldData("createdBy", operator, metaObject);
+        this.setFieldData("createBy", operator, metaObject);
     }
 
 
