@@ -13,7 +13,7 @@ import java.util.List;
  * @description ：用户表 接口业务逻辑接口
  * @Version 1.0
  */
-public interface  JwConfigurationUserService extends IService<JwConfigurationUser> {
+public interface JwConfigurationUserService extends IService<JwConfigurationUser> {
 
     /**
      * 查询所有用户信息
@@ -34,5 +34,7 @@ public interface  JwConfigurationUserService extends IService<JwConfigurationUse
      * @return
      */
     JwConfigurationUser delete(String userId);
+
+
 }
 

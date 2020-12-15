@@ -1,8 +1,13 @@
 package com.rbgt.jw.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.rbgt.jw.entity.JwConfigurationUser;
+import com.rbgt.jw.service.dto.configuration.JwConfigurationUserDTO;
+import com.rbgt.jw.service.spec.configuration.JwConfigurationUserSpec;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户表 dao接口
@@ -14,6 +19,13 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface JwConfigurationUserDao extends BaseMapper<JwConfigurationUser> {
-	
+
+    /**
+     * 分页查询
+     * @param param
+     * @param page
+     * @return
+     */
+    IPage<JwConfigurationUserDTO> search(@Param("param") JwConfigurationUserSpec param, Page<JwConfigurationUser> page);
 	
 }

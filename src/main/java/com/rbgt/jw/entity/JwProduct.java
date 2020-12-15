@@ -9,21 +9,22 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 用户表 的实体类
+ * 产品信息表 的实体类
  *
  * @author ： huangdefu@yiautos.com
- * @description ：用户表 的实体类
- * @date ： 2020-12-14 18:35:58
+ * @description ：产品信息表 的实体类
+ * @date ： 2020-12-15 14:22:29
  * @Version ：1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("jw_configuration_user")
-public class JwConfigurationUser extends Model<JwConfigurationUser> {
+@TableName("jw_product")
+public class JwProduct extends Model<JwProduct> {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,11 +34,12 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
 
 
     /**
-     * 更新人 更新人
+     * 创建人 创建人
      */
-    @ApiModelProperty("创建人")
+    @ApiModelProperty("创建人 创建人")
     @TableField(fill = FieldFill.INSERT)
     private String createBy;
+
 
     /**
      * 创建时间 创建时间
@@ -45,8 +47,9 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
     @ApiModelProperty("创建时间 创建时间")
     @TableField(fill = FieldFill.INSERT)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
+
 
     /**
      * 更新人 更新人
@@ -55,50 +58,72 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String lastModifiedBy;
 
+
     /**
      * 更新时间 更新时间
      */
     @ApiModelProperty("更新时间 更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
-    /**
-     * 用户ID 用户ID
-     */
-    @ApiModelProperty("用户ID 用户ID")
-    private String userId;
 
     /**
-     * 用户名称 用户名称
+     * 产品ID
      */
-    @ApiModelProperty("用户名称 用户名称")
-    private String userName;
-    
-    /**
-     * 联系电话 联系电话
-     */
-    @ApiModelProperty("联系电话 联系电话")
-    private String userMobile;
+    @ApiModelProperty("产品ID")
+    private String productId;
+
 
     /**
-     * 用户编号 用户编号
+     * 产品编号
      */
-    @ApiModelProperty("用户编号 用户编号")
-    private String userNo;
+    @ApiModelProperty("产品编号")
+    private String productNo;
+
 
     /**
-     * 用户账号
+     * 产品名称
      */
-    @ApiModelProperty("用户账号")
-    private String userAccount;
-    
+    @ApiModelProperty("产品名称")
+    private String productName;
+
+
     /**
-     * 用户密码 用户密码
+     * 产品规格
      */
-    @ApiModelProperty("用户密码 用户密码")
-    private String userPwd;
+    @ApiModelProperty("产品规格")
+    private Integer productSpecifications;
+
+
+    /**
+     * 产品包装
+     */
+    @ApiModelProperty("产品包装")
+    private Integer productPack;
+
+
+    /**
+     * 产品口味
+     */
+    @ApiModelProperty("产品口味")
+    private Integer productTaste;
+
+
+    /**
+     * 进货价格
+     */
+    @ApiModelProperty("进货价格")
+    private BigDecimal stockPrice;
+
+
+    /**
+     * 零售价格
+     */
+    @ApiModelProperty("零售价格")
+    private BigDecimal retailPrice;
+
 
     /**
      * 是否删除 是否删除
@@ -106,6 +131,5 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
     @ApiModelProperty("是否删除 是否删除")
     @TableLogic
     private int isDel;
-    
 
 }
