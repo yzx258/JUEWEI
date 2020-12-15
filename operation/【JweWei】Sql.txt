@@ -1,3 +1,4 @@
+-- 相关表结构
 CREATE TABLE jw_configuration_user(
     id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
     create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
