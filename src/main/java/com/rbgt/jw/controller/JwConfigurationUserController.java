@@ -1,9 +1,12 @@
 package com.rbgt.jw.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwConfigurationUser;
 import com.rbgt.jw.service.JwConfigurationUserService;
+import com.rbgt.jw.service.dto.configuration.JwConfigurationUserDTO;
+import com.rbgt.jw.service.spec.configuration.JwConfigurationUserSpec;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -32,6 +35,12 @@ public class JwConfigurationUserController {
     @GetMapping("/user/get/all")
     public ResponseResult<List<JwConfigurationUser>> getAll(){
         return new ResponseResult(jwConfigurationUserService.queryAll());
+    }
+
+    @ApiOperation(value = "查询 - 分页用户信息")
+    @PostMapping("/user/search")
+    public ResponseResult<IPage<JwConfigurationUserDTO>> search(@RequestBody JwConfigurationUserSpec spec){
+        return new ResponseResult(jwConfigurationUserService.search(spec));
     }
 
     @ApiOperation(value = "新增 - 用户信息")

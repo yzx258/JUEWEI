@@ -2,10 +2,13 @@ package com.rbgt.jw.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.dao.JwConfigurationUserDao;
 import com.rbgt.jw.entity.JwConfigurationUser;
 import com.rbgt.jw.service.JwConfigurationUserService;
+import com.rbgt.jw.service.dto.configuration.JwConfigurationUserDTO;
+import com.rbgt.jw.service.spec.configuration.JwConfigurationUserSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -47,6 +50,12 @@ public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationU
             return jwConfigurationUser;
         }
         return null;
+    }
+
+    @Override
+    public IPage<JwConfigurationUserDTO> search(JwConfigurationUserSpec spec) {
+        IPage<JwConfigurationUserDTO> search = this.baseMapper.search(spec, spec.getPage());
+        return search;
     }
 }
 

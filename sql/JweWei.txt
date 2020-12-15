@@ -1,0 +1,251 @@
+CREATE TABLE jw_configuration_user(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    user_id VARCHAR(32)    COMMENT '用户ID 用户ID' ,
+    user_name VARCHAR(32)    COMMENT '用户名称 用户名称' ,
+    user_mobile VARCHAR(32)    COMMENT '联系电话 联系电话' ,
+    user_no VARCHAR(32)    COMMENT '用户编号 用户编号' ,
+    user_account VARCHAR(32)    COMMENT '用户账号' ,
+    user_pwd VARCHAR(32)    COMMENT '用户密码 用户密码' ,
+    is_del INT(1)    COMMENT '是否删除 是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '用户表 ';
+
+CREATE TABLE jw_configuration_user_role(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    user_id VARCHAR(32)    COMMENT '用户ID 用户ID' ,
+    role_id VARCHAR(32)    COMMENT '角色ID 角色ID' ,
+    is_del INT(1)    COMMENT '是否删除 是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '用户角色表 ';;
+
+CREATE TABLE jw_configuration_role(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    role_id VARCHAR(32)    COMMENT '角色ID 角色ID' ,
+    role_name VARCHAR(32)    COMMENT '角色名称 角色名称' ,
+    role_label VARCHAR(32)    COMMENT '角色标签 角色标签' ,
+    is_del INT(1)    COMMENT '是否删除 是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '角色表 ';;
+
+CREATE TABLE jw_shop(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    shop_id VARCHAR(32)    COMMENT '门店ID' ,
+    shop_no VARCHAR(32)    COMMENT '门店编号' ,
+    shop_name VARCHAR(32)    COMMENT '门店名称' ,
+    market_name VARCHAR(32)    COMMENT '所属市场' ,
+    zone_name VARCHAR(32)    COMMENT '所属战区' ,
+    commissioner_name VARCHAR(32)    COMMENT '市场专员' ,
+    commissioner_mobile VARCHAR(32)    COMMENT '专员电话' ,
+    shop_manager_name VARCHAR(32)    COMMENT '门店店长' ,
+    shop_manager_mobile VARCHAR(32)    COMMENT '店长电话' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '门店信息表 ';;
+
+CREATE TABLE jw_product(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    product_id VARCHAR(32)    COMMENT '产品ID' ,
+    product_no VARCHAR(32)    COMMENT '产品编号' ,
+    product_name VARCHAR(32)    COMMENT '产品名称' ,
+    product_specifications INT    COMMENT '产品规格' ,
+    product_pack INT    COMMENT '产品包装' ,
+    product_taste INT    COMMENT '产品口味' ,
+    stock_price DECIMAL(32,8)    COMMENT '进货价格' ,
+    retail_price DECIMAL(32,8)    COMMENT '零售价格' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '产品信息表 ';;
+
+CREATE TABLE jw_purchase_info(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    purchase_id VARCHAR(32)    COMMENT '进货ID' ,
+    shop_status INT    COMMENT '进货状态' ,
+    shop_id VARCHAR(32)    COMMENT '门店ID' ,
+    shop_name VARCHAR(32)    COMMENT '门店名称' ,
+    purchase_time DATETIME    COMMENT '下单日期' ,
+    arrive_time DATETIME    COMMENT '到货日期' ,
+    responsible_id VARCHAR(32)    COMMENT '收货人ID' ,
+    responsible_name VARCHAR(32)    COMMENT '收货人名称' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '进货信息表 ';;
+
+CREATE TABLE jw_purchase_product(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    general_product_id VARCHAR(32)    COMMENT '进货/调货产品ID' ,
+    purchase_id VARCHAR(32)    COMMENT '进货ID' ,
+    product_id VARCHAR(32)    COMMENT '产品ID' ,
+    product_name VARCHAR(32)    COMMENT '产品名称' ,
+    product_number INT    COMMENT '产品数量' ,
+    change_product_number INT    COMMENT '最终产品数量' ,
+    is_consistent VARCHAR(1)    COMMENT '数量是否一致' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '进货产品记录表 ';;
+
+CREATE TABLE jw_purchase_check(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    shop_id VARCHAR(32)    COMMENT '门店ID' ,
+    shop_name VARCHAR(32)    COMMENT '门店名称' ,
+    arrive_time DATETIME    COMMENT '到货日期' ,
+    responsible_id VARCHAR(32)    COMMENT '收货人ID' ,
+    responsible_name VARCHAR(32)    COMMENT '收货人名称' ,
+		is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '到货核对信息表 ';;
+
+CREATE TABLE jw_field_change_record(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    responsible_id VARCHAR(32)    COMMENT '操作人ID' ,
+    responsible_name VARCHAR(32)    COMMENT '操作人名称' ,
+    field_name VARCHAR(32)    COMMENT '字段名称' ,
+    original_value VARCHAR(32)    COMMENT '原始值' ,
+    change_value VARCHAR(32)    COMMENT '变更至' ,
+    is_change VARCHAR(1)    COMMENT '是否变更' ,
+    change_note VARCHAR(32)    COMMENT '备注' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '字段变更记录表 ';;
+
+CREATE TABLE jw_cargo_info(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    cargo_id VARCHAR(32)    COMMENT '调货ID' ,
+    cargo_status INT    COMMENT '调货状态' ,
+    cargo_shop_id VARCHAR(32)    COMMENT '调出门店ID' ,
+    cargo_shop_name VARCHAR(32)    COMMENT '调出门店名称' ,
+    call_in_shop_id VARCHAR(32)    COMMENT '调入门店ID' ,
+    call_in_shop_name VARCHAR(32)    COMMENT '调入门店名称' ,
+    cargo_time DATETIME    COMMENT '调货时间' ,
+    responsible_id VARCHAR(32)    COMMENT '负责人ID' ,
+    responsible_name VARCHAR(32)    COMMENT '负责人名称' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '调货信息表 ';;
+
+CREATE TABLE jw_breakage_info(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    shop_id VARCHAR(32)    COMMENT '门店ID' ,
+    shop_name VARCHAR(32)    COMMENT '门店名称' ,
+    breakage_time DATETIME    COMMENT '报损日期' ,
+    responsible_id VARCHAR(32)    COMMENT '负责人ID' ,
+    responsible_name VARCHAR(32)    COMMENT '负责人名称' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '报损信息表 ';;
+
+CREATE TABLE jw_configuration_daily(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    daily_id VARCHAR(32)    COMMENT '日结配置ID' ,
+    shop_id VARCHAR(32)    COMMENT '门店ID' ,
+    shop_name VARCHAR(32)    COMMENT '门店名称' ,
+    responsible_id VARCHAR(32)    COMMENT '收银员ID' ,
+    responsible_name VARCHAR(32)    COMMENT '收银员名称' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '日结配置表 ';;
+
+CREATE TABLE jw_configuration_basic(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    basic_id VARCHAR(32)    COMMENT '基础配置ID' ,
+    basic_key VARCHAR(32)    COMMENT '配置名称' ,
+    basic_type INT(1)  COMMENT '配置类型' ,
+    basic_value VARCHAR(32)    COMMENT '配置值' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '基础数据配置 ';;
+
+CREATE TABLE jw_configuration_daily_detail(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    daily_id VARCHAR(32)    COMMENT '日结ID' ,
+    daily_key VARCHAR(32)    COMMENT '日结名称' ,
+    daily_value VARCHAR(32)    COMMENT '日结值' ,
+    daily_type VARCHAR(32)    COMMENT '日结类型' ,
+    is_del INT(1)   COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '日结配置明细表 ';;
+
+CREATE TABLE jw_daily_record(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    daliy_record_id VARCHAR(32)    COMMENT '日结记录ID' ,
+    shop_id VARCHAR(32)    COMMENT '门店ID' ,
+    shop_name VARCHAR(32)    COMMENT '门店名称' ,
+    succession_time DATETIME    COMMENT '交班日期' ,
+    responsible_id VARCHAR(32)    COMMENT '收银员ID' ,
+    responsible_name VARCHAR(32)    COMMENT '收银员名称' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '交班日结记录表 ';;
+
+CREATE TABLE jw_daily_record_detail(
+    id VARCHAR(32) NOT NULL   COMMENT 'ID 唯一标识' ,
+    create_by VARCHAR(32)    COMMENT '创建人 创建人' ,
+    create_time DATETIME    COMMENT '创建时间 创建时间' ,
+    last_modified_by VARCHAR(32)    COMMENT '更新人 更新人' ,
+    update_time DATETIME    COMMENT '更新时间 更新时间' ,
+    daily_record_id VARCHAR(32)    COMMENT '日结ID' ,
+    daily_key VARCHAR(32)    COMMENT '日结名称' ,
+    daily_value VARCHAR(32)    COMMENT '日结值' ,
+    daily_type VARCHAR(32)    COMMENT '日结类型' ,
+    is_del INT(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = '交班日结明细表 ';;

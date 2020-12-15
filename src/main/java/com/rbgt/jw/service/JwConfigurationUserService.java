@@ -1,7 +1,12 @@
 package com.rbgt.jw.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rbgt.jw.entity.JwConfigurationUser;
+import com.rbgt.jw.service.dto.configuration.JwConfigurationUserDTO;
+import com.rbgt.jw.service.spec.configuration.JwConfigurationUserSpec;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -34,6 +39,13 @@ public interface JwConfigurationUserService extends IService<JwConfigurationUser
      * @return
      */
     JwConfigurationUser delete(String userId);
+
+    /**
+     * 分页查询
+     * @param spec
+     * @return
+     */
+    IPage<JwConfigurationUserDTO> search(JwConfigurationUserSpec spec);
 
 
 }
