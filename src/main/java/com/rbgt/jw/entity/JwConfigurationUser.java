@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -50,7 +51,8 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
      */
     @ApiModelProperty("创建时间 创建时间")
     @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     /**
@@ -65,7 +67,8 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
      */
     @ApiModelProperty("更新时间 更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     /**
