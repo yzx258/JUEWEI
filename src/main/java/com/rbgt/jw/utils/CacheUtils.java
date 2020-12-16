@@ -2,6 +2,7 @@ package com.rbgt.jw.utils;
 
 import cn.hutool.cache.Cache;
 import cn.hutool.cache.CacheUtil;
+import cn.hutool.core.date.DateUnit;
 import org.springframework.stereotype.Component;
 
 /**
@@ -33,5 +34,15 @@ public class CacheUtils {
      */
     public void saveCache(String key,String value){
         fifoCache.put(key,value);
+    }
+
+    /**
+     * 设置时间缓存信息
+     * @param key
+     * @param value
+     * @param time
+     */
+    public void saveCache(String key,String value,long time){
+        fifoCache.put(key,value,time);
     }
 }

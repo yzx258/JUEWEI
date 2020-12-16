@@ -27,8 +27,6 @@ import java.util.Map;
 public class EnumController {
 
     @Autowired
-    private CacheUtils cacheUtils;
-    @Autowired
     private EnumsUtils enumsUtils;
 
     @ApiOperation(value = "查询 - 所有枚举信息")

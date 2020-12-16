@@ -1,5 +1,6 @@
 package com.rbgt.jw.utils;
 
+import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.util.ClassUtil;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class EnumsUtils {
     /**
      * 需要获取的包路径
      */
-    private static final String URL = "java.lang.Enum";
+    private static final String URL = "com.rbgt.jw.enums";
 
     /**
      * 根据包路径获取所有枚举
@@ -57,7 +58,7 @@ public class EnumsUtils {
             }
             map.put(obj.getSimpleName(),list);
         }
-        cacheUtils.saveCache("EnumsAll",JSON.toJSONString(map));
+        cacheUtils.saveCache("EnumsAll",JSON.toJSONString(map), DateUnit.SECOND.getMillis() * 5);
         return map;
     }
 }

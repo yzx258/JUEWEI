@@ -18,7 +18,16 @@ public enum ResponseCode {
     /**
      * 所有无法识别的异常默认的返回状态码
      */
-    SERVICE_ERROR(100002, "服务器异常");
+    SERVICE_ERROR(100002, "服务器异常"),
+    /**
+     * TOKEN不能为空，请检查URL后缀地址【例如：http://abc/efg?token=abcd】
+     */
+    TOKEN_NULL_ERROR(100003, "TOKEN不能为空，请检查URL后缀地址【例如：http://abc/efg?token=abcd】"),
+    /**
+     * TOKEN无效
+     */
+    TOKEN_INVALID_ERROR(100003, "无效的TOKEN"),
+    ;
     /**
      * 状态码
      */
