@@ -1,76 +1,106 @@
-package com.rbgt.jw.service.dto;
+package com.rbgt.jw.entity;
 
+import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 /**
- * jw_configuration_daily_detail_detail表的DTO
+ * 交班日结明细表 的实体类
  *
  * @author ： huangdefu@yiautos.com
- * @date : 2020-12-15 15:22:14
- * @description ：jw_configuration_daily_detail_detail表的DTO
- * @Version 1.0
+ * @description ：交班日结明细表 的实体类
+ * @date ： 2020-12-16 18:24:00
+ * @Version ：1.0
  */
 @Data
-public class JwConfigurationDailyDetailDetailDTO {
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("jw_daily_record_detail")
+public class JwDailyRecordDetail extends Model<JwDailyRecordDetail> {
 
-    /**
-     * ID 唯一标识
-     */
-    @ApiModelProperty("ID 唯一标识")
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty("主ID")
+    @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
+
+
     /**
      * 创建人 创建人
      */
     @ApiModelProperty("创建人 创建人")
+    @TableField(fill = FieldFill.INSERT)
     private String createBy;
+
+
     /**
      * 创建时间 创建时间
      */
     @ApiModelProperty("创建时间 创建时间")
+    @TableField(fill = FieldFill.INSERT)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
+
+
     /**
      * 更新人 更新人
      */
     @ApiModelProperty("更新人 更新人")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String lastModifiedBy;
+
+
     /**
      * 更新时间 更新时间
      */
     @ApiModelProperty("更新时间 更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
+
+
     /**
      * 日结ID
      */
     @ApiModelProperty("日结ID")
     private String dailyRecordId;
+
+
     /**
      * 日结名称
      */
     @ApiModelProperty("日结名称")
     private String dailyKey;
+
+
     /**
      * 日结值
      */
     @ApiModelProperty("日结值")
     private String dailyValue;
+
+
     /**
      * 日结类型
      */
     @ApiModelProperty("日结类型")
     private String dailyType;
+
+
     /**
      * 是否删除
      */
     @ApiModelProperty("是否删除")
-    private Integer isDel;
+    private int isDel;
+
 
 }

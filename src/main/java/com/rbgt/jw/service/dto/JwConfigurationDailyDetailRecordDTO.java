@@ -1,106 +1,76 @@
-package com.rbgt.jw.entity;
+package com.rbgt.jw.service.dto;
 
-import com.baomidou.mybatisplus.annotation.*;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 /**
- * 日结配置表 的实体类
+ * jw_configuration_daily_detail_detail表的DTO
  *
  * @author ： huangdefu@yiautos.com
- * @description ：日结配置表 的实体类
- * @date ： 2020-12-16 18:24:00
- * @Version ：1.0
+ * @date : 2020-12-15 15:22:14
+ * @description ：jw_configuration_daily_detail_detail表的DTO
+ * @Version 1.0
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@TableName("jw_configuration_daily")
-public class JwConfigurationDaily extends Model<JwConfigurationDaily> {
+public class JwConfigurationDailyDetailRecordDTO {
 
-    private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty("主ID")
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    /**
+     * ID 唯一标识
+     */
+    @ApiModelProperty("ID 唯一标识")
     private String id;
-
-
     /**
      * 创建人 创建人
      */
     @ApiModelProperty("创建人 创建人")
-    @TableField(fill = FieldFill.INSERT)
     private String createBy;
-
-
     /**
      * 创建时间 创建时间
      */
     @ApiModelProperty("创建时间 创建时间")
-    @TableField(fill = FieldFill.INSERT)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
-
-
     /**
      * 更新人 更新人
      */
     @ApiModelProperty("更新人 更新人")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String lastModifiedBy;
-
-
     /**
      * 更新时间 更新时间
      */
     @ApiModelProperty("更新时间 更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
-
-
     /**
-     * 门店ID
+     * 日结ID
      */
-    @ApiModelProperty("门店ID")
-    private String shopId;
-
-
+    @ApiModelProperty("日结ID")
+    private String dailyRecordId;
     /**
-     * 门店名称
+     * 日结名称
      */
-    @ApiModelProperty("门店名称")
-    private String shopName;
-
-
+    @ApiModelProperty("日结名称")
+    private String dailyKey;
     /**
-     * 收银员ID
+     * 日结值
      */
-    @ApiModelProperty("收银员ID")
-    private String responsibleId;
-
-
+    @ApiModelProperty("日结值")
+    private String dailyValue;
     /**
-     * 收银员名称
+     * 日结类型
      */
-    @ApiModelProperty("收银员名称")
-    private String responsibleName;
-
-
+    @ApiModelProperty("日结类型")
+    private String dailyType;
     /**
      * 是否删除
      */
     @ApiModelProperty("是否删除")
-    private int isDel;
-
+    private Integer isDel;
 
 }

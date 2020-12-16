@@ -1,9 +1,7 @@
 package com.rbgt.jw.service.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -11,7 +9,7 @@ import java.util.Date;
  * jw_configuration_daily_detail表的DTO
  *
  * @author ： huangdefu@yiautos.com
- * @date : 2020-12-15 15:22:14
+ * @date : 2020-12-16 18:24:00
  * @description ：jw_configuration_daily_detail表的DTO
  * @Version 1.0
  */
@@ -32,8 +30,6 @@ public class JwConfigurationDailyDetailDTO {
      * 创建时间 创建时间
      */
     @ApiModelProperty("创建时间 创建时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
     /**
      * 更新人 更新人
@@ -44,8 +40,6 @@ public class JwConfigurationDailyDetailDTO {
      * 更新时间 更新时间
      */
     @ApiModelProperty("更新时间 更新时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
     /**
      * 日结ID
@@ -71,6 +65,6 @@ public class JwConfigurationDailyDetailDTO {
      * 是否删除
      */
     @ApiModelProperty("是否删除")
-    private Integer isDel;
+    private int isDel;
 
 }

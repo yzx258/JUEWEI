@@ -16,7 +16,7 @@ import java.util.Date;
  *
  * @author ： huangdefu@yiautos.com
  * @description ：到货核对信息表 的实体类
- * @date ： 2020-12-15 13:57:04
+ * @date ： 2020-12-16 18:24:01
  * @Version ：1.0
  */
 @Data
@@ -102,10 +102,12 @@ public class JwPurchaseCheck extends Model<JwPurchaseCheck> {
     @ApiModelProperty("收货人名称")
     private String responsibleName;
 
+
     /**
-     * 是否删除 是否删除
+     * 是否删除
      */
-    @ApiModelProperty("是否删除 是否删除")
-    @TableLogic
+    @ApiModelProperty("是否删除")
     private int isDel;
+
+
 }

@@ -1,7 +1,7 @@
 package com.rbgt.jw.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.rbgt.jw.entity.JwConfigurationDailyRecord;
+import com.rbgt.jw.entity.JwDailyRecord;
 
 /**
  * 交班日结记录表 接口业务逻辑接口
@@ -11,7 +11,7 @@ import com.rbgt.jw.entity.JwConfigurationDailyRecord;
  * @description ：交班日结记录表 接口业务逻辑接口
  * @Version 1.0
  */
-public interface JwConfigurationDailyRecordService extends IService<JwConfigurationDailyRecord>  {
+public interface JwConfigurationDailyRecordService extends IService<JwDailyRecord>  {
 
 }
 

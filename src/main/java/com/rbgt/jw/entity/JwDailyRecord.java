@@ -12,18 +12,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * 调货信息表 的实体类
+ * 交班日结记录表 的实体类
  *
  * @author ： huangdefu@yiautos.com
- * @description ：调货信息表 的实体类
+ * @description ：交班日结记录表 的实体类
  * @date ： 2020-12-16 18:24:01
  * @Version ：1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("jw_cargo_info")
-public class JwCargoInfo extends Model<JwCargoInfo> {
+@TableName("jw_daily_record")
+public class JwDailyRecord extends Model<JwDailyRecord> {
 
     private static final long serialVersionUID = 1L;
 
@@ -69,58 +69,44 @@ public class JwCargoInfo extends Model<JwCargoInfo> {
 
 
     /**
-     * 调货状态
+     * 日结记录ID
      */
-    @ApiModelProperty("调货状态")
-    private int cargoStatus;
+    @ApiModelProperty("日结记录ID")
+    private String daliyRecordId;
 
 
     /**
-     * 调出门店ID
+     * 门店ID
      */
-    @ApiModelProperty("调出门店ID")
-    private String cargoShopId;
+    @ApiModelProperty("门店ID")
+    private String shopId;
 
 
     /**
-     * 调出门店名称
+     * 门店名称
      */
-    @ApiModelProperty("调出门店名称")
-    private String cargoShopName;
+    @ApiModelProperty("门店名称")
+    private String shopName;
 
 
     /**
-     * 调入门店ID
+     * 交班日期
      */
-    @ApiModelProperty("调入门店ID")
-    private String callInShopId;
+    @ApiModelProperty("交班日期")
+    private Date successionTime;
 
 
     /**
-     * 调入门店名称
+     * 收银员ID
      */
-    @ApiModelProperty("调入门店名称")
-    private String callInShopName;
-
-
-    /**
-     * 调货时间
-     */
-    @ApiModelProperty("调货时间")
-    private Date cargoTime;
-
-
-    /**
-     * 负责人ID
-     */
-    @ApiModelProperty("负责人ID")
+    @ApiModelProperty("收银员ID")
     private String responsibleId;
 
 
     /**
-     * 负责人名称
+     * 收银员名称
      */
-    @ApiModelProperty("负责人名称")
+    @ApiModelProperty("收银员名称")
     private String responsibleName;
 
 

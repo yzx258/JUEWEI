@@ -7,6 +7,8 @@ package com.rbgt.jw.enums;
  * @description: 描述
  */
 public enum ResponseCode {
+
+    // 系统异常
     /**
      * 成功返回的状态码
      */
@@ -27,6 +29,11 @@ public enum ResponseCode {
      * TOKEN无效
      */
     TOKEN_INVALID_ERROR(100003, "无效的TOKEN"),
+    // 用户信息异常
+    /**
+     * 找不到用户信息
+     */
+    USER_NOT_ERROR(200001, "找不到用户信息"),
     ;
     /**
      * 状态码

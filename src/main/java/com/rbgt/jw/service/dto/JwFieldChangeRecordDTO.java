@@ -6,15 +6,15 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * jw_configuration_daily表的DTO
+ * jw_field_change_record表的DTO
  *
  * @author ： huangdefu@yiautos.com
- * @date : 2020-12-16 18:24:00
- * @description ：jw_configuration_daily表的DTO
+ * @date : 2020-12-16 18:24:01
+ * @description ：jw_field_change_record表的DTO
  * @Version 1.0
  */
 @Data
-public class JwConfigurationDailyDTO {
+public class JwFieldChangeRecordDTO {
 
     /**
      * ID 唯一标识
@@ -42,25 +42,40 @@ public class JwConfigurationDailyDTO {
     @ApiModelProperty("更新时间 更新时间")
     private Date updateTime;
     /**
-     * 门店ID
+     * 操作人ID
      */
-    @ApiModelProperty("门店ID")
-    private String shopId;
-    /**
-     * 门店名称
-     */
-    @ApiModelProperty("门店名称")
-    private String shopName;
-    /**
-     * 收银员ID
-     */
-    @ApiModelProperty("收银员ID")
+    @ApiModelProperty("操作人ID")
     private String responsibleId;
     /**
-     * 收银员名称
+     * 操作人名称
      */
-    @ApiModelProperty("收银员名称")
+    @ApiModelProperty("操作人名称")
     private String responsibleName;
+    /**
+     * 字段名称
+     */
+    @ApiModelProperty("字段名称")
+    private String fieldName;
+    /**
+     * 原始值
+     */
+    @ApiModelProperty("原始值")
+    private String originalValue;
+    /**
+     * 变更至
+     */
+    @ApiModelProperty("变更至")
+    private String changeValue;
+    /**
+     * 是否变更
+     */
+    @ApiModelProperty("是否变更")
+    private String isChange;
+    /**
+     * 备注
+     */
+    @ApiModelProperty("备注")
+    private String changeNote;
     /**
      * 是否删除
      */

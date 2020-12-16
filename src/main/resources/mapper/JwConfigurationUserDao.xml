@@ -4,7 +4,7 @@
 <mapper namespace="com.rbgt.jw.dao.JwConfigurationUserDao">
 
     <!-- 分页搜索 -->
-    <select id="search" resultType="com.rbgt.jw.service.dto.configuration.JwConfigurationUserDTO">
+    <select id="search" resultType="com.rbgt.jw.service.dto.JwConfigurationUserDTO">
         select jcu.* from jw_configuration_user jcu
 <!--        <where>-->
 <!--            &lt;!&ndash; 关键字搜索[模板，需要修改] &ndash;&gt;-->

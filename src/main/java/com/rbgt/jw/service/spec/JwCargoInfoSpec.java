@@ -4,14 +4,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * jw_cargo_info表的Spec
  *
  * @author ： huangdefu@yiautos.com
- * @date : 2020-12-15 15:22:14
+ * @date : 2020-12-16 18:24:01
  * @description ：jw_cargo_info表的Spec
  * @Version 1.0
  */
@@ -47,15 +46,10 @@ public class JwCargoInfoSpec {
     @ApiModelProperty("更新时间 更新时间")
     private Date updateTime;
     /**
-     * 调货ID
-     */
-    @ApiModelProperty("调货ID")
-    private String cargoId;
-    /**
      * 调货状态
      */
     @ApiModelProperty("调货状态")
-    private Integer cargoStatus;
+    private int cargoStatus;
     /**
      * 调出门店ID
      */
@@ -80,7 +74,7 @@ public class JwCargoInfoSpec {
      * 调货时间
      */
     @ApiModelProperty("调货时间")
-    private LocalDateTime cargoTime;
+    private Date cargoTime;
     /**
      * 负责人ID
      */
@@ -95,7 +89,7 @@ public class JwCargoInfoSpec {
      * 是否删除
      */
     @ApiModelProperty("是否删除")
-    private Integer isDel;
+    private int isDel;
 
     @ApiModelProperty("分页参数")
     private Page page;

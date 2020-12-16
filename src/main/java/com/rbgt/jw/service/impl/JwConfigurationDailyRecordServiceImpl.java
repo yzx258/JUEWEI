@@ -2,7 +2,7 @@ package com.rbgt.jw.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.dao.JwConfigurationDailyRecordDao;
-import com.rbgt.jw.entity.JwConfigurationDailyRecord;
+import com.rbgt.jw.entity.JwDailyRecord;
 import com.rbgt.jw.service.JwConfigurationDailyRecordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class JwConfigurationDailyRecordServiceImpl extends ServiceImpl<JwConfigurationDailyRecordDao, JwConfigurationDailyRecord> implements JwConfigurationDailyRecordService {
+public class JwConfigurationDailyRecordServiceImpl extends ServiceImpl<JwConfigurationDailyRecordDao, JwDailyRecord> implements JwConfigurationDailyRecordService {
 
 }
 

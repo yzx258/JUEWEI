@@ -1,12 +1,10 @@
 package com.rbgt.jw.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rbgt.jw.entity.JwConfigurationUser;
-import com.rbgt.jw.service.dto.configuration.JwConfigurationUserDTO;
-import com.rbgt.jw.service.spec.configuration.JwConfigurationUserSpec;
-import org.apache.ibatis.annotations.Param;
+import com.rbgt.jw.service.dto.JwConfigurationUserDTO;
+import com.rbgt.jw.service.spec.JwConfigurationUserSpec;
 
 import java.util.List;
 

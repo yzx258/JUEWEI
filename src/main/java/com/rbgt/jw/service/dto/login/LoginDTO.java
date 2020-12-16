@@ -1,7 +1,7 @@
 package com.rbgt.jw.service.dto.login;
 
+import com.rbgt.jw.service.dto.JwConfigurationUserDTO;
 import com.rbgt.jw.service.dto.JwShopDTO;
-import com.rbgt.jw.service.dto.configuration.JwConfigurationUserDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

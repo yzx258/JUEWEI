@@ -7,15 +7,15 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * jw_purchase_product表的Spec
+ * jw_configuration_user表的Spec
  *
  * @author ： huangdefu@yiautos.com
- * @date : 2020-12-16 18:28:13
- * @description ：jw_purchase_product表的Spec
+ * @date : 2020-12-16 18:28:14
+ * @description ：jw_configuration_user表的Spec
  * @Version 1.0
  */
 @Data
-public class JwPurchaseProductSpec {
+public class JwConfigurationUserSpec {
 
     @ApiModelProperty("关键字")
     private String keyword;
@@ -46,44 +46,39 @@ public class JwPurchaseProductSpec {
     @ApiModelProperty("更新时间 更新时间")
     private Date updateTime;
         /**
-     * 进货/调货产品ID
+     * 门店ID
      */
-    @ApiModelProperty("进货/调货产品ID")
-    private String generalProductId;
+    @ApiModelProperty("门店ID")
+    private String shopId;
         /**
-     * 进货ID
+     * 用户名称 用户名称
      */
-    @ApiModelProperty("进货ID")
-    private String purchaseId;
+    @ApiModelProperty("用户名称 用户名称")
+    private String userName;
         /**
-     * 产品ID
+     * 联系电话 联系电话
      */
-    @ApiModelProperty("产品ID")
-    private String productId;
+    @ApiModelProperty("联系电话 联系电话")
+    private String userMobile;
         /**
-     * 产品名称
+     * 用户编号 用户编号
      */
-    @ApiModelProperty("产品名称")
-    private String productName;
+    @ApiModelProperty("用户编号 用户编号")
+    private String userNo;
         /**
-     * 产品数量
+     * 用户账号
      */
-    @ApiModelProperty("产品数量")
-    private int productNumber;
+    @ApiModelProperty("用户账号")
+    private String userAccount;
         /**
-     * 最终产品数量
+     * 用户密码 用户密码
      */
-    @ApiModelProperty("最终产品数量")
-    private int changeProductNumber;
+    @ApiModelProperty("用户密码 用户密码")
+    private String userPwd;
         /**
-     * 数量是否一致
+     * 是否删除 是否删除
      */
-    @ApiModelProperty("数量是否一致")
-    private String isConsistent;
-        /**
-     * 是否删除
-     */
-    @ApiModelProperty("是否删除")
+    @ApiModelProperty("是否删除 是否删除")
     private int isDel;
     
     @ApiModelProperty("分页参数")

@@ -25,8 +25,9 @@ public class ExceptionHandlerAdvice {
      */
     @ExceptionHandler(Exception.class)
     public ResponseResult handleException(Exception e){
+        log.info("处理未捕获的Exception");
         log.error(e.getMessage(),e);
-        return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(),ResponseCode.SERVICE_ERROR.getMsg(),null);
+        return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(),ResponseCode.SERVICE_ERROR.getMsg(),e.getMessage());
     }
 
     /**
@@ -36,8 +37,9 @@ public class ExceptionHandlerAdvice {
      */
     @ExceptionHandler(RuntimeException.class)
     public ResponseResult handleRuntimeException(RuntimeException e){
+        log.info("处理未捕获的RuntimeException");
         log.error(e.getMessage(),e);
-        return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(),ResponseCode.SERVICE_ERROR.getMsg(),null);
+        return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(),ResponseCode.SERVICE_ERROR.getMsg(),e.getMessage());
     }
 
     /**
@@ -47,8 +49,9 @@ public class ExceptionHandlerAdvice {
      */
     @ExceptionHandler(BaseException.class)
     public ResponseResult handleBaseException(BaseException e){
+        log.info("处理业务异常BaseException");
         log.error(e.getMessage(),e);
         ResponseCode code=e.getCode();
-        return new ResponseResult(code.getCode(),code.getMsg(),null);
+        return new ResponseResult(code.getCode(),code.getMsg(),e.getMessage());
     }
 }

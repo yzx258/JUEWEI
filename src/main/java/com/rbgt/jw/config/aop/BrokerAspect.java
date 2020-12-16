@@ -47,6 +47,7 @@ public class BrokerAspect {
      */
     @Before("BrokerAspect()")
     public void doBefore(JoinPoint joinPoint) {
+        log.info("进来了AOP");
         if(joinPoint.getSignature().getName().equals("login")){
             log.info("免鉴权接口："+joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
             return;

@@ -17,7 +17,7 @@ import java.util.Date;
  *
  * @author ： huangdefu@yiautos.com
  * @description ：产品信息表 的实体类
- * @date ： 2020-12-15 14:22:29
+ * @date ： 2020-12-16 18:28:14
  * @Version ：1.0
  */
 @Data
@@ -70,13 +70,6 @@ public class JwProduct extends Model<JwProduct> {
 
 
     /**
-     * 产品ID
-     */
-    @ApiModelProperty("产品ID")
-    private String productId;
-
-
-    /**
      * 产品编号
      */
     @ApiModelProperty("产品编号")
@@ -94,21 +87,21 @@ public class JwProduct extends Model<JwProduct> {
      * 产品规格
      */
     @ApiModelProperty("产品规格")
-    private Integer productSpecifications;
+    private int productSpecifications;
 
 
     /**
      * 产品包装
      */
     @ApiModelProperty("产品包装")
-    private Integer productPack;
+    private int productPack;
 
 
     /**
      * 产品口味
      */
     @ApiModelProperty("产品口味")
-    private Integer productTaste;
+    private int productTaste;
 
 
     /**
@@ -126,10 +119,10 @@ public class JwProduct extends Model<JwProduct> {
 
 
     /**
-     * 是否删除 是否删除
+     * 是否删除
      */
-    @ApiModelProperty("是否删除 是否删除")
-    @TableLogic
+    @ApiModelProperty("是否删除")
     private int isDel;
+
 
 }

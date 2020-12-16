@@ -37,6 +37,15 @@ public class CacheUtils {
     }
 
     /**
+     * 清空缓存信息
+     * @param key
+     * @return
+     */
+    public void del(String key){
+        fifoCache.remove(key);
+    }
+
+    /**
      * 设置时间缓存信息
      * @param key
      * @param value

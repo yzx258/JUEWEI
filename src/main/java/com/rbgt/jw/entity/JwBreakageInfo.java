@@ -16,7 +16,7 @@ import java.util.Date;
  *
  * @author ： huangdefu@yiautos.com
  * @description ：报损信息表 的实体类
- * @date ： 2020-12-15 13:57:04
+ * @date ： 2020-12-16 18:24:01
  * @Version ：1.0
  */
 @Data
@@ -86,7 +86,7 @@ public class JwBreakageInfo extends Model<JwBreakageInfo> {
      * 报损日期
      */
     @ApiModelProperty("报损日期")
-    private String breakageTime;
+    private Date breakageTime;
 
 
     /**
@@ -104,10 +104,10 @@ public class JwBreakageInfo extends Model<JwBreakageInfo> {
 
 
     /**
-     * 是否删除 是否删除
+     * 是否删除
      */
-    @ApiModelProperty("是否删除 是否删除")
-    @TableLogic
+    @ApiModelProperty("是否删除")
     private int isDel;
+
 
 }

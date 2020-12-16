@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -17,7 +16,7 @@ import java.util.Date;
  *
  * @author ： huangdefu@yiautos.com
  * @description ：基础数据配置 的实体类
- * @date ： 2020-12-15 13:57:04
+ * @date ： 2020-12-16 18:24:01
  * @Version ：1.0
  */
 @Data
@@ -70,13 +69,6 @@ public class JwConfigurationBasic extends Model<JwConfigurationBasic> {
 
 
     /**
-     * 基础配置ID
-     */
-    @ApiModelProperty("基础配置ID")
-    private String basicId;
-
-
-    /**
      * 配置名称
      */
     @ApiModelProperty("配置名称")
@@ -87,7 +79,7 @@ public class JwConfigurationBasic extends Model<JwConfigurationBasic> {
      * 配置类型
      */
     @ApiModelProperty("配置类型")
-    private Integer basicType;
+    private int basicType;
 
 
     /**
@@ -98,10 +90,10 @@ public class JwConfigurationBasic extends Model<JwConfigurationBasic> {
 
 
     /**
-     * 是否删除 是否删除
+     * 是否删除
      */
-    @ApiModelProperty("是否删除 是否删除")
-    @TableLogic
+    @ApiModelProperty("是否删除")
     private int isDel;
+
 
 }

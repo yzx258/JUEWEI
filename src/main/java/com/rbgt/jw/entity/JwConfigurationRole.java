@@ -16,7 +16,7 @@ import java.util.Date;
  *
  * @author ： huangdefu@yiautos.com
  * @description ：角色表 的实体类
- * @date ： 2020-12-15 11:52:39
+ * @date ： 2020-12-16 18:24:01
  * @Version ：1.0
  */
 @Data
@@ -69,13 +69,6 @@ public class JwConfigurationRole extends Model<JwConfigurationRole> {
 
 
     /**
-     * 角色ID 角色ID
-     */
-    @ApiModelProperty("角色ID 角色ID")
-    private String roleId;
-
-
-    /**
      * 角色名称 角色名称
      */
     @ApiModelProperty("角色名称 角色名称")
@@ -93,7 +86,6 @@ public class JwConfigurationRole extends Model<JwConfigurationRole> {
      * 是否删除 是否删除
      */
     @ApiModelProperty("是否删除 是否删除")
-    @TableLogic
     private int isDel;
 
 

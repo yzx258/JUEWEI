@@ -1,19 +1,18 @@
 package com.rbgt.jw.controller.login;
 
-import cn.hutool.core.date.DateUnit;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
-import com.rbgt.jw.service.spec.configuration.JwConfigurationUserSpec;
+import com.rbgt.jw.service.LoginService;
 import com.rbgt.jw.service.spec.login.LoginSpec;
-import com.rbgt.jw.utils.CacheUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
+import javax.validation.Valid;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司
@@ -29,19 +28,17 @@ import java.util.UUID;
 public class LoginController {
 
     @Autowired
-    private CacheUtils cacheUtils;
+    private LoginService loginService;
 
     @ApiOperation(value = "查询 - 用户登录")
     @PostMapping("/login")
-    public ResponseResult<String> login(@RequestBody LoginSpec loginSpec){
-        String token = UUID.randomUUID().toString().replace("-","");
-        cacheUtils.saveCache(token,loginSpec.getUserAccount(), DateUnit.HOUR.getMillis() * 24);
-        return new ResponseResult(token);
-}
+    public ResponseResult<?> login(@Valid @RequestBody LoginSpec loginSpec) {
+        return new ResponseResult(loginService.login(loginSpec));
+    }
 
     @ApiOperation(value = "查询 - 用户注销")
-    @PostMapping("/logout")
-    public ResponseResult<Object> logout(@RequestBody JwConfigurationUserSpec jwConfigurationUserSpec){
-        return new ResponseResult(jwConfigurationUserSpec);
+    @PostMapping("/logout/{token}")
+    public ResponseResult<Object> logout(@PathVariable("token") String token) {
+        return new ResponseResult(loginService.logout(token));
     }
 }

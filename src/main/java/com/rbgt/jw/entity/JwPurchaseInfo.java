@@ -9,22 +9,21 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- * 交班日结记录表 的实体类
+ * 进货信息表 的实体类
  *
  * @author ： huangdefu@yiautos.com
- * @description ：交班日结记录表 的实体类
- * @date ： 2020-12-15 13:57:04
+ * @description ：进货信息表 的实体类
+ * @date ： 2020-12-16 18:28:14
  * @Version ：1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("jw_configuration_daily_record")
-public class JwConfigurationDailyRecord extends Model<JwConfigurationDailyRecord> {
+@TableName("jw_purchase_info")
+public class JwPurchaseInfo extends Model<JwPurchaseInfo> {
 
     private static final long serialVersionUID = 1L;
 
@@ -70,10 +69,10 @@ public class JwConfigurationDailyRecord extends Model<JwConfigurationDailyRecord
 
 
     /**
-     * 日结记录ID
+     * 进货状态
      */
-    @ApiModelProperty("日结记录ID")
-    private String daliyRecordId;
+    @ApiModelProperty("进货状态")
+    private int shopStatus;
 
 
     /**
@@ -91,34 +90,37 @@ public class JwConfigurationDailyRecord extends Model<JwConfigurationDailyRecord
 
 
     /**
-     * 交班日期
+     * 下单日期
      */
-    @ApiModelProperty("交班日期")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date successionTime;
+    @ApiModelProperty("下单日期")
+    private Date purchaseTime;
 
 
     /**
-     * 收银员ID
+     * 到货日期
      */
-    @ApiModelProperty("收银员ID")
+    @ApiModelProperty("到货日期")
+    private Date arriveTime;
+
+
+    /**
+     * 收货人ID
+     */
+    @ApiModelProperty("收货人ID")
     private String responsibleId;
 
 
     /**
-     * 收银员名称
+     * 收货人名称
      */
-    @ApiModelProperty("收银员名称")
+    @ApiModelProperty("收货人名称")
     private String responsibleName;
 
 
     /**
-     * 是否删除 是否删除
+     * 是否删除
      */
-    @ApiModelProperty("是否删除 是否删除")
-    @TableLogic
+    @ApiModelProperty("是否删除")
     private int isDel;
 
 

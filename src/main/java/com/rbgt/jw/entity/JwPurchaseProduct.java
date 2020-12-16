@@ -12,18 +12,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * 交班日结明细表 的实体类
+ * 进货产品记录表 的实体类
  *
  * @author ： huangdefu@yiautos.com
- * @description ：交班日结明细表 的实体类
- * @date ： 2020-12-15 13:57:04
+ * @description ：进货产品记录表 的实体类
+ * @date ： 2020-12-16 18:28:13
  * @Version ：1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("jw_configuration_daily_detail_detail")
-public class JwConfigurationDailyDetailDetail extends Model<JwConfigurationDailyDetailDetail> {
+@TableName("jw_purchase_product")
+public class JwPurchaseProduct extends Model<JwPurchaseProduct> {
 
     private static final long serialVersionUID = 1L;
 
@@ -69,38 +69,58 @@ public class JwConfigurationDailyDetailDetail extends Model<JwConfigurationDaily
 
 
     /**
-     * 日结ID
+     * 进货/调货产品ID
      */
-    @ApiModelProperty("日结ID")
-    private String dailyRecordId;
+    @ApiModelProperty("进货/调货产品ID")
+    private String generalProductId;
 
 
     /**
-     * 日结名称
+     * 进货ID
      */
-    @ApiModelProperty("日结名称")
-    private String dailyKey;
+    @ApiModelProperty("进货ID")
+    private String purchaseId;
 
 
     /**
-     * 日结值
+     * 产品ID
      */
-    @ApiModelProperty("日结值")
-    private String dailyValue;
+    @ApiModelProperty("产品ID")
+    private String productId;
 
 
     /**
-     * 日结类型
+     * 产品名称
      */
-    @ApiModelProperty("日结类型")
-    private String dailyType;
+    @ApiModelProperty("产品名称")
+    private String productName;
 
 
     /**
-     * 是否删除 是否删除
+     * 产品数量
      */
-    @ApiModelProperty("是否删除 是否删除")
-    @TableLogic
+    @ApiModelProperty("产品数量")
+    private int productNumber;
+
+
+    /**
+     * 最终产品数量
+     */
+    @ApiModelProperty("最终产品数量")
+    private int changeProductNumber;
+
+
+    /**
+     * 数量是否一致
+     */
+    @ApiModelProperty("数量是否一致")
+    private String isConsistent;
+
+
+    /**
+     * 是否删除
+     */
+    @ApiModelProperty("是否删除")
     private int isDel;
 
 

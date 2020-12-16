@@ -4,19 +4,18 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- * jw_configuration_daily_record表的Spec
+ * jw_configuration_role表的Spec
  *
  * @author ： huangdefu@yiautos.com
- * @date : 2020-12-15 15:22:14
- * @description ：jw_configuration_daily_record表的Spec
+ * @date : 2020-12-16 18:24:01
+ * @description ：jw_configuration_role表的Spec
  * @Version 1.0
  */
 @Data
-public class JwConfigurationDailyRecordSpec {
+public class JwConfigurationRoleSpec {
 
     @ApiModelProperty("关键字")
     private String keyword;
@@ -47,40 +46,20 @@ public class JwConfigurationDailyRecordSpec {
     @ApiModelProperty("更新时间 更新时间")
     private Date updateTime;
     /**
-     * 日结记录ID
+     * 角色名称 角色名称
      */
-    @ApiModelProperty("日结记录ID")
-    private String daliyRecordId;
+    @ApiModelProperty("角色名称 角色名称")
+    private String roleName;
     /**
-     * 门店ID
+     * 角色标签 角色标签
      */
-    @ApiModelProperty("门店ID")
-    private String shopId;
+    @ApiModelProperty("角色标签 角色标签")
+    private String roleLabel;
     /**
-     * 门店名称
+     * 是否删除 是否删除
      */
-    @ApiModelProperty("门店名称")
-    private String shopName;
-    /**
-     * 交班日期
-     */
-    @ApiModelProperty("交班日期")
-    private LocalDateTime successionTime;
-    /**
-     * 收银员ID
-     */
-    @ApiModelProperty("收银员ID")
-    private String responsibleId;
-    /**
-     * 收银员名称
-     */
-    @ApiModelProperty("收银员名称")
-    private String responsibleName;
-    /**
-     * 是否删除
-     */
-    @ApiModelProperty("是否删除")
-    private Integer isDel;
+    @ApiModelProperty("是否删除 是否删除")
+    private int isDel;
 
     @ApiModelProperty("分页参数")
     private Page page;

@@ -4,14 +4,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * jw_purchase_check表的Spec
  *
  * @author ： huangdefu@yiautos.com
- * @date : 2020-12-15 15:22:14
+ * @date : 2020-12-16 18:24:01
  * @description ：jw_purchase_check表的Spec
  * @Version 1.0
  */
@@ -60,7 +59,7 @@ public class JwPurchaseCheckSpec {
      * 到货日期
      */
     @ApiModelProperty("到货日期")
-    private LocalDateTime arriveTime;
+    private Date arriveTime;
     /**
      * 收货人ID
      */
@@ -75,7 +74,7 @@ public class JwPurchaseCheckSpec {
      * 是否删除
      */
     @ApiModelProperty("是否删除")
-    private Integer isDel;
+    private int isDel;
 
     @ApiModelProperty("分页参数")
     private Page page;

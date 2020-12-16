@@ -6,15 +6,15 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * jw_configuration_daily表的DTO
+ * jw_daily_record_detail表的DTO
  *
  * @author ： huangdefu@yiautos.com
  * @date : 2020-12-16 18:24:00
- * @description ：jw_configuration_daily表的DTO
+ * @description ：jw_daily_record_detail表的DTO
  * @Version 1.0
  */
 @Data
-public class JwConfigurationDailyDTO {
+public class JwDailyRecordDetailDTO {
 
     /**
      * ID 唯一标识
@@ -42,25 +42,25 @@ public class JwConfigurationDailyDTO {
     @ApiModelProperty("更新时间 更新时间")
     private Date updateTime;
     /**
-     * 门店ID
+     * 日结ID
      */
-    @ApiModelProperty("门店ID")
-    private String shopId;
+    @ApiModelProperty("日结ID")
+    private String dailyRecordId;
     /**
-     * 门店名称
+     * 日结名称
      */
-    @ApiModelProperty("门店名称")
-    private String shopName;
+    @ApiModelProperty("日结名称")
+    private String dailyKey;
     /**
-     * 收银员ID
+     * 日结值
      */
-    @ApiModelProperty("收银员ID")
-    private String responsibleId;
+    @ApiModelProperty("日结值")
+    private String dailyValue;
     /**
-     * 收银员名称
+     * 日结类型
      */
-    @ApiModelProperty("收银员名称")
-    private String responsibleName;
+    @ApiModelProperty("日结类型")
+    private String dailyType;
     /**
      * 是否删除
      */

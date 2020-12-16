@@ -59,6 +59,12 @@
         </dependency>
         <!-- MyBatisPlus END -->
 
+        <!-- 接口不能为空API -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
         <!--引入AOP依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

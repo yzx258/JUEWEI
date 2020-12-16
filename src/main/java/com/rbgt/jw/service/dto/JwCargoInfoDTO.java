@@ -1,18 +1,15 @@
 package com.rbgt.jw.service.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * jw_cargo_info表的DTO
  *
  * @author ： huangdefu@yiautos.com
- * @date : 2020-12-15 15:22:14
+ * @date : 2020-12-16 18:24:01
  * @description ：jw_cargo_info表的DTO
  * @Version 1.0
  */
@@ -33,8 +30,6 @@ public class JwCargoInfoDTO {
      * 创建时间 创建时间
      */
     @ApiModelProperty("创建时间 创建时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
     /**
      * 更新人 更新人
@@ -45,19 +40,12 @@ public class JwCargoInfoDTO {
      * 更新时间 更新时间
      */
     @ApiModelProperty("更新时间 更新时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
-    /**
-     * 调货ID
-     */
-    @ApiModelProperty("调货ID")
-    private String cargoId;
     /**
      * 调货状态
      */
     @ApiModelProperty("调货状态")
-    private Integer cargoStatus;
+    private int cargoStatus;
     /**
      * 调出门店ID
      */
@@ -82,8 +70,6 @@ public class JwCargoInfoDTO {
      * 调货时间
      */
     @ApiModelProperty("调货时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date cargoTime;
     /**
      * 负责人ID
@@ -99,6 +85,6 @@ public class JwCargoInfoDTO {
      * 是否删除
      */
     @ApiModelProperty("是否删除")
-    private Integer isDel;
+    private int isDel;
 
 }
