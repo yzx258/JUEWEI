@@ -71,6 +71,6 @@ public class JwConfigurationDailyDetailRecordDTO {
      * 是否删除
      */
     @ApiModelProperty("是否删除")
-    private Integer isDel;
+    private int isDel;
 
 }
