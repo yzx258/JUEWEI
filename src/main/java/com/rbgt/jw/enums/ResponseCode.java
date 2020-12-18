@@ -1,11 +1,14 @@
 package com.rbgt.jw.enums;
 
+import lombok.Getter;
+
 /**
  * @author 俞春旺
  * @program: JueWei
  * @date 2020-12-14 22:23:29
  * @description: 描述
  */
+@Getter
 public enum ResponseCode {
 
     // 系统异常
@@ -34,6 +37,10 @@ public enum ResponseCode {
      * 找不到用户信息
      */
     USER_NOT_ERROR(200001, "找不到用户信息"),
+    /**
+     * 门店信息
+     */
+    SHOP_NOT_ERROR(300001, "找不到门店信息"),
     ;
     /**
      * 状态码
@@ -47,13 +54,5 @@ public enum ResponseCode {
     ResponseCode(int code, String msg) {
         this.code = code;
         this.msg = msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMsg() {
-        return msg;
     }
 }

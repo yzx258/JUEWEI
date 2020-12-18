@@ -21,5 +21,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JwConfigurationRoleServiceImpl extends ServiceImpl<JwConfigurationRoleDao, JwConfigurationRole> implements JwConfigurationRoleService {
 
+    @Override
+    public JwConfigurationRole findByRoleLabel(String roleLabel) {
+        return this.baseMapper.findByRoleLabel(roleLabel);
+    }
 }
 

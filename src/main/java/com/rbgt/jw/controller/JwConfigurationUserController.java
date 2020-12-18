@@ -7,6 +7,7 @@ import com.rbgt.jw.entity.JwConfigurationUser;
 import com.rbgt.jw.service.JwConfigurationUserService;
 import com.rbgt.jw.service.dto.JwConfigurationUserDTO;
 import com.rbgt.jw.service.spec.JwConfigurationUserSpec;
+import com.rbgt.jw.service.spec.user.AddUserSpec;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -45,8 +46,8 @@ public class JwConfigurationUserController {
 
     @ApiOperation(value = "新增 - 用户信息")
     @PostMapping("/user/add")
-    public ResponseResult<JwConfigurationUser> add(@RequestBody @ApiParam(name = "jwConfigurationUser", value = "创建用户实体类")JwConfigurationUser jwConfigurationUser){
-        return new ResponseResult(jwConfigurationUserService.add(jwConfigurationUser));
+    public ResponseResult<JwConfigurationUser> add(@RequestBody @ApiParam(name = "addUserSpec", value = "创建用户实体类") AddUserSpec addUserSpec){
+        return new ResponseResult(jwConfigurationUserService.add(addUserSpec));
     }
 
     @ApiOperation(value = "删除 - 用户信息")

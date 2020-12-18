@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.rbgt.jw.entity.JwConfigurationUser;
 import com.rbgt.jw.service.dto.JwConfigurationUserDTO;
 import com.rbgt.jw.service.spec.JwConfigurationUserSpec;
+import com.rbgt.jw.service.spec.user.AddUserSpec;
 
 import java.util.List;
 
@@ -26,10 +27,10 @@ public interface JwConfigurationUserService extends IService<JwConfigurationUser
 
     /**
      * 新增用户信息
-     * @param jwConfigurationUser
+     * @param addUserSpec
      * @return
      */
-    JwConfigurationUser add(JwConfigurationUser jwConfigurationUser);
+    JwConfigurationUser add(AddUserSpec addUserSpec);
 
     /**
      * 逻辑删除数据

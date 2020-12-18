@@ -13,5 +13,12 @@ import com.rbgt.jw.entity.JwConfigurationRole;
  */
 public interface JwConfigurationRoleService extends IService<JwConfigurationRole>  {
 
+    /**
+     * 根据标签查询角色ID
+     * @param roleLabel
+     * @return
+     */
+    JwConfigurationRole findByRoleLabel(String roleLabel);
+
 }
 
