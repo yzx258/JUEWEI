@@ -4,7 +4,7 @@
 <mapper namespace="com.rbgt.jw.dao.JwShopDao">
 
     <!-- 分页搜索 -->
-    <select id="search" resultType="com.rbgt.jw.service.dto.JwShopDTO">
+    <select id="search" resultType="com.rbgt.jw.base.dto.JwShopDTO">
         select js.* from jw_shop js
     </select>
 </mapper>

@@ -2,15 +2,13 @@ package com.rbgt.jw.controller;
 
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
-import com.rbgt.jw.utils.CacheUtils;
-import com.rbgt.jw.utils.EnumsUtils;
+import com.rbgt.jw.base.utils.EnumsUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 /**

@@ -3,6 +3,8 @@ package com.rbgt.jw.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.product.ProductPackTypeEnum;
+import com.rbgt.jw.base.enums.product.ProductTasteTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -94,14 +96,14 @@ public class JwProduct extends Model<JwProduct> {
      * 产品包装
      */
     @ApiModelProperty("产品包装")
-    private int productPack;
+    private ProductPackTypeEnum productPack;
 
 
     /**
      * 产品口味
      */
     @ApiModelProperty("产品口味")
-    private int productTaste;
+    private ProductTasteTypeEnum productTaste;
 
 
     /**

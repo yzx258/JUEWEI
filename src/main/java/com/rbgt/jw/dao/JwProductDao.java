@@ -4,11 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.rbgt.jw.entity.JwProduct;
-import com.rbgt.jw.entity.JwShop;
-import com.rbgt.jw.service.dto.JwProductDTO;
-import com.rbgt.jw.service.dto.JwShopDTO;
-import com.rbgt.jw.service.spec.JwProductSpec;
-import com.rbgt.jw.service.spec.JwShopSpec;
+import com.rbgt.jw.base.dto.JwProductDTO;
+import com.rbgt.jw.base.spec.JwProductSpec;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

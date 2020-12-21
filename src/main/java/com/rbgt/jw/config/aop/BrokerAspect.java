@@ -2,8 +2,8 @@ package com.rbgt.jw.config.aop;
 
 import cn.hutool.core.util.StrUtil;
 import com.rbgt.jw.config.handler.BaseException;
-import com.rbgt.jw.enums.ResponseCode;
-import com.rbgt.jw.utils.CacheUtils;
+import com.rbgt.jw.base.enums.ResponseCode;
+import com.rbgt.jw.base.utils.CacheUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;

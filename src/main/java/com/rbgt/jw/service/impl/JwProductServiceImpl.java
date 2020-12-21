@@ -6,10 +6,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.dao.JwProductDao;
 import com.rbgt.jw.entity.JwProduct;
-import com.rbgt.jw.entity.JwShop;
 import com.rbgt.jw.service.JwProductService;
-import com.rbgt.jw.service.dto.JwProductDTO;
-import com.rbgt.jw.service.spec.JwProductSpec;
+import com.rbgt.jw.base.dto.JwProductDTO;
+import com.rbgt.jw.base.spec.JwProductSpec;
+import com.rbgt.jw.base.spec.product.AddProductSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,17 +27,27 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JwProductServiceImpl extends ServiceImpl<JwProductDao, JwProduct> implements JwProductService   {
 
+    /**
+     * 新增/修改产品配置
+     * @param addProductSpec
+     * @return
+     */
     @Override
-    public JwProduct addOrUpdate(JwProductSpec spec) {
+    public JwProduct addOrUpdate(AddProductSpec addProductSpec) {
         JwProduct jwProduct = new JwProduct();
-        if(StrUtil.isNotBlank(spec.getId())){
-            jwProduct = this.baseMapper.selectById(spec.getId());
+        if(StrUtil.isNotBlank(addProductSpec.getId())){
+            jwProduct = this.baseMapper.selectById(addProductSpec.getId());
         }
-        BeanUtil.copyProperties(spec,jwProduct,true);
+        BeanUtil.copyProperties(addProductSpec,jwProduct,true);
         jwProduct.insertOrUpdate();
         return jwProduct;
     }
 
+    /**
+     * 分页查询产品信息
+     * @param spec
+     * @return
+     */
     @Override
     public IPage<JwProductDTO> search(JwProductSpec spec) {
         return this.baseMapper.search(spec,spec.getPage());

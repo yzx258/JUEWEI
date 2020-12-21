@@ -7,7 +7,7 @@
         select jr.* from jw_configuration_role jr where jr.role_label = #{roleLabel}
     </select>
     <!-- 分页查询 -->
-    <select id="search" resultType="com.rbgt.jw.service.dto.JwConfigurationRoleDTO">
+    <select id="search" resultType="com.rbgt.jw.base.dto.JwConfigurationRoleDTO">
         select jr.* from jw_configuration_role jr
     </select>
     <!-- 根据用户ID，查询所有角色 -->

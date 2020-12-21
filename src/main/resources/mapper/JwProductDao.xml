@@ -4,7 +4,7 @@
 <mapper namespace="com.rbgt.jw.dao.JwProductDao">
 
     <!-- 分页获取产品信息 -->
-    <select id="search" resultType="com.rbgt.jw.service.dto.JwProductDTO">
+    <select id="search" resultType="com.rbgt.jw.base.dto.JwProductDTO">
         select jp.* from jw_product jp
     </select>
 </mapper>

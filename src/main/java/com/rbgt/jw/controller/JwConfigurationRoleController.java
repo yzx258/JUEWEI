@@ -4,20 +4,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwConfigurationRole;
-import com.rbgt.jw.entity.JwConfigurationUserRole;
-import com.rbgt.jw.service.JwConfigurationRoleService;
-import com.rbgt.jw.service.JwConfigurationUserRoleService;
-import com.rbgt.jw.service.dto.JwConfigurationRoleDTO;
-import com.rbgt.jw.service.dto.JwProductDTO;
-import com.rbgt.jw.service.spec.JwConfigurationRoleSpec;
-import com.rbgt.jw.service.spec.JwProductSpec;
+import com.rbgt.jw.service.configuration.JwConfigurationRoleService;
+import com.rbgt.jw.base.dto.JwConfigurationRoleDTO;
+import com.rbgt.jw.base.spec.JwConfigurationRoleSpec;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司

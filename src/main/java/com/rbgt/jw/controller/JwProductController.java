@@ -5,17 +5,14 @@ import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwProduct;
 import com.rbgt.jw.service.JwProductService;
-import com.rbgt.jw.service.dto.JwProductDTO;
-import com.rbgt.jw.service.spec.JwProductSpec;
+import com.rbgt.jw.base.dto.JwProductDTO;
+import com.rbgt.jw.base.spec.JwProductSpec;
+import com.rbgt.jw.base.spec.product.AddProductSpec;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司
@@ -23,7 +20,7 @@ import javax.validation.Valid;
  * @author： yucw
  * @date： 2020/12/18 10:56
  * @version： 1.0
- * @description: 门店相关接口
+ * @description: 产品相关接口
  */
 @BaseResponse
 @Api(value = "/product", tags = "产品接口")
@@ -33,16 +30,22 @@ public class JwProductController {
     @Autowired
     private JwProductService jwProductService;
 
-    @ApiOperation(value = "查询 - 分页门店信息")
+    @ApiOperation(value = "查询 - 分页产品信息")
     @PostMapping("/product/search")
     public ResponseResult<IPage<JwProductDTO>> search(@RequestBody JwProductSpec spec){
         return new ResponseResult(jwProductService.search(spec));
     }
 
-    @ApiOperation(value = "新增 - 门店信息")
+    @ApiOperation(value = "查询 - 根据产品ID查询信息")
+    @GetMapping("/product/get/{id}")
+    public ResponseResult<JwProduct> getById(@PathVariable("id") String id){
+        return new ResponseResult(jwProductService.getById(id));
+    }
+
+    @ApiOperation(value = "新增 - 产品信息")
     @PostMapping("/product/add")
-    public ResponseResult<JwProduct> add(@Valid @RequestBody @ApiParam(name = "jwProductSpec", value = "创建门店实体类") JwProductSpec jwProductSpec){
-        return new ResponseResult(jwProductService.addOrUpdate(jwProductSpec));
+    public ResponseResult<JwProduct> add(@RequestBody @ApiParam(name = "addProductSpec", value = "创建产品实体类") AddProductSpec addProductSpec){
+        return new ResponseResult(jwProductService.addOrUpdate(addProductSpec));
     }
 
 }

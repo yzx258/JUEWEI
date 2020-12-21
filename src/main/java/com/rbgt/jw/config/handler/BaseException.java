@@ -1,5 +1,5 @@
 package com.rbgt.jw.config.handler;
-import com.rbgt.jw.enums.ResponseCode;
+import com.rbgt.jw.base.enums.ResponseCode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -2,7 +2,7 @@ package com.rbgt.jw.config.handler;
 
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
-import com.rbgt.jw.enums.ResponseCode;
+import com.rbgt.jw.base.enums.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

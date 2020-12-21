@@ -3,9 +3,8 @@ package com.rbgt.jw.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rbgt.jw.entity.JwShop;
-import com.rbgt.jw.service.dto.JwConfigurationUserDTO;
-import com.rbgt.jw.service.spec.JwConfigurationUserSpec;
-import com.rbgt.jw.service.spec.JwShopSpec;
+import com.rbgt.jw.base.dto.JwConfigurationUserDTO;
+import com.rbgt.jw.base.spec.JwShopSpec;
 
 /**
  * 门店信息表 接口业务逻辑接口

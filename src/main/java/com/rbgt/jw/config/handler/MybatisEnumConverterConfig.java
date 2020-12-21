@@ -24,7 +24,7 @@ import java.util.Set;
 @Slf4j
 public class MybatisEnumConverterConfig {
 
-    private String enumScanBasePackage = "com.rbgt.jw.enums.**";
+    private String enumScanBasePackage = "com.rbgt.jw.**.enums.**";
     private final SqlSessionFactory sqlSessionFactory;
 
     public MybatisEnumConverterConfig(SqlSessionFactory sqlSessionFactory) {

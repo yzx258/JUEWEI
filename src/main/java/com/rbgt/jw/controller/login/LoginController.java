@@ -2,8 +2,8 @@ package com.rbgt.jw.controller.login;
 
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
-import com.rbgt.jw.service.LoginService;
-import com.rbgt.jw.service.spec.login.LoginSpec;
+import com.rbgt.jw.service.login.LoginService;
+import com.rbgt.jw.base.spec.login.LoginSpec;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
