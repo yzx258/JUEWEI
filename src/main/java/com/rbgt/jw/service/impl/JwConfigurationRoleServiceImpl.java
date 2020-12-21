@@ -1,9 +1,17 @@
 package com.rbgt.jw.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rbgt.jw.config.handler.BaseException;
 import com.rbgt.jw.dao.JwConfigurationRoleDao;
 import com.rbgt.jw.entity.JwConfigurationRole;
+import com.rbgt.jw.enums.ResponseCode;
 import com.rbgt.jw.service.JwConfigurationRoleService;
+import com.rbgt.jw.service.dto.JwConfigurationRoleDTO;
+import com.rbgt.jw.service.spec.JwConfigurationRoleSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,9 +29,48 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JwConfigurationRoleServiceImpl extends ServiceImpl<JwConfigurationRoleDao, JwConfigurationRole> implements JwConfigurationRoleService {
 
+    /**
+     * 根据标签查询角色ID
+     * @param roleLabel
+     * @return
+     */
     @Override
     public JwConfigurationRole findByRoleLabel(String roleLabel) {
         return this.baseMapper.findByRoleLabel(roleLabel);
+    }
+
+    /**
+     * 新增/修改角色信息
+     * @param spec
+     * @return
+     */
+    @Override
+    public JwConfigurationRole addOrUpdate(JwConfigurationRoleSpec spec) {
+        JwConfigurationRole jwConfigurationRole = new JwConfigurationRole();
+        // 是否存在角色ID
+        if(StrUtil.isNotBlank(spec.getId())){
+            jwConfigurationRole = this.baseMapper.selectById(spec.getId());
+        }
+        // 标签是否存在库
+        if(StrUtil.isNotBlank(spec.getRoleLabel())){
+            jwConfigurationRole = this.baseMapper.findByRoleLabel(spec.getRoleLabel());
+            if(ObjectUtil.isNotNull(jwConfigurationRole) && StrUtil.isNotBlank(jwConfigurationRole.getId())){
+                throw new BaseException(ResponseCode.ROLE_ERROR);
+            }
+        }
+        BeanUtil.copyProperties(spec,jwConfigurationRole,true);
+        jwConfigurationRole.insertOrUpdate();
+        return jwConfigurationRole;
+    }
+
+    /**
+     * 分页查角色店信息
+     * @param spec
+     * @return
+     */
+    @Override
+    public IPage<JwConfigurationRoleDTO> search(JwConfigurationRoleSpec spec) {
+        return this.baseMapper.search(spec,spec.getPage());
     }
 }
 

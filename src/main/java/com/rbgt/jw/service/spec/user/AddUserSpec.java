@@ -63,7 +63,28 @@ public class AddUserSpec {
     @ApiModelProperty("用户密码 用户密码")
     private String userRole;
 
+    @ApiModelProperty("配置权：有权限[true],无权限[false]")
+    private Boolean isConfiguration;
+
+    @ApiModelProperty("进货权：有权限[true],无权限[false]")
+    private Boolean isStock;
+
+    @ApiModelProperty("调货权：有权限[true],无权限[false]")
+    private Boolean isCargo;
+
+    @ApiModelProperty("核对权：有权限[true],无权限[false]")
+    private Boolean isCheck;
+
+    @ApiModelProperty("盘点权：有权限[true],无权限[false]")
+    private Boolean isInventory;
+
+    @ApiModelProperty("盘点复盘权：有权限[true],无权限[false]")
+    private Boolean isInventoryCheck;
+
     @ApiModelProperty("角色ID")
     private List<String> roleList;
+
+    @ApiModelProperty("交班日结权：有权限[true],无权限[false]")
+    private Boolean isDaily;
 
 }

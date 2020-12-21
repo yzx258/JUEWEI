@@ -28,15 +28,15 @@ import java.util.List;
  * @description:
  */
 @BaseResponse
-@Api(value = "/role", tags = "产品接口")
+@Api(value = "/user/role", tags = "用户角色接口")
 @RestController
-public class UserRoleController {
+public class JwConfigurationUserRoleController {
 
     @Autowired
     private JwConfigurationUserRoleService jwConfigurationUserRoleService;
 
     @ApiOperation(value = "新增 - 门店信息")
-    @PostMapping("/role/batch/add")
+    @PostMapping("/user/role/batch/add")
     public ResponseResult<Boolean> add(@RequestBody @ApiParam(name = "list", value = "创建用户角色实体类") List<JwConfigurationUserRole> list){
         jwConfigurationUserRoleService.batchAdd(list);
         return new ResponseResult(true);

@@ -4,4 +4,12 @@
 <mapper namespace="com.rbgt.jw.dao.JwConfigurationRoleDao">
 
 
+    <!-- 根据角色查询 -->
+    <select id="findByRoleLabel" resultType="com.rbgt.jw.entity.JwConfigurationRole">
+        select jr.* from jw_configuration_role jr where jr.role_label = #{roleLabel}
+    </select>
+    <!-- 分页查询 -->
+    <select id="search" resultType="com.rbgt.jw.service.dto.JwConfigurationRoleDTO">
+        select jr.* from jw_configuration_role jr
+    </select>
 </mapper>

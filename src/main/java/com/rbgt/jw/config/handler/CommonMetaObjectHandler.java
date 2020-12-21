@@ -1,10 +1,17 @@
 package com.rbgt.jw.config.handler;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.rbgt.jw.utils.UserUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -17,9 +24,12 @@ import java.util.Date;
  * @author: 俞春旺
  * @date: 2020-04-23
  */
+@Slf4j
 @Component
 public class CommonMetaObjectHandler implements MetaObjectHandler {
 
+    @Autowired
+    private UserUtils userUtils;
 
     @Override
     public void insertFill(MetaObject metaObject) {
@@ -106,6 +116,6 @@ public class CommonMetaObjectHandler implements MetaObjectHandler {
      * @return 如果没有操作人，则返回-1
      */
     private String getOperator() {
-        return "俞春旺";
+        return userUtils.getUserId();
     }
 }
