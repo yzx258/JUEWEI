@@ -32,10 +32,11 @@ public class ExceptionHandlerAdvice {
     public ResponseResult handleException(Exception e) {
         if (StrUtil.isNotBlank(e.getMessage())) {
             String containChinese = isContainChinese(e.getMessage());
-            log.info("处理未捕获的Exception：{}", containChinese);
+            log.error("处理未捕获的Exception：{}", containChinese);
             return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(), ResponseCode.SERVICE_ERROR.getMsg(), containChinese);
         }
-        log.info("处理未捕获的Exception：{}", e.getMessage());
+        log.error("处理未捕获的Exception：{}", e.getMessage());
+        log.error("处理未捕获的Exception：{}", e);
         return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(), ResponseCode.SERVICE_ERROR.getMsg(), e.getMessage());
     }
 
@@ -49,10 +50,11 @@ public class ExceptionHandlerAdvice {
     public ResponseResult handleRuntimeException(RuntimeException e) {
         if (StrUtil.isNotBlank(e.getMessage())) {
             String containChinese = isContainChinese(e.getMessage());
-            log.info("处理未捕获的Exception：{}", containChinese);
+            log.error("处理未捕获的Exception：{}", containChinese);
             return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(), ResponseCode.SERVICE_ERROR.getMsg(), containChinese);
         }
-        log.info("处理未捕获的Exception：{}", e.getMessage());
+        log.error("处理未捕获的Exception：{}", e.getMessage());
+        log.error("处理未捕获的Exception：{}", e);
         return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(), ResponseCode.SERVICE_ERROR.getMsg(), e.getMessage());
     }
 
@@ -66,10 +68,11 @@ public class ExceptionHandlerAdvice {
     public ResponseResult handleBaseException(BaseException e) {
         if (StrUtil.isNotBlank(e.getMessage())) {
             String containChinese = isContainChinese(e.getMessage());
-            log.info("处理未捕获的Exception：{}", containChinese);
+            log.error("处理未捕获的Exception：{}", containChinese);
             return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(), ResponseCode.SERVICE_ERROR.getMsg(), containChinese);
         }
-        log.info("处理未捕获的Exception：{}", e.getMessage());
+        log.error("处理未捕获的Exception：{}", e.getMessage());
+        log.error("处理未捕获的Exception：{}", e);
         return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(), ResponseCode.SERVICE_ERROR.getMsg(), e.getMessage());
 
     }
