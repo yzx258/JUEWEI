@@ -1,4 +1,4 @@
-package com.rbgt.jw.entity;
+package com.rbgt.jw.entity.configuration;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -12,18 +12,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * 日结配置明细表 的实体类
+ * 基础数据配置 的实体类
  *
  * @author ： huangdefu@yiautos.com
- * @description ：日结配置明细表 的实体类
- * @date ： 2020-12-16 18:24:00
+ * @description ：基础数据配置 的实体类
+ * @date ： 2020-12-16 18:24:01
  * @Version ：1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("jw_configuration_daily_detail")
-public class JwConfigurationDailyDetail extends Model<JwConfigurationDailyDetail> {
+@TableName("jw_configuration_basic")
+public class JwConfigurationBasic extends Model<JwConfigurationBasic> {
 
     private static final long serialVersionUID = 1L;
 
@@ -69,31 +69,24 @@ public class JwConfigurationDailyDetail extends Model<JwConfigurationDailyDetail
 
 
     /**
-     * 日结ID
+     * 配置名称
      */
-    @ApiModelProperty("日结ID")
-    private String dailyId;
+    @ApiModelProperty("配置名称")
+    private String basicKey;
 
 
     /**
-     * 日结名称
+     * 配置类型
      */
-    @ApiModelProperty("日结名称")
-    private String dailyKey;
+    @ApiModelProperty("配置类型")
+    private int basicType;
 
 
     /**
-     * 日结值
+     * 配置值
      */
-    @ApiModelProperty("日结值")
-    private String dailyValue;
-
-
-    /**
-     * 日结类型
-     */
-    @ApiModelProperty("日结类型")
-    private String dailyType;
+    @ApiModelProperty("配置值")
+    private String basicValue;
 
 
     /**

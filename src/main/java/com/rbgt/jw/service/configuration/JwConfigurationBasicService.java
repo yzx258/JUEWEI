@@ -1,7 +1,7 @@
 package com.rbgt.jw.service.configuration;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.rbgt.jw.entity.JwConfigurationBasic;
+import com.rbgt.jw.entity.configuration.JwConfigurationBasic;
 
 /**
  * 基础数据配置 接口业务逻辑接口

@@ -70,6 +70,11 @@ public class JwProduct extends Model<JwProduct> {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
+    /**
+     * 门店ID
+     */
+    @ApiModelProperty("门店ID")
+    private String shopId;
 
     /**
      * 产品编号

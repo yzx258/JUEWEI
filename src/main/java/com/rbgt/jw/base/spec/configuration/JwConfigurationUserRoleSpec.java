@@ -1,4 +1,4 @@
-package com.rbgt.jw.base.spec;
+package com.rbgt.jw.base.spec.configuration;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModelProperty;

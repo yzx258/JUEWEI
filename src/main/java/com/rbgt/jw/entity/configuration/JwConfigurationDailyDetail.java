@@ -1,9 +1,8 @@
-package com.rbgt.jw.entity;
+package com.rbgt.jw.entity.configuration;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,18 +12,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * 进货信息表 的实体类
+ * 日结配置明细表 的实体类
  *
  * @author ： huangdefu@yiautos.com
- * @description ：进货信息表 的实体类
- * @date ： 2020-12-16 18:28:14
+ * @description ：日结配置明细表 的实体类
+ * @date ： 2020-12-16 18:24:00
  * @Version ：1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("jw_purchase_info")
-public class JwPurchaseInfo extends Model<JwPurchaseInfo> {
+@TableName("jw_configuration_daily_detail")
+public class JwConfigurationDailyDetail extends Model<JwConfigurationDailyDetail> {
 
     private static final long serialVersionUID = 1L;
 
@@ -70,56 +69,31 @@ public class JwPurchaseInfo extends Model<JwPurchaseInfo> {
 
 
     /**
-     * 进货状态
+     * 日结ID
      */
-    @ApiModelProperty("进货状态")
-    private PurchaseTypeEnum shopStatus = PurchaseTypeEnum.STAY_CONFIRM;
+    @ApiModelProperty("日结ID")
+    private String dailyId;
 
 
     /**
-     * 门店ID
+     * 日结名称
      */
-    @ApiModelProperty("门店ID")
-    private String shopId;
+    @ApiModelProperty("日结名称")
+    private String dailyKey;
 
 
     /**
-     * 门店名称
+     * 日结值
      */
-    @ApiModelProperty("门店名称")
-    private String shopName;
+    @ApiModelProperty("日结值")
+    private String dailyValue;
 
 
     /**
-     * 下单日期
+     * 日结类型
      */
-    @ApiModelProperty("下单日期")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date purchaseTime;
-
-
-    /**
-     * 到货日期
-     */
-    @ApiModelProperty("到货日期")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date arriveTime;
-
-
-    /**
-     * 收货人ID
-     */
-    @ApiModelProperty("收货人ID")
-    private String responsibleId;
-
-
-    /**
-     * 收货人名称
-     */
-    @ApiModelProperty("收货人名称")
-    private String responsibleName;
+    @ApiModelProperty("日结类型")
+    private String dailyType;
 
 
     /**

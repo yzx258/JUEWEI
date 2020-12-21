@@ -1,4 +1,4 @@
-package com.rbgt.jw.base.spec;
+package com.rbgt.jw.base.spec.configuration;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,15 +7,15 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * jw_configuration_daily表的Spec
+ * jw_configuration_basic表的Spec
  *
  * @author ： huangdefu@yiautos.com
- * @date : 2020-12-16 18:24:00
- * @description ：jw_configuration_daily表的Spec
+ * @date : 2020-12-16 18:24:01
+ * @description ：jw_configuration_basic表的Spec
  * @Version 1.0
  */
 @Data
-public class JwConfigurationDailySpec {
+public class JwConfigurationBasicSpec {
 
     @ApiModelProperty("关键字")
     private String keyword;
@@ -46,25 +46,20 @@ public class JwConfigurationDailySpec {
     @ApiModelProperty("更新时间 更新时间")
     private Date updateTime;
     /**
-     * 门店ID
+     * 配置名称
      */
-    @ApiModelProperty("门店ID")
-    private String shopId;
+    @ApiModelProperty("配置名称")
+    private String basicKey;
     /**
-     * 门店名称
+     * 配置类型
      */
-    @ApiModelProperty("门店名称")
-    private String shopName;
+    @ApiModelProperty("配置类型")
+    private int basicType;
     /**
-     * 收银员ID
+     * 配置值
      */
-    @ApiModelProperty("收银员ID")
-    private String responsibleId;
-    /**
-     * 收银员名称
-     */
-    @ApiModelProperty("收银员名称")
-    private String responsibleName;
+    @ApiModelProperty("配置值")
+    private String basicValue;
     /**
      * 是否删除
      */

@@ -1,4 +1,4 @@
-package com.rbgt.jw.entity;
+package com.rbgt.jw.entity.configuration;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -12,18 +12,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * 日结配置表 的实体类
+ * 角色表 的实体类
  *
  * @author ： huangdefu@yiautos.com
- * @description ：日结配置表 的实体类
- * @date ： 2020-12-16 18:24:00
+ * @description ：角色表 的实体类
+ * @date ： 2020-12-16 18:24:01
  * @Version ：1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("jw_configuration_daily")
-public class JwConfigurationDaily extends Model<JwConfigurationDaily> {
+@TableName("jw_configuration_role")
+public class JwConfigurationRole extends Model<JwConfigurationRole> {
 
     private static final long serialVersionUID = 1L;
 
@@ -69,37 +69,23 @@ public class JwConfigurationDaily extends Model<JwConfigurationDaily> {
 
 
     /**
-     * 门店ID
+     * 角色名称 角色名称
      */
-    @ApiModelProperty("门店ID")
-    private String shopId;
+    @ApiModelProperty("角色名称 角色名称")
+    private String roleName;
 
 
     /**
-     * 门店名称
+     * 角色标签 角色标签
      */
-    @ApiModelProperty("门店名称")
-    private String shopName;
+    @ApiModelProperty("角色标签 角色标签")
+    private String roleLabel;
 
 
     /**
-     * 收银员ID
+     * 是否删除 是否删除
      */
-    @ApiModelProperty("收银员ID")
-    private String responsibleId;
-
-
-    /**
-     * 收银员名称
-     */
-    @ApiModelProperty("收银员名称")
-    private String responsibleName;
-
-
-    /**
-     * 是否删除
-     */
-    @ApiModelProperty("是否删除")
+    @ApiModelProperty("是否删除 是否删除")
     private int isDel;
 
 

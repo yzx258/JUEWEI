@@ -2,7 +2,7 @@ package com.rbgt.jw.service.impl.configuration;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.dao.JwConfigurationUserRoleDao;
-import com.rbgt.jw.entity.JwConfigurationUserRole;
+import com.rbgt.jw.entity.configuration.JwConfigurationUserRole;
 import com.rbgt.jw.service.configuration.JwConfigurationUserRoleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

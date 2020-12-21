@@ -1,35 +1,31 @@
-package com.rbgt.jw.base.spec;
+package com.rbgt.jw.base.spec.purchase;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
+import com.rbgt.jw.base.spec.product.AddProductSpec;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * jw_purchase_info表的Spec
  *
  * @author ： huangdefu@yiautos.com
  * @date : 2020-12-16 18:28:14
- * @description ：jw_purchase_info表的Spec
+ * @description ：
  * @Version 1.0
  */
 @Data
-public class JwPurchaseInfoSpec {
+public class AddPurchaseInfoSpec {
 
-    @ApiModelProperty("关键字")
-    private String keyword;
-
-    /**
-     * ID 唯一标识
-     */
-    @ApiModelProperty("ID 唯一标识")
-    private String id;
     /**
      * 进货状态
      */
     @ApiModelProperty("进货状态")
-    private int shopStatus;
+    private PurchaseTypeEnum shopStatus;
     /**
      * 门店ID
      */
@@ -44,11 +40,15 @@ public class JwPurchaseInfoSpec {
      * 下单日期
      */
     @ApiModelProperty("下单日期")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date purchaseTime;
     /**
      * 到货日期
      */
     @ApiModelProperty("到货日期")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date arriveTime;
     /**
      * 收货人ID
@@ -60,13 +60,7 @@ public class JwPurchaseInfoSpec {
      */
     @ApiModelProperty("收货人名称")
     private String responsibleName;
-    /**
-     * 是否删除
-     */
-    @ApiModelProperty("是否删除")
-    private int isDel;
 
-    @ApiModelProperty("分页参数")
-    private Page page;
-
+    @ApiModelProperty("进货产品记录信息")
+    List<AddProductRecordSpec> addProductRecordSpecs;
 }

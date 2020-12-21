@@ -2,9 +2,9 @@ package com.rbgt.jw.service.configuration;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.rbgt.jw.entity.JwConfigurationUser;
+import com.rbgt.jw.entity.configuration.JwConfigurationUser;
 import com.rbgt.jw.base.dto.JwConfigurationUserDTO;
-import com.rbgt.jw.base.spec.JwConfigurationUserSpec;
+import com.rbgt.jw.base.spec.configuration.JwConfigurationUserSpec;
 import com.rbgt.jw.base.spec.user.AddUserSpec;
 import com.rbgt.jw.base.spec.user.UpdateUserPwdSpec;
 

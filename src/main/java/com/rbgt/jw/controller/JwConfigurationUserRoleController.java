@@ -2,7 +2,7 @@ package com.rbgt.jw.controller;
 
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
-import com.rbgt.jw.entity.JwConfigurationUserRole;
+import com.rbgt.jw.entity.configuration.JwConfigurationUserRole;
 import com.rbgt.jw.service.configuration.JwConfigurationUserRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

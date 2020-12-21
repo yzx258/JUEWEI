@@ -18,11 +18,11 @@ import lombok.Getter;
 public enum ProductTasteTypeEnum {
 
     Z(0,"无"),
-    m_l(1,"麻辣"),
-    t_l(2,"甜辣"),
-    w_x(3,"五香"),
-    t_j(4,"藤椒"),
-    s_l(5,"酸辣"),
+    M_L(1,"麻辣"),
+    T_L(2,"甜辣"),
+    W_X(3,"五香"),
+    T_J(4,"藤椒"),
+    S_L(5,"酸辣"),
     ;
 
     private int code;

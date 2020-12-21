@@ -2,7 +2,7 @@ package com.rbgt.jw.service.impl.configuration;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.dao.JwConfigurationBasicDao;
-import com.rbgt.jw.entity.JwConfigurationBasic;
+import com.rbgt.jw.entity.configuration.JwConfigurationBasic;
 import com.rbgt.jw.service.configuration.JwConfigurationBasicService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -74,14 +74,6 @@ public class JwPurchaseProduct extends Model<JwPurchaseProduct> {
     @ApiModelProperty("进货/调货产品ID")
     private String generalProductId;
 
-
-    /**
-     * 进货ID
-     */
-    @ApiModelProperty("进货ID")
-    private String purchaseId;
-
-
     /**
      * 产品ID
      */

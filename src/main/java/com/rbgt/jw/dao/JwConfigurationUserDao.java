@@ -3,9 +3,9 @@ package com.rbgt.jw.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.rbgt.jw.entity.JwConfigurationUser;
+import com.rbgt.jw.entity.configuration.JwConfigurationUser;
 import com.rbgt.jw.base.dto.JwConfigurationUserDTO;
-import com.rbgt.jw.base.spec.JwConfigurationUserSpec;
+import com.rbgt.jw.base.spec.configuration.JwConfigurationUserSpec;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

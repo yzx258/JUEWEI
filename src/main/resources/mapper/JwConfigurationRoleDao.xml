@@ -3,7 +3,7 @@
 
 <mapper namespace="com.rbgt.jw.dao.JwConfigurationRoleDao">
     <!-- 根据角色查询 -->
-    <select id="findByRoleLabel" resultType="com.rbgt.jw.entity.JwConfigurationRole">
+    <select id="findByRoleLabel" resultType="com.rbgt.jw.entity.configuration.JwConfigurationRole">
         select jr.* from jw_configuration_role jr where jr.role_label = #{roleLabel}
     </select>
     <!-- 分页查询 -->
@@ -11,7 +11,7 @@
         select jr.* from jw_configuration_role jr
     </select>
     <!-- 根据用户ID，查询所有角色 -->
-    <select id="findByUserId" resultType="com.rbgt.jw.entity.JwConfigurationRole">
+    <select id="findByUserId" resultType="com.rbgt.jw.entity.configuration.JwConfigurationRole">
         select jr.* from jw_configuration_role jr where jr.role_label = #{userId}
     </select>
 </mapper>

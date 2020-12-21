@@ -3,27 +3,30 @@ package com.rbgt.jw.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.product.ProductPackTypeEnum;
+import com.rbgt.jw.base.enums.product.ProductTasteTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 角色表 的实体类
+ * 进货产品记录表 的实体类
  *
  * @author ： huangdefu@yiautos.com
- * @description ：角色表 的实体类
- * @date ： 2020-12-16 18:24:01
+ * @description ：进货产品记录表 的实体类
+ * @date ： 2020-12-16 18:28:14
  * @Version ：1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("jw_configuration_role")
-public class JwConfigurationRole extends Model<JwConfigurationRole> {
+@TableName("jw_product_record")
+public class JwProductRecord extends Model<JwProductRecord> {
 
     private static final long serialVersionUID = 1L;
 
@@ -68,25 +71,67 @@ public class JwConfigurationRole extends Model<JwConfigurationRole> {
     private Date updateTime;
 
 
-    /**
-     * 角色名称 角色名称
-     */
-    @ApiModelProperty("角色名称 角色名称")
-    private String roleName;
-
+    @ApiModelProperty("进货ID")
+    private String purchaseId;
 
     /**
-     * 角色标签 角色标签
+     * 门店ID
      */
-    @ApiModelProperty("角色标签 角色标签")
-    private String roleLabel;
+    @ApiModelProperty("门店ID")
+    private String shopId;
+
+    /**
+     * 产品编号
+     */
+    @ApiModelProperty("产品编号")
+    private String productNo;
 
 
     /**
-     * 是否删除 是否删除
+     * 产品名称
      */
-    @ApiModelProperty("是否删除 是否删除")
+    @ApiModelProperty("产品名称")
+    private String productName;
+
+
+    /**
+     * 产品规格
+     */
+    @ApiModelProperty("产品规格")
+    private int productSpecifications;
+
+
+    /**
+     * 产品包装
+     */
+    @ApiModelProperty("产品包装")
+    private ProductPackTypeEnum productPack;
+
+
+    /**
+     * 产品口味
+     */
+    @ApiModelProperty("产品口味")
+    private ProductTasteTypeEnum productTaste;
+
+
+    /**
+     * 进货价格
+     */
+    @ApiModelProperty("进货价格")
+    private BigDecimal stockPrice;
+
+
+    /**
+     * 零售价格
+     */
+    @ApiModelProperty("零售价格")
+    private BigDecimal retailPrice;
+
+
+    /**
+     * 是否删除
+     */
+    @ApiModelProperty("是否删除")
     private int isDel;
-
-
 }

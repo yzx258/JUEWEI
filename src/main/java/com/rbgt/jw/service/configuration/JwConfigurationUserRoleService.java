@@ -1,7 +1,7 @@
 package com.rbgt.jw.service.configuration;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.rbgt.jw.entity.JwConfigurationUserRole;
+import com.rbgt.jw.entity.configuration.JwConfigurationUserRole;
 
 import java.util.List;
 

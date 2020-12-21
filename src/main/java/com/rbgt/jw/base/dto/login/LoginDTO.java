@@ -1,6 +1,6 @@
 package com.rbgt.jw.base.dto.login;
 
-import com.rbgt.jw.entity.JwConfigurationRole;
+import com.rbgt.jw.entity.configuration.JwConfigurationRole;
 import com.rbgt.jw.base.dto.JwConfigurationUserDTO;
 import com.rbgt.jw.base.dto.JwShopDTO;
 import io.swagger.annotations.ApiModelProperty;

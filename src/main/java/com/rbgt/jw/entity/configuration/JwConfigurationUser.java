@@ -1,4 +1,4 @@
-package com.rbgt.jw.entity;
+package com.rbgt.jw.entity.configuration;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -12,18 +12,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * 基础数据配置 的实体类
+ * 用户表 的实体类
  *
  * @author ： huangdefu@yiautos.com
- * @description ：基础数据配置 的实体类
- * @date ： 2020-12-16 18:24:01
+ * @description ：用户表 的实体类
+ * @date ： 2020-12-16 18:28:14
  * @Version ：1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("jw_configuration_basic")
-public class JwConfigurationBasic extends Model<JwConfigurationBasic> {
+@TableName("jw_configuration_user")
+public class JwConfigurationUser extends Model<JwConfigurationUser> {
 
     private static final long serialVersionUID = 1L;
 
@@ -69,30 +69,51 @@ public class JwConfigurationBasic extends Model<JwConfigurationBasic> {
 
 
     /**
-     * 配置名称
+     * 门店ID
      */
-    @ApiModelProperty("配置名称")
-    private String basicKey;
+    @ApiModelProperty("门店ID")
+    private String shopId;
 
 
     /**
-     * 配置类型
+     * 用户名称 用户名称
      */
-    @ApiModelProperty("配置类型")
-    private int basicType;
+    @ApiModelProperty("用户名称 用户名称")
+    private String userName;
 
 
     /**
-     * 配置值
+     * 联系电话 联系电话
      */
-    @ApiModelProperty("配置值")
-    private String basicValue;
+    @ApiModelProperty("联系电话 联系电话")
+    private String userMobile;
 
 
     /**
-     * 是否删除
+     * 用户编号 用户编号
      */
-    @ApiModelProperty("是否删除")
+    @ApiModelProperty("用户编号 用户编号")
+    private String userNo;
+
+
+    /**
+     * 用户账号
+     */
+    @ApiModelProperty("用户账号")
+    private String userAccount;
+
+
+    /**
+     * 用户密码 用户密码
+     */
+    @ApiModelProperty("用户密码 用户密码")
+    private String userPwd;
+
+
+    /**
+     * 是否删除 是否删除
+     */
+    @ApiModelProperty("是否删除 是否删除")
     private int isDel;
 
 

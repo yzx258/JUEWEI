@@ -6,7 +6,7 @@ import cn.hutool.core.date.DateUnit;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.rbgt.jw.config.handler.BaseException;
-import com.rbgt.jw.entity.JwConfigurationUser;
+import com.rbgt.jw.entity.configuration.JwConfigurationUser;
 import com.rbgt.jw.entity.JwShop;
 import com.rbgt.jw.base.enums.ResponseCode;
 import com.rbgt.jw.service.configuration.JwConfigurationRoleService;
@@ -55,7 +55,6 @@ public class LoginServiceImpl implements LoginService {
             // 从缓存取数据
             log.info("登录信息从缓存取：{}",cacheUtils.getCache(token));
             loginDTO = JSON.parseObject(cacheUtils.getCache(token), LoginDTO.class);
-            loginDTO.setToken(token);
             return loginDTO;
         }
         // 设置最新数据

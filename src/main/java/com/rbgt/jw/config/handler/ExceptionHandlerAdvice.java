@@ -34,6 +34,7 @@ public class ExceptionHandlerAdvice {
         if (ObjectUtil.isNotNull(e.getMessage()) && StrUtil.isNotBlank(e.getMessage())) {
             String containChinese = isContainChinese(e.getMessage());
             log.error("处理未捕获的Exception：{}", containChinese);
+            log.error("处理未捕获的Exception：{}", e);
             return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(), ResponseCode.SERVICE_ERROR.getMsg(), containChinese);
         }
         log.error("处理未捕获的Exception：{}", e.getMessage());
@@ -52,6 +53,7 @@ public class ExceptionHandlerAdvice {
         if (ObjectUtil.isNotNull(e.getMessage()) && StrUtil.isNotBlank(e.getMessage())) {
             String containChinese = isContainChinese(e.getMessage());
             log.error("处理未捕获的RuntimeException：{}", containChinese);
+            log.error("处理未捕获的RuntimeException：{}", e);
             return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(), ResponseCode.SERVICE_ERROR.getMsg(), containChinese);
         }
         log.error("处理未捕获的RuntimeException：{}", e.getMessage());

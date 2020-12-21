@@ -1,7 +1,7 @@
 package com.rbgt.jw.service.configuration;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.rbgt.jw.entity.JwConfigurationDailyDetail;
+import com.rbgt.jw.entity.configuration.JwConfigurationDailyDetail;
 
 /**
  * 日结配置明细表 接口业务逻辑接口

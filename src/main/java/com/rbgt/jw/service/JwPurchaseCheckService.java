@@ -13,5 +13,6 @@ import com.rbgt.jw.entity.JwPurchaseCheck;
  */
 public interface JwPurchaseCheckService extends IService<JwPurchaseCheck>  {
 
+
 }
 

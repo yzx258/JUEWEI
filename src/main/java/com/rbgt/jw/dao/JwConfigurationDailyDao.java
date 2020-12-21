@@ -1,7 +1,7 @@
 package com.rbgt.jw.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.rbgt.jw.entity.JwConfigurationDaily;
+import com.rbgt.jw.entity.configuration.JwConfigurationDaily;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
