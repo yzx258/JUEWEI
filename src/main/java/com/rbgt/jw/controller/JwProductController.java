@@ -3,14 +3,10 @@ package com.rbgt.jw.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
-import com.rbgt.jw.entity.JwConfigurationUser;
 import com.rbgt.jw.entity.JwProduct;
 import com.rbgt.jw.service.JwProductService;
-import com.rbgt.jw.service.JwShopService;
 import com.rbgt.jw.service.dto.JwProductDTO;
-import com.rbgt.jw.service.dto.JwShopDTO;
 import com.rbgt.jw.service.spec.JwProductSpec;
-import com.rbgt.jw.service.spec.JwShopSpec;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司
@@ -43,7 +41,7 @@ public class JwProductController {
 
     @ApiOperation(value = "新增 - 门店信息")
     @PostMapping("/product/add")
-    public ResponseResult<JwProduct> add(@RequestBody @ApiParam(name = "jwProductSpec", value = "创建门店实体类") JwProductSpec jwProductSpec){
+    public ResponseResult<JwProduct> add(@Valid @RequestBody @ApiParam(name = "jwProductSpec", value = "创建门店实体类") JwProductSpec jwProductSpec){
         return new ResponseResult(jwProductService.addOrUpdate(jwProductSpec));
     }
 

@@ -49,7 +49,7 @@ public class JwConfigurationRoleController {
 
     @ApiOperation(value = "查询 - 根据标签查询角色信息")
     @GetMapping("/role/get/{lab}")
-    public ResponseResult<JwConfigurationRole> add(@PathVariable("lab") @ApiParam(name = "lab", value = "角色标签") String lab){
+    public ResponseResult<JwConfigurationRole> findByRoleLabel(@PathVariable("lab") @ApiParam(name = "lab", value = "角色标签") String lab){
         return new ResponseResult(jwConfigurationRoleService.findByRoleLabel(lab));
     }
 

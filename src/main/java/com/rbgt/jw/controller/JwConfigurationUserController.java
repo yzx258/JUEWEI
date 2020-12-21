@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -46,7 +47,7 @@ public class JwConfigurationUserController {
 
     @ApiOperation(value = "新增 - 用户信息")
     @PostMapping("/user/add")
-    public ResponseResult<JwConfigurationUser> add(@RequestBody @ApiParam(name = "addUserSpec", value = "创建用户实体类") AddUserSpec addUserSpec){
+    public ResponseResult<JwConfigurationUser> add(@Valid @RequestBody @ApiParam(name = "addUserSpec", value = "创建用户实体类") AddUserSpec addUserSpec){
         return new ResponseResult(jwConfigurationUserService.add(addUserSpec));
     }
 

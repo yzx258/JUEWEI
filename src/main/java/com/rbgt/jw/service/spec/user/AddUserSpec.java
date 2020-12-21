@@ -3,6 +3,7 @@ package com.rbgt.jw.service.spec.user;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -20,71 +21,69 @@ public class AddUserSpec {
      * 门店ID
      */
     @ApiModelProperty("门店ID")
+    @NotNull(message = "门店不能为空")
     private String shopId;
 
 
     /**
      * 用户名称 用户名称
      */
-    @ApiModelProperty("用户名称 用户名称")
+    @ApiModelProperty("用户名称")
+    @NotNull(message = "用户名称不能为空")
     private String userName;
 
 
     /**
      * 联系电话 联系电话
      */
-    @ApiModelProperty("联系电话 联系电话")
+    @ApiModelProperty("联系电话")
+    @NotNull(message = "联系电话不能为空")
     private String userMobile;
 
 
     /**
      * 用户编号 用户编号
      */
-    @ApiModelProperty("用户编号 用户编号")
+    @ApiModelProperty("用户编号")
+    @NotNull(message = "用户编号不能为空")
     private String userNo;
-
 
     /**
      * 用户账号
      */
     @ApiModelProperty("用户账号")
+    @NotNull(message = "用户账号不能为空")
     private String userAccount;
-
 
     /**
      * 用户密码 用户密码
      */
-    @ApiModelProperty("用户密码 用户密码")
+    @ApiModelProperty("用户密码")
+    @NotNull(message = "用户密码不能为空")
     private String userPwd;
 
-    /**
-     * 用户角色
-     */
-    @ApiModelProperty("用户密码 用户密码")
-    private String userRole;
+    @ApiModelProperty("是否店长：是[true],否[false]")
+    private Boolean isManager = false;
 
     @ApiModelProperty("配置权：有权限[true],无权限[false]")
-    private Boolean isConfiguration;
+    private Boolean isConfiguration = false;
 
     @ApiModelProperty("进货权：有权限[true],无权限[false]")
-    private Boolean isStock;
+    private Boolean isStock = false;
 
     @ApiModelProperty("调货权：有权限[true],无权限[false]")
-    private Boolean isCargo;
+    private Boolean isCargo = false;
 
     @ApiModelProperty("核对权：有权限[true],无权限[false]")
-    private Boolean isCheck;
+    private Boolean isCheck = false;
 
     @ApiModelProperty("盘点权：有权限[true],无权限[false]")
-    private Boolean isInventory;
+    private Boolean isInventory = false;
 
     @ApiModelProperty("盘点复盘权：有权限[true],无权限[false]")
-    private Boolean isInventoryCheck;
-
-    @ApiModelProperty("角色ID")
-    private List<String> roleList;
+    private Boolean isInventoryCheck = false;
 
     @ApiModelProperty("交班日结权：有权限[true],无权限[false]")
-    private Boolean isDaily;
+    private Boolean isDaily = false;
 
 }

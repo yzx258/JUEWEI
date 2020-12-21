@@ -87,6 +87,26 @@ public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationU
      * @param list
      */
     private void setUserRole(JwConfigurationUser jwConfigurationUser, AddUserSpec addUserSpec, List<JwConfigurationUserRole> list) {
+        // 是否店长
+        if (addUserSpec.getIsManager()) {
+            // 店长
+            JwConfigurationRole byRoleLabel = jwConfigurationRoleService.findByRoleLabel(RoleConstantEnum.SHOP_MANAGER.getCode());
+            if (ObjectUtil.isNotNull(byRoleLabel) && StrUtil.isNotBlank(byRoleLabel.getId())) {
+                JwConfigurationUserRole rl = new JwConfigurationUserRole();
+                rl.setRoleId(byRoleLabel.getId());
+                rl.setUserId(jwConfigurationUser.getId());
+                list.add(rl);
+            }
+        }else{
+            // 店员
+            JwConfigurationRole byRoleLabel = jwConfigurationRoleService.findByRoleLabel(RoleConstantEnum.SHOP_ASSISTANT.getCode());
+            if (ObjectUtil.isNotNull(byRoleLabel) && StrUtil.isNotBlank(byRoleLabel.getId())) {
+                JwConfigurationUserRole rl = new JwConfigurationUserRole();
+                rl.setRoleId(byRoleLabel.getId());
+                rl.setUserId(jwConfigurationUser.getId());
+                list.add(rl);
+            }
+        }
         if (addUserSpec.getIsConfiguration()) {
             // 存在配置权
             JwConfigurationRole byRoleLabel = jwConfigurationRoleService.findByRoleLabel(RoleConstantEnum.SHOP_CONFIGURATION.getCode());

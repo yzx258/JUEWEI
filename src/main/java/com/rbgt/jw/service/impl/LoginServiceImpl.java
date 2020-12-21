@@ -6,9 +6,11 @@ import cn.hutool.core.date.DateUnit;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.rbgt.jw.config.handler.BaseException;
+import com.rbgt.jw.entity.JwConfigurationRole;
 import com.rbgt.jw.entity.JwConfigurationUser;
 import com.rbgt.jw.entity.JwShop;
 import com.rbgt.jw.enums.ResponseCode;
+import com.rbgt.jw.service.JwConfigurationRoleService;
 import com.rbgt.jw.service.JwConfigurationUserService;
 import com.rbgt.jw.service.JwShopService;
 import com.rbgt.jw.service.LoginService;
@@ -42,6 +44,8 @@ public class LoginServiceImpl implements LoginService {
     private JwConfigurationUserService jwConfigurationUserService;
     @Autowired
     private JwShopService jwShopService;
+    @Autowired
+    private JwConfigurationRoleService jwConfigurationRoleService;
 
     @Override
     public LoginDTO login(LoginSpec loginSpec) {
@@ -70,9 +74,11 @@ public class LoginServiceImpl implements LoginService {
             BeanUtil.copyProperties(byId,jwShopDTO,true);
             loginDTO.setJwShopDTO(jwShopDTO);
             // 设置缓存信息
+            loginDTO.setToken(token);
+            // 获取角色信息
+            loginDTO.setList(jwConfigurationRoleService.findByUserId(jwConfigurationUserDTO.getId()));
             cacheUtils.saveCache(token, JSON.toJSONString(loginDTO), DateUnit.HOUR.getMillis() * 24);
             cacheUtils.saveCache(loginSpec.getUserAccount(),token);
-            loginDTO.setToken(token);
             return loginDTO;
         }else{
             throw new BaseException(ResponseCode.USER_NOT_ERROR);

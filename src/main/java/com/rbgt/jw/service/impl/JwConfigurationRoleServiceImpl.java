@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 角色表 业务逻辑接口实现类
  *
@@ -40,6 +42,16 @@ public class JwConfigurationRoleServiceImpl extends ServiceImpl<JwConfigurationR
     }
 
     /**
+     * 根据用户ID，查询所有角色
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<JwConfigurationRole> findByUserId(String userId) {
+        return this.baseMapper.findByUserId(userId);
+    }
+
+    /**
      * 新增/修改角色信息
      * @param spec
      * @return
@@ -57,6 +69,7 @@ public class JwConfigurationRoleServiceImpl extends ServiceImpl<JwConfigurationR
             if(ObjectUtil.isNotNull(jwConfigurationRole) && StrUtil.isNotBlank(jwConfigurationRole.getId())){
                 throw new BaseException(ResponseCode.ROLE_ERROR);
             }
+            jwConfigurationRole = new JwConfigurationRole();
         }
         BeanUtil.copyProperties(spec,jwConfigurationRole,true);
         jwConfigurationRole.insertOrUpdate();

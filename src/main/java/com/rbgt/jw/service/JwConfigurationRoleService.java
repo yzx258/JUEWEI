@@ -8,6 +8,8 @@ import com.rbgt.jw.service.dto.JwConfigurationRoleDTO;
 import com.rbgt.jw.service.spec.JwConfigurationRoleSpec;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 角色表 接口业务逻辑接口
  *
@@ -24,6 +26,13 @@ public interface JwConfigurationRoleService extends IService<JwConfigurationRole
      * @return
      */
     JwConfigurationRole findByRoleLabel(String roleLabel);
+
+    /**
+     * 根据用户ID，查询所有角色
+     * @param userId
+     * @return
+     */
+    List<JwConfigurationRole> findByUserId(String userId);
 
     /**
      * 新增/修改角色信息

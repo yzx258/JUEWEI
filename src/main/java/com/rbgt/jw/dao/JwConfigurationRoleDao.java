@@ -9,6 +9,8 @@ import com.rbgt.jw.service.spec.JwConfigurationRoleSpec;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 角色表 dao接口
  * 
@@ -26,6 +28,13 @@ public interface JwConfigurationRoleDao extends BaseMapper<JwConfigurationRole> 
      * @return
      */
     JwConfigurationRole findByRoleLabel(String roleLabel);
+
+    /**
+     * 根据用户ID，查询所有角色
+     * @param userId
+     * @return
+     */
+    List<JwConfigurationRole> findByUserId(String userId);
 
     /**
      * 分页查角色店信息

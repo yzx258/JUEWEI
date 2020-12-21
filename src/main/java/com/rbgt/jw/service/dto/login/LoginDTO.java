@@ -1,9 +1,13 @@
 package com.rbgt.jw.service.dto.login;
 
+import com.rbgt.jw.entity.JwConfigurationRole;
+import com.rbgt.jw.entity.JwConfigurationUser;
 import com.rbgt.jw.service.dto.JwConfigurationUserDTO;
 import com.rbgt.jw.service.dto.JwShopDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司
@@ -25,6 +29,6 @@ public class LoginDTO {
     @ApiModelProperty("门店信息")
     private JwShopDTO jwShopDTO;
 
-
-
+    @ApiModelProperty("门店信息")
+    private List<JwConfigurationRole> list;
 }
