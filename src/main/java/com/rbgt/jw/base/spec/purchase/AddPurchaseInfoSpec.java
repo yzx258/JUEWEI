@@ -2,11 +2,11 @@ package com.rbgt.jw.base.spec.purchase;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
-import com.rbgt.jw.base.spec.product.AddProductSpec;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +30,7 @@ public class AddPurchaseInfoSpec {
      * 门店ID
      */
     @ApiModelProperty("门店ID")
+    @NotNull(message = "门店ID不能为空")
     private String shopId;
     /**
      * 门店名称
@@ -54,6 +55,7 @@ public class AddPurchaseInfoSpec {
      * 收货人ID
      */
     @ApiModelProperty("收货人ID")
+    @NotNull(message = "收货人ID不能为空")
     private String responsibleId;
     /**
      * 收货人名称

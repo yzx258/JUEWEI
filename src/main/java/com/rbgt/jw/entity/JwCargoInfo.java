@@ -3,6 +3,7 @@ package com.rbgt.jw.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -72,7 +73,7 @@ public class JwCargoInfo extends Model<JwCargoInfo> {
      * 调货状态
      */
     @ApiModelProperty("调货状态")
-    private int cargoStatus;
+    private PurchaseTypeEnum cargoStatus;
 
 
     /**
@@ -107,6 +108,8 @@ public class JwCargoInfo extends Model<JwCargoInfo> {
      * 调货时间
      */
     @ApiModelProperty("调货时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date cargoTime;
 
 

@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * @company： 厦门宜车时代信息技术有限公司
  * @copyright： Copyright (C), 2020
@@ -29,7 +31,7 @@ public class JwPurchaseInfoController {
 
     @ApiOperation(value = "新增 - 进货信息")
     @PostMapping("/purchase/add")
-    public ResponseResult<JwPurchaseInfo> add(@RequestBody @ApiParam(name = "spec", value = "创建进货实体类") AddPurchaseInfoSpec spec){
+    public ResponseResult<JwPurchaseInfo> add(@Valid @RequestBody @ApiParam(name = "spec", value = "创建进货实体类") AddPurchaseInfoSpec spec){
         return new ResponseResult(jwPurchaseInfoService.add(spec));
     }
 
