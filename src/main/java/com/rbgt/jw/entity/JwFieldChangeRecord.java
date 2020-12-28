@@ -67,6 +67,12 @@ public class JwFieldChangeRecord extends Model<JwFieldChangeRecord> {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
+    /**
+     * 目标ID
+     */
+    @ApiModelProperty("目标ID")
+    private String targetId;
+
 
     /**
      * 操作人ID

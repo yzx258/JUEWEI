@@ -3,12 +3,15 @@ package com.rbgt.jw.entity.configuration;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.daily.DailyAccountedTypeEnum;
+import com.rbgt.jw.base.enums.daily.DailyTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -86,14 +89,20 @@ public class JwConfigurationDailyDetail extends Model<JwConfigurationDailyDetail
      * 日结值
      */
     @ApiModelProperty("日结值")
-    private String dailyValue;
+    private BigDecimal dailyValue;
 
 
     /**
      * 日结类型
      */
     @ApiModelProperty("日结类型")
-    private String dailyType;
+    private DailyTypeEnum dailyType;
+
+    /**
+     * 日结类型
+     */
+    @ApiModelProperty("日结占比类型")
+    private DailyAccountedTypeEnum dailyAccountedType;
 
 
     /**
