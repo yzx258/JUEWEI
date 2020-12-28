@@ -1,11 +1,13 @@
 package com.rbgt.jw.base.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.entity.JwProductRecord;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * jw_breakage_info表的DTO
@@ -74,10 +76,10 @@ public class JwBreakageInfoDTO {
      */
     @ApiModelProperty("负责人名称")
     private String responsibleName;
-    /**
-     * 是否删除
-     */
-    @ApiModelProperty("是否删除")
-    private int isDel;
 
+    /**
+     * 进货产品记录
+     */
+    @ApiModelProperty("进货产品记录")
+    List<JwProductRecord> jwProductRecordList;
 }

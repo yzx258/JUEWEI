@@ -31,14 +31,12 @@ public class JwBreakageInfo extends Model<JwBreakageInfo> {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-
     /**
      * 创建人 创建人
      */
     @ApiModelProperty("创建人 创建人")
     @TableField(fill = FieldFill.INSERT)
     private String createBy;
-
 
     /**
      * 创建时间 创建时间
@@ -49,14 +47,12 @@ public class JwBreakageInfo extends Model<JwBreakageInfo> {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
-
     /**
      * 更新人 更新人
      */
     @ApiModelProperty("更新人 更新人")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String lastModifiedBy;
-
 
     /**
      * 更新时间 更新时间
@@ -67,13 +63,11 @@ public class JwBreakageInfo extends Model<JwBreakageInfo> {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
-
     /**
      * 门店ID
      */
     @ApiModelProperty("门店ID")
     private String shopId;
-
 
     /**
      * 门店名称
@@ -81,13 +75,13 @@ public class JwBreakageInfo extends Model<JwBreakageInfo> {
     @ApiModelProperty("门店名称")
     private String shopName;
 
-
     /**
      * 报损日期
      */
     @ApiModelProperty("报损日期")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date breakageTime;
-
 
     /**
      * 负责人ID
@@ -95,19 +89,15 @@ public class JwBreakageInfo extends Model<JwBreakageInfo> {
     @ApiModelProperty("负责人ID")
     private String responsibleId;
 
-
     /**
      * 负责人名称
      */
     @ApiModelProperty("负责人名称")
     private String responsibleName;
 
-
     /**
      * 是否删除
      */
     @ApiModelProperty("是否删除")
     private int isDel;
-
-
 }
