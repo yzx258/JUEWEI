@@ -1,6 +1,7 @@
 package com.rbgt.jw.base.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
 import com.rbgt.jw.entity.JwProductRecord;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -29,7 +30,7 @@ public class JwCargoInfoDTO {
      * 调货状态
      */
     @ApiModelProperty("调货状态")
-    private int cargoStatus;
+    private PurchaseTypeEnum cargoStatus;
     /**
      * 调出门店ID
      */

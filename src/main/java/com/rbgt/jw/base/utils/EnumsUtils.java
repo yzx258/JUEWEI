@@ -3,6 +3,7 @@ package com.rbgt.jw.base.utils;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.util.ClassUtil;
 import com.alibaba.fastjson.JSON;
+import com.rbgt.jw.base.dto.enums.EnumsDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,15 +44,16 @@ public class EnumsUtils {
         Set<Class<?>> classes = ClassUtil.scanPackage(URL);
         Map<String,Object> map = new LinkedHashMap<>();
         for (Class obj : classes) {
-            List<Map<String, Object>> list = new ArrayList<>();
+            List<EnumsDTO> list = new ArrayList<>();
             try{
                 Object[] objects = obj.getEnumConstants();
                 Method getCode = obj.getMethod("getCode");
                 Method getMessage = obj.getMethod("getMsg");
                 for (Object obj1 : objects) {
-                    Map<String, Object> maps = new LinkedHashMap<>();
-                    maps.put(getCode.invoke(obj1)+"",getMessage.invoke(obj1));
-                    list.add(maps);
+                    EnumsDTO enumsDTO = new EnumsDTO();
+                    enumsDTO.setCode(getCode.invoke(obj1)+"");
+                    enumsDTO.setMsg(getMessage.invoke(obj1)+"");
+                    list.add(enumsDTO);
                 }
             }catch (Exception e){
                 log.error("【{}】获取枚举失败",obj.getSimpleName());

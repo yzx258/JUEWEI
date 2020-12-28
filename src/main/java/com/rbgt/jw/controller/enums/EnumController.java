@@ -1,4 +1,4 @@
-package com.rbgt.jw.controller;
+package com.rbgt.jw.controller.enums;
 
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
