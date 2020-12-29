@@ -1,7 +1,11 @@
 package com.rbgt.jw.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.rbgt.jw.base.dto.JwBreakageInfoDTO;
 import com.rbgt.jw.base.dto.JwCargoInfoDTO;
+import com.rbgt.jw.base.spec.breakage.BreakageInfoSearchSpec;
 import com.rbgt.jw.base.spec.cargo.AddCargoInfoSpec;
+import com.rbgt.jw.base.spec.cargo.CargoInfoSearchSpec;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwCargoInfo;
@@ -40,6 +44,12 @@ public class JwCargoInfoController {
     @GetMapping("/cargo/get/{id}")
     public ResponseResult<JwCargoInfoDTO> getById(@PathVariable("id") @ApiParam(name = "id", value = "调货ID") String id){
         return new ResponseResult(jwCargoInfoService.details(id));
+    }
+
+    @ApiOperation(value = "查询 - 分页信息")
+    @PostMapping("/cargo/search")
+    public ResponseResult<IPage<JwCargoInfoDTO>> search(@RequestBody CargoInfoSearchSpec spec){
+        return new ResponseResult(jwCargoInfoService.search(spec));
     }
 
 }

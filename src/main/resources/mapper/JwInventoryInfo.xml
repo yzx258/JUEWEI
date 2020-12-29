@@ -4,4 +4,8 @@
 <mapper namespace="com.rbgt.jw.dao.JwInventoryInfoDao">
 
 
+    <!-- 分页查询数据 -->
+    <select id="search" resultType="com.rbgt.jw.base.dto.inventory.InventoryInfoDTO">
+        select * from jw_inventory_info jii
+    </select>
 </mapper>

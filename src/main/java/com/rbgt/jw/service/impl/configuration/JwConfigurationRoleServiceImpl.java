@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.config.handler.BaseException;
-import com.rbgt.jw.dao.JwConfigurationRoleDao;
+import com.rbgt.jw.dao.configuration.JwConfigurationRoleDao;
 import com.rbgt.jw.entity.configuration.JwConfigurationRole;
 import com.rbgt.jw.base.enums.ResponseCode;
 import com.rbgt.jw.service.configuration.JwConfigurationRoleService;

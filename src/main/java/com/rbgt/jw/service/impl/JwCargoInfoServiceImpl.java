@@ -4,9 +4,11 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.base.dto.JwCargoInfoDTO;
 import com.rbgt.jw.base.spec.cargo.AddCargoInfoSpec;
+import com.rbgt.jw.base.spec.cargo.CargoInfoSearchSpec;
 import com.rbgt.jw.dao.JwCargoInfoDao;
 import com.rbgt.jw.entity.JwCargoInfo;
 import com.rbgt.jw.entity.JwProductRecord;
@@ -78,6 +80,16 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
             jwCargoInfoDTO.setJwProductRecordList(list);
         }
         return jwCargoInfoDTO;
+    }
+
+    /**
+     * 分页查询数据
+     * @param spec
+     * @return
+     */
+    @Override
+    public IPage<JwCargoInfoDTO> search(CargoInfoSearchSpec spec) {
+        return this.baseMapper.search(spec,spec.getPage());
     }
 }
 

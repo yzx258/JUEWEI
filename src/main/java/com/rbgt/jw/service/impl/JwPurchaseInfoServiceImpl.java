@@ -4,8 +4,10 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
+import com.rbgt.jw.base.spec.JwPurchaseInfoSpec;
 import com.rbgt.jw.base.spec.purchase.AddPurchaseInfoSpec;
 import com.rbgt.jw.dao.JwPurchaseInfoDao;
 import com.rbgt.jw.entity.JwProductRecord;
@@ -79,5 +81,15 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
             jwPurchaseInfoDTO.setJwProductRecordList(list);
         }
         return jwPurchaseInfoDTO;
+    }
+
+    /**
+     * 分页查询信息
+     * @param spec
+     * @return
+     */
+    @Override
+    public IPage<JwPurchaseInfoDTO> search(JwPurchaseInfoSpec spec) {
+        return this.baseMapper.search(spec,spec.getPage());
     }
 }

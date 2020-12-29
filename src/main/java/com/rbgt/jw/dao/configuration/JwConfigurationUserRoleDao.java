@@ -1,4 +1,4 @@
-package com.rbgt.jw.dao;
+package com.rbgt.jw.dao.configuration;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.rbgt.jw.entity.configuration.JwConfigurationUserRole;

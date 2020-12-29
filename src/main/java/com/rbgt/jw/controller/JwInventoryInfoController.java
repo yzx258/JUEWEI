@@ -1,9 +1,13 @@
 package com.rbgt.jw.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.rbgt.jw.base.dto.JwCargoInfoDTO;
+import com.rbgt.jw.base.dto.JwDailyRecordDTO;
 import com.rbgt.jw.base.dto.inventory.InventoryInfoDTO;
+import com.rbgt.jw.base.spec.JwDailyRecordSpec;
 import com.rbgt.jw.base.spec.cargo.AddCargoInfoSpec;
 import com.rbgt.jw.base.spec.inventory.AddInventoryInfoSpec;
+import com.rbgt.jw.base.spec.inventory.InventorySearchSpec;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwCargoInfo;
@@ -44,6 +48,12 @@ public class JwInventoryInfoController {
     @GetMapping("/inventory/get/{id}")
     public ResponseResult<InventoryInfoDTO> getById(@PathVariable("id") @ApiParam(name = "id", value = "盘点ID") String id){
         return new ResponseResult(jwInventoryInfoService.details(id));
+    }
+
+    @ApiOperation(value = "查询 - 分页信息")
+    @PostMapping("/inventory/search")
+    public ResponseResult<IPage<InventoryInfoDTO>> search(@RequestBody InventorySearchSpec spec){
+        return new ResponseResult(jwInventoryInfoService.search(spec));
     }
 
 }

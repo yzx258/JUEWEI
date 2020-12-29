@@ -1,9 +1,10 @@
 package com.rbgt.jw.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rbgt.jw.base.dto.JwCargoInfoDTO;
-import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
 import com.rbgt.jw.base.spec.cargo.AddCargoInfoSpec;
+import com.rbgt.jw.base.spec.cargo.CargoInfoSearchSpec;
 import com.rbgt.jw.entity.JwCargoInfo;
 
 /**
@@ -29,6 +30,13 @@ public interface JwCargoInfoService extends IService<JwCargoInfo>  {
      * @return
      */
     JwCargoInfoDTO details(String id);
+
+    /**
+     * 分页查询数据
+     * @param spec
+     * @return
+     */
+    IPage<JwCargoInfoDTO> search(CargoInfoSearchSpec spec);
 
 }
 

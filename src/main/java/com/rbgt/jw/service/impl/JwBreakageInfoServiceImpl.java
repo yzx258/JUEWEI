@@ -4,11 +4,14 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.base.dto.JwBreakageInfoDTO;
 import com.rbgt.jw.base.dto.JwCargoInfoDTO;
 import com.rbgt.jw.base.dto.inventory.InventoryInfoDTO;
+import com.rbgt.jw.base.spec.JwShopSpec;
 import com.rbgt.jw.base.spec.breakage.AddBreakageInfoSpec;
+import com.rbgt.jw.base.spec.breakage.BreakageInfoSearchSpec;
 import com.rbgt.jw.dao.JwBreakageInfoDao;
 import com.rbgt.jw.entity.JwBreakageInfo;
 import com.rbgt.jw.entity.JwInventoryInfo;
@@ -82,6 +85,16 @@ public class JwBreakageInfoServiceImpl extends ServiceImpl<JwBreakageInfoDao, Jw
             jwBreakageInfoDTO.setJwProductRecordList(list);
         }
         return jwBreakageInfoDTO;
+    }
+
+    /**
+     * 分页查询报损信息
+     * @param spec
+     * @return
+     */
+    @Override
+    public IPage<JwBreakageInfoDTO> search(BreakageInfoSearchSpec spec) {
+        return this.baseMapper.search(spec,spec.getPage());
     }
 }
 

@@ -4,4 +4,8 @@
 <mapper namespace="com.rbgt.jw.dao.JwBreakageInfoDao">
 
 
+    <!-- 分页查询数据 -->
+    <select id="search" resultType="com.rbgt.jw.base.dto.JwBreakageInfoDTO">
+        select * from jw_breakage_info jbi
+    </select>
 </mapper>

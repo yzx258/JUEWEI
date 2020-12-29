@@ -1,8 +1,16 @@
 package com.rbgt.jw.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.rbgt.jw.base.dto.JwDailyRecordDTO;
+import com.rbgt.jw.base.dto.inventory.InventoryInfoDTO;
+import com.rbgt.jw.base.spec.JwDailyRecordSpec;
+import com.rbgt.jw.base.spec.inventory.InventorySearchSpec;
+import com.rbgt.jw.entity.JwDailyRecord;
 import com.rbgt.jw.entity.JwInventoryInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 产品信息表 dao接口
@@ -14,4 +22,13 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface JwInventoryInfoDao extends BaseMapper<JwInventoryInfo> {
+
+    /**
+     * 分页查询信息
+     * @param param
+     * @param page
+     * @return
+     */
+    IPage<InventoryInfoDTO> search(@Param("param") InventorySearchSpec param, Page<JwInventoryInfo> page);
+
 }

@@ -31,5 +31,12 @@ public interface JwProductService extends IService<JwProduct>  {
      */
     IPage<JwProductDTO> search(JwProductSpec spec);
 
+    /**
+     * 根据ID获取产品详情
+     * @param id
+     * @return
+     */
+    JwProductDTO details(String id);
+
 }
 

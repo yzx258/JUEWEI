@@ -1,9 +1,16 @@
 package com.rbgt.jw.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rbgt.jw.base.dto.JwCargoInfoDTO;
 import com.rbgt.jw.base.dto.JwDailyRecordDTO;
+import com.rbgt.jw.base.spec.JwDailyRecordSpec;
+import com.rbgt.jw.base.spec.cargo.CargoInfoSearchSpec;
 import com.rbgt.jw.base.spec.daily.AddDailyRecordSpec;
+import com.rbgt.jw.entity.JwCargoInfo;
 import com.rbgt.jw.entity.JwDailyRecord;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 日结信息表 接口业务逻辑接口
@@ -28,5 +35,12 @@ public interface JwDailyRecordService extends IService<JwDailyRecord> {
      * @return
      */
     JwDailyRecordDTO details(String id);
+
+    /**
+     * 分页查询信息
+     * @param spec
+     * @return
+     */
+    IPage<JwDailyRecordDTO> search(JwDailyRecordSpec spec);
 
 }

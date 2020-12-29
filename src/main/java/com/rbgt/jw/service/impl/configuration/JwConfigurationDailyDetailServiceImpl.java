@@ -1,7 +1,7 @@
 package com.rbgt.jw.service.impl.configuration;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.rbgt.jw.dao.JwConfigurationDailyDetailDao;
+import com.rbgt.jw.dao.configuration.JwConfigurationDailyDetailDao;
 import com.rbgt.jw.entity.configuration.JwConfigurationDailyDetail;
 import com.rbgt.jw.service.configuration.JwConfigurationDailyDetailService;
 import lombok.RequiredArgsConstructor;

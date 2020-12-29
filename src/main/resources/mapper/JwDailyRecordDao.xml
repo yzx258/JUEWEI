@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.rbgt.jw.dao.JwCargoInfoDao">
+<mapper namespace="com.rbgt.jw.dao.JwDailyRecordDao">
 
 
     <!-- 分页查询数据 -->
-    <select id="search" resultType="com.rbgt.jw.base.dto.JwCargoInfoDTO">
-        select * from jw_cargo_info jci
+    <select id="search" resultType="com.rbgt.jw.base.dto.JwDailyRecordDTO">
+        select * from jw_daily_record jdr
     </select>
 </mapper>

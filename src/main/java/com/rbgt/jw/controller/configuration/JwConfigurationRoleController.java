@@ -1,4 +1,4 @@
-package com.rbgt.jw.controller;
+package com.rbgt.jw.controller.configuration;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.rbgt.jw.config.resoponse.ResponseResult;

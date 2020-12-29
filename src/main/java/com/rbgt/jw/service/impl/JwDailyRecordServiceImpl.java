@@ -2,8 +2,12 @@ package com.rbgt.jw.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rbgt.jw.base.dto.JwCargoInfoDTO;
 import com.rbgt.jw.base.dto.JwDailyRecordDTO;
+import com.rbgt.jw.base.spec.JwDailyRecordSpec;
+import com.rbgt.jw.base.spec.cargo.CargoInfoSearchSpec;
 import com.rbgt.jw.base.spec.daily.AddDailyRecordSpec;
 import com.rbgt.jw.dao.JwDailyRecordDao;
 import com.rbgt.jw.entity.JwDailyRecord;
@@ -54,5 +58,15 @@ public class JwDailyRecordServiceImpl extends ServiceImpl<JwDailyRecordDao, JwDa
             BeanUtil.copyProperties(byId, jwDailyRecordDTO, true);
         }
         return jwDailyRecordDTO;
+    }
+
+    /**
+     * 分页查询信息
+     * @param spec
+     * @return
+     */
+    @Override
+    public IPage<JwDailyRecordDTO> search(JwDailyRecordSpec spec) {
+        return this.baseMapper.search(spec,spec.getPage());
     }
 }

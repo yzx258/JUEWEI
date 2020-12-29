@@ -1,9 +1,11 @@
 package com.rbgt.jw.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
 import com.rbgt.jw.dao.JwProductDao;
 import com.rbgt.jw.entity.JwProduct;
 import com.rbgt.jw.service.JwProductService;
@@ -51,6 +53,18 @@ public class JwProductServiceImpl extends ServiceImpl<JwProductDao, JwProduct> i
     @Override
     public IPage<JwProductDTO> search(JwProductSpec spec) {
         return this.baseMapper.search(spec,spec.getPage());
+    }
+
+    @Override
+    public JwProductDTO details(String id) {
+        JwProductDTO jwProductDTO = new JwProductDTO();
+        JwProduct byId = this.getById(id);
+        if(ObjectUtil.isNotNull(byId) && StrUtil.isNotBlank(byId.getId())){
+            // 拷贝数据
+            BeanUtil.copyProperties(byId,jwProductDTO,true);
+            return jwProductDTO;
+        }
+        return jwProductDTO;
     }
 }
 

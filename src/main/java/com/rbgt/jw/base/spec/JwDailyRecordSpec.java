@@ -21,35 +21,11 @@ public class JwDailyRecordSpec {
     private String keyword;
 
     /**
-     * ID 唯一标识
-     */
-    @ApiModelProperty("ID 唯一标识")
-    private String id;
-    /**
      * 创建人 创建人
      */
     @ApiModelProperty("创建人 创建人")
     private String createBy;
-    /**
-     * 创建时间 创建时间
-     */
-    @ApiModelProperty("创建时间 创建时间")
-    private Date createTime;
-    /**
-     * 更新人 更新人
-     */
-    @ApiModelProperty("更新人 更新人")
-    private String lastModifiedBy;
-    /**
-     * 更新时间 更新时间
-     */
-    @ApiModelProperty("更新时间 更新时间")
-    private Date updateTime;
-    /**
-     * 日结记录ID
-     */
-    @ApiModelProperty("日结记录ID")
-    private String daliyRecordId;
+
     /**
      * 门店ID
      */
@@ -75,11 +51,6 @@ public class JwDailyRecordSpec {
      */
     @ApiModelProperty("收银员名称")
     private String responsibleName;
-    /**
-     * 是否删除
-     */
-    @ApiModelProperty("是否删除")
-    private int isDel;
 
     @ApiModelProperty("分页参数")
     private Page page;

@@ -1,7 +1,11 @@
 package com.rbgt.jw.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.rbgt.jw.base.dto.JwCargoInfoDTO;
 import com.rbgt.jw.base.dto.JwDailyRecordDTO;
 import com.rbgt.jw.base.dto.inventory.InventoryInfoDTO;
+import com.rbgt.jw.base.spec.JwDailyRecordSpec;
+import com.rbgt.jw.base.spec.cargo.CargoInfoSearchSpec;
 import com.rbgt.jw.base.spec.daily.AddDailyRecordSpec;
 import com.rbgt.jw.base.spec.inventory.AddInventoryInfoSpec;
 import com.rbgt.jw.config.resoponse.ResponseResult;
@@ -46,4 +50,9 @@ public class JwDailyRecordController {
         return new ResponseResult(jwDailyRecordService.details(id));
     }
 
+    @ApiOperation(value = "查询 - 分页信息")
+    @PostMapping("/daily/search")
+    public ResponseResult<IPage<JwDailyRecordDTO>> search(@RequestBody JwDailyRecordSpec spec){
+        return new ResponseResult(jwDailyRecordService.search(spec));
+    }
 }

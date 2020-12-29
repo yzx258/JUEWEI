@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.config.handler.BaseException;
-import com.rbgt.jw.dao.JwConfigurationUserDao;
+import com.rbgt.jw.dao.configuration.JwConfigurationUserDao;
 import com.rbgt.jw.entity.configuration.JwConfigurationRole;
 import com.rbgt.jw.entity.configuration.JwConfigurationUser;
 import com.rbgt.jw.entity.configuration.JwConfigurationUserRole;

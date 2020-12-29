@@ -1,8 +1,12 @@
 package com.rbgt.jw.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.rbgt.jw.base.dto.JwBreakageInfoDTO;
+import com.rbgt.jw.base.dto.JwShopDTO;
 import com.rbgt.jw.base.dto.inventory.InventoryInfoDTO;
+import com.rbgt.jw.base.spec.JwShopSpec;
 import com.rbgt.jw.base.spec.breakage.AddBreakageInfoSpec;
+import com.rbgt.jw.base.spec.breakage.BreakageInfoSearchSpec;
 import com.rbgt.jw.base.spec.inventory.AddInventoryInfoSpec;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
@@ -42,8 +46,14 @@ public class JwBreakageInfoController {
 
     @ApiOperation(value = "查询 - 根据ID查询报损详情")
     @GetMapping("/breakage/get/{id}")
-    public ResponseResult<JwBreakageInfoDTO> getById(@PathVariable("id") @ApiParam(name = "id", value = "盘点ID") String id){
+    public ResponseResult<JwBreakageInfoDTO> details(@PathVariable("id") @ApiParam(name = "id", value = "盘点ID") String id){
         return new ResponseResult(jwBreakageInfoService.details(id));
+    }
+
+    @ApiOperation(value = "查询 - 分页报损信息")
+    @PostMapping("/breakage/search")
+    public ResponseResult<IPage<JwBreakageInfoDTO>> search(@RequestBody BreakageInfoSearchSpec spec){
+        return new ResponseResult(jwBreakageInfoService.search(spec));
     }
 
 }

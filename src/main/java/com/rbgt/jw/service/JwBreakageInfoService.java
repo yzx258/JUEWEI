@@ -1,9 +1,13 @@
 package com.rbgt.jw.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rbgt.jw.base.dto.JwBreakageInfoDTO;
 import com.rbgt.jw.base.dto.JwCargoInfoDTO;
+import com.rbgt.jw.base.dto.JwConfigurationUserDTO;
+import com.rbgt.jw.base.spec.JwShopSpec;
 import com.rbgt.jw.base.spec.breakage.AddBreakageInfoSpec;
+import com.rbgt.jw.base.spec.breakage.BreakageInfoSearchSpec;
 import com.rbgt.jw.base.spec.cargo.AddCargoInfoSpec;
 import com.rbgt.jw.entity.JwBreakageInfo;
 import com.rbgt.jw.entity.JwCargoInfo;
@@ -32,5 +36,11 @@ public interface JwBreakageInfoService extends IService<JwBreakageInfo>  {
      */
     JwBreakageInfoDTO details(String id);
 
+    /**
+     * 分页查询报损信息
+     * @param spec
+     * @return
+     */
+    IPage<JwBreakageInfoDTO> search(BreakageInfoSearchSpec spec);
 }
 
