@@ -2,6 +2,8 @@ package com.rbgt.jw.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rbgt.jw.base.dto.JwShopDTO;
+import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
 import com.rbgt.jw.entity.JwShop;
 import com.rbgt.jw.base.dto.JwConfigurationUserDTO;
 import com.rbgt.jw.base.spec.JwShopSpec;
@@ -28,7 +30,15 @@ public interface JwShopService extends IService<JwShop>  {
      * @param spec
      * @return
      */
-    IPage<JwConfigurationUserDTO> search(JwShopSpec spec);
+    IPage<JwShopDTO> search(JwShopSpec spec);
+
+    /**
+     * 根据ID获取门店详情
+     * @param id
+     * @return
+     */
+    JwShopDTO details(String id);
+
 
 }
 

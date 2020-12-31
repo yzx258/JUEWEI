@@ -14,6 +14,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @company： 厦门宜车时代信息技术有限公司
  * @copyright： Copyright (C), 2020
@@ -46,6 +48,12 @@ public class JwProductController {
     @PostMapping("/product/add")
     public ResponseResult<JwProduct> add(@RequestBody @ApiParam(name = "addProductSpec", value = "创建产品实体类") AddProductSpec addProductSpec){
         return new ResponseResult(jwProductService.addOrUpdate(addProductSpec));
+    }
+
+    @ApiOperation(value = "查询 - 根据门店ID查询信息")
+    @GetMapping("/product/shopId/{shopId}")
+    public ResponseResult<List<JwProduct>> findByShopId(@PathVariable("shopId") String shopId){
+        return new ResponseResult(jwProductService.findByShopId(shopId));
     }
 
 }

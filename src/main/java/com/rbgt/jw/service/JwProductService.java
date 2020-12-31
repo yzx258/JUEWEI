@@ -2,10 +2,13 @@ package com.rbgt.jw.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rbgt.jw.base.dto.product.ShopProductDTO;
 import com.rbgt.jw.entity.JwProduct;
 import com.rbgt.jw.base.dto.JwProductDTO;
 import com.rbgt.jw.base.spec.JwProductSpec;
 import com.rbgt.jw.base.spec.product.AddProductSpec;
+
+import java.util.List;
 
 /**
  * 产品信息表 接口业务逻辑接口
@@ -37,6 +40,13 @@ public interface JwProductService extends IService<JwProduct>  {
      * @return
      */
     JwProductDTO details(String id);
+
+    /**
+     * 根据门店ID，查询对应产品
+     * @param shopId
+     * @return
+     */
+    List<ShopProductDTO> findByShopId(String shopId);
 
 }
 

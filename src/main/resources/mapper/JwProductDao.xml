@@ -7,4 +7,8 @@
     <select id="search" resultType="com.rbgt.jw.base.dto.JwProductDTO">
         select jp.* from jw_product jp
     </select>
+    <!-- 根据门店ID，查询门店配置的产品 -->
+    <select id="findByShopId" resultType="com.rbgt.jw.base.dto.product.ShopProductDTO">
+        select jp.* from jw_product jp where jp.shop_id = #{shopId} and jp.is_del = 0
+    </select>
 </mapper>

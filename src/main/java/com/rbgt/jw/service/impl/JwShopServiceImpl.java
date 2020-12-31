@@ -1,9 +1,11 @@
 package com.rbgt.jw.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rbgt.jw.base.dto.JwShopDTO;
 import com.rbgt.jw.dao.JwShopDao;
 import com.rbgt.jw.entity.JwShop;
 import com.rbgt.jw.service.JwShopService;
@@ -26,6 +28,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JwShopServiceImpl extends ServiceImpl<JwShopDao, JwShop> implements JwShopService   {
 
+    /**
+     * 新增/修改门店配置
+     * @param shopSpec
+     * @return
+     */
     @Override
     public JwShop addOrUpdate(JwShopSpec shopSpec) {
         JwShop jwShop = new JwShop();
@@ -37,9 +44,30 @@ public class JwShopServiceImpl extends ServiceImpl<JwShopDao, JwShop> implements
         return jwShop;
     }
 
+    /**
+     * 分页查询门店信息
+     * @param spec
+     * @return
+     */
     @Override
-    public IPage<JwConfigurationUserDTO> search(JwShopSpec spec) {
+    public IPage<JwShopDTO> search(JwShopSpec spec) {
         return this.baseMapper.search(spec,spec.getPage());
+    }
+
+    /**
+     * 根据ID获取门店详情
+     * @param id
+     * @return
+     */
+    @Override
+    public JwShopDTO details(String id) {
+        JwShop byId = this.getById(id);
+        JwShopDTO jwShopDTO = new JwShopDTO();
+        if(ObjectUtil.isNotNull(byId)){
+            BeanUtil.copyProperties(byId,jwShopDTO,true);
+            return jwShopDTO;
+        }
+        return jwShopDTO;
     }
 }
 

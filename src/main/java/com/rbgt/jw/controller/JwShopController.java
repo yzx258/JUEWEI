@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,12 @@ public class JwShopController {
     @PostMapping("/shop/add")
     public ResponseResult<JwConfigurationUser> add(@RequestBody @ApiParam(name = "jwShopSpec", value = "创建门店实体类")JwShopSpec jwShopSpec){
         return new ResponseResult(jwShopService.addOrUpdate(jwShopSpec));
+    }
+
+    @ApiOperation(value = "查询 - 门店详情信息")
+    @PostMapping("/shop/details/{id}")
+    public ResponseResult<JwShopDTO> details(@PathVariable("id") @RequestBody String id){
+        return new ResponseResult(jwShopService.details(id));
     }
 
 }

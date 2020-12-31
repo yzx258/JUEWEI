@@ -3,8 +3,10 @@ package com.rbgt.jw.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rbgt.jw.base.dto.product.ShopProductDTO;
 import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
 import com.rbgt.jw.dao.JwProductDao;
 import com.rbgt.jw.entity.JwProduct;
@@ -15,6 +17,8 @@ import com.rbgt.jw.base.spec.product.AddProductSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 产品信息表 业务逻辑接口实现类
@@ -55,6 +59,11 @@ public class JwProductServiceImpl extends ServiceImpl<JwProductDao, JwProduct> i
         return this.baseMapper.search(spec,spec.getPage());
     }
 
+    /**
+     * 根据门店ID，查询对应产品
+     * @param id
+     * @return
+     */
     @Override
     public JwProductDTO details(String id) {
         JwProductDTO jwProductDTO = new JwProductDTO();
@@ -65,6 +74,16 @@ public class JwProductServiceImpl extends ServiceImpl<JwProductDao, JwProduct> i
             return jwProductDTO;
         }
         return jwProductDTO;
+    }
+
+    /**
+     * 根据门店ID，查询对应产品
+     * @param shopId
+     * @return
+     */
+    @Override
+    public List<ShopProductDTO> findByShopId(String shopId) {
+        return this.baseMapper.findByShopId(shopId);
     }
 }
 

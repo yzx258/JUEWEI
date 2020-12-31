@@ -90,13 +90,11 @@ public class JwProductRecord extends Model<JwProductRecord> {
     @ApiModelProperty("产品编号")
     private String productNo;
 
-
     /**
      * 产品名称
      */
     @ApiModelProperty("产品名称")
     private String productName;
-
 
     /**
      * 产品规格
@@ -105,18 +103,10 @@ public class JwProductRecord extends Model<JwProductRecord> {
     private int productSpecifications;
 
     /**
-     * 产品规格
-     */
-    @ApiModelProperty("审核后的产品规格")
-    private int newProductSpecifications;
-
-
-    /**
      * 产品包装
      */
     @ApiModelProperty("产品包装")
     private ProductPackTypeEnum productPack;
-
 
     /**
      * 产品口味
@@ -124,6 +114,17 @@ public class JwProductRecord extends Model<JwProductRecord> {
     @ApiModelProperty("产品口味")
     private ProductTasteTypeEnum productTaste;
 
+    /**
+     * 产品数值
+     */
+    @ApiModelProperty("产品数值")
+    private BigDecimal productValue;
+
+    /**
+     * 审核后的产品数值
+     */
+    @ApiModelProperty("审核后的产品数值")
+    private BigDecimal newProductValue;
 
     /**
      * 进货价格
@@ -131,13 +132,11 @@ public class JwProductRecord extends Model<JwProductRecord> {
     @ApiModelProperty("进货价格")
     private BigDecimal stockPrice;
 
-
     /**
      * 零售价格
      */
     @ApiModelProperty("零售价格")
     private BigDecimal retailPrice;
-
 
     /**
      * 是否删除

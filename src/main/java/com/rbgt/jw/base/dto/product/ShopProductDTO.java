@@ -1,30 +1,31 @@
-package com.rbgt.jw.base.spec.purchase;
+package com.rbgt.jw.base.dto.product;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rbgt.jw.base.enums.product.ProductPackTypeEnum;
 import com.rbgt.jw.base.enums.product.ProductTasteTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
- * jw_product表的Spec
+ * jw_product表的DTO
  *
  * @author ： huangdefu@yiautos.com
  * @date : 2020-12-16 18:28:14
- * @description ：进货产品记录表
+ * @description ：jw_product表的DTO
  * @Version 1.0
  */
 @Data
-public class AddProductRecordSpec {
+public class ShopProductDTO {
 
     /**
-     * 门店ID
+     * ID 唯一标识
      */
-    @ApiModelProperty("门店ID")
-    private String shopId;
-
+    @ApiModelProperty("ID 唯一标识")
+    private String id;
     /**
      * 产品编号
      */
