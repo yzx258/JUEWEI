@@ -7,13 +7,14 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rbgt.jw.base.enums.role.RoleTypeEnum;
 import com.rbgt.jw.config.handler.BaseException;
 import com.rbgt.jw.dao.configuration.JwConfigurationUserDao;
 import com.rbgt.jw.entity.configuration.JwConfigurationRole;
 import com.rbgt.jw.entity.configuration.JwConfigurationUser;
 import com.rbgt.jw.entity.configuration.JwConfigurationUserRole;
 import com.rbgt.jw.base.enums.ResponseCode;
-import com.rbgt.jw.base.enums.RoleConstantEnum;
+import com.rbgt.jw.base.enums.role.RoleConstantEnum;
 import com.rbgt.jw.service.configuration.JwConfigurationRoleService;
 import com.rbgt.jw.service.configuration.JwConfigurationUserRoleService;
 import com.rbgt.jw.service.configuration.JwConfigurationUserService;
@@ -87,7 +88,7 @@ public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationU
      */
     private void setUserRole(JwConfigurationUser jwConfigurationUser, AddUserSpec addUserSpec, List<JwConfigurationUserRole> list) {
         // 是否店长
-        if (addUserSpec.getIsManager()) {
+        if (RoleTypeEnum.SHOP_MANAGER.equals(addUserSpec.getRoleType())) {
             // 店长
             JwConfigurationRole byRoleLabel = jwConfigurationRoleService.findByRoleLabel(RoleConstantEnum.SHOP_MANAGER.getCode());
             if (ObjectUtil.isNotNull(byRoleLabel) && StrUtil.isNotBlank(byRoleLabel.getId())) {
@@ -96,9 +97,18 @@ public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationU
                 rl.setUserId(jwConfigurationUser.getId());
                 list.add(rl);
             }
-        }else{
+        }else if(RoleTypeEnum.SHOP_ASSISTANT.equals(addUserSpec.getRoleType())){
             // 店员
             JwConfigurationRole byRoleLabel = jwConfigurationRoleService.findByRoleLabel(RoleConstantEnum.SHOP_ASSISTANT.getCode());
+            if (ObjectUtil.isNotNull(byRoleLabel) && StrUtil.isNotBlank(byRoleLabel.getId())) {
+                JwConfigurationUserRole rl = new JwConfigurationUserRole();
+                rl.setRoleId(byRoleLabel.getId());
+                rl.setUserId(jwConfigurationUser.getId());
+                list.add(rl);
+            }
+        }else if(RoleTypeEnum.ADMINISTRATOR.equals(addUserSpec.getRoleType())){
+            // 区域管理员
+            JwConfigurationRole byRoleLabel = jwConfigurationRoleService.findByRoleLabel(RoleConstantEnum.ADMINISTRATOR.getCode());
             if (ObjectUtil.isNotNull(byRoleLabel) && StrUtil.isNotBlank(byRoleLabel.getId())) {
                 JwConfigurationUserRole rl = new JwConfigurationUserRole();
                 rl.setRoleId(byRoleLabel.getId());

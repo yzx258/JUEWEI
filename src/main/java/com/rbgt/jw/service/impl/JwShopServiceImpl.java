@@ -51,7 +51,8 @@ public class JwShopServiceImpl extends ServiceImpl<JwShopDao, JwShop> implements
      */
     @Override
     public IPage<JwShopDTO> search(JwShopSpec spec) {
-        return this.baseMapper.search(spec,spec.getPage());
+        IPage<JwShopDTO> search = this.baseMapper.search(spec, spec.getPage());
+        return search;
     }
 
     /**

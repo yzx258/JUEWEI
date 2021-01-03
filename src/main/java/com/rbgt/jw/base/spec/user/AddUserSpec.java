@@ -1,5 +1,6 @@
 package com.rbgt.jw.base.spec.user;
 
+import com.rbgt.jw.base.enums.role.RoleTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -23,7 +24,6 @@ public class AddUserSpec {
     @NotNull(message = "门店不能为空")
     private String shopId;
 
-
     /**
      * 用户名称 用户名称
      */
@@ -31,14 +31,12 @@ public class AddUserSpec {
     @NotNull(message = "用户名称不能为空")
     private String userName;
 
-
     /**
      * 联系电话 联系电话
      */
     @ApiModelProperty("联系电话")
     @NotNull(message = "联系电话不能为空")
     private String userMobile;
-
 
     /**
      * 用户编号 用户编号
@@ -61,8 +59,8 @@ public class AddUserSpec {
     @NotNull(message = "用户密码不能为空")
     private String userPwd;
 
-    @ApiModelProperty("是否店长：是[true],否[false]")
-    private Boolean isManager = false;
+    @ApiModelProperty("职位：角色职位类型")
+    private RoleTypeEnum roleType = RoleTypeEnum.SHOP_ASSISTANT;
 
     @ApiModelProperty("配置权：有权限[true],无权限[false]")
     private Boolean isConfiguration = false;
@@ -82,7 +80,13 @@ public class AddUserSpec {
     @ApiModelProperty("盘点复盘权：有权限[true],无权限[false]")
     private Boolean isInventoryCheck = false;
 
+    @ApiModelProperty("报损权：有权限[true],无权限[false]")
+    private Boolean isBreakage = false;
+
     @ApiModelProperty("交班日结权：有权限[true],无权限[false]")
     private Boolean isDaily = false;
+
+    @ApiModelProperty("数据权：有权限[true],无权限[false]")
+    private Boolean isData = false;
 
 }

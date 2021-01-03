@@ -13,6 +13,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @company： 厦门宜车时代信息技术有限公司
  * @copyright： Copyright (C), 2020
@@ -47,4 +49,9 @@ public class JwConfigurationRoleController {
         return new ResponseResult(jwConfigurationRoleService.findByRoleLabel(lab));
     }
 
+    @ApiOperation(value = "查询 - 员工配置查询门店角色")
+    @GetMapping("/role/get/labs")
+    public ResponseResult<List<JwConfigurationRole>> findUserRoleLabel(){
+        return new ResponseResult(jwConfigurationRoleService.findUserRoleLabel());
+    }
 }

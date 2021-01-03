@@ -3,6 +3,7 @@ package com.rbgt.jw.service.impl.configuration;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.config.handler.BaseException;
@@ -84,6 +85,17 @@ public class JwConfigurationRoleServiceImpl extends ServiceImpl<JwConfigurationR
     @Override
     public IPage<JwConfigurationRoleDTO> search(JwConfigurationRoleSpec spec) {
         return this.baseMapper.search(spec,spec.getPage());
+    }
+
+    /**
+     * 查询门店员工角色
+     * @return
+     */
+    @Override
+    public List<JwConfigurationRole> findUserRoleLabel() {
+        QueryWrapper<JwConfigurationRole> qw = new QueryWrapper<>();
+        qw.in("role_label","SHOP_ASSISTANT","SHOP_MANAGER","ADMINISTRATOR").orderByAsc("create_time");
+        return this.baseMapper.selectList(qw);
     }
 }
 

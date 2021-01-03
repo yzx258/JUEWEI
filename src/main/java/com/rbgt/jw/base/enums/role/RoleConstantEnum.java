@@ -1,4 +1,4 @@
-package com.rbgt.jw.base.enums;
+package com.rbgt.jw.base.enums.role;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

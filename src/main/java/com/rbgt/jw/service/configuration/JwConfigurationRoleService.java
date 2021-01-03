@@ -45,5 +45,11 @@ public interface JwConfigurationRoleService extends IService<JwConfigurationRole
      * @return
      */
     IPage<JwConfigurationRoleDTO> search(JwConfigurationRoleSpec spec);
+
+    /**
+     * 查询门店员工角色
+     * @return
+     */
+    List<JwConfigurationRole> findUserRoleLabel();
 }
 
