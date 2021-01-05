@@ -31,7 +31,7 @@ import javax.validation.Valid;
  * @description:
  */
 @BaseResponse
-@Api(value = "/daily", tags = "日结接口")
+@Api(value = "/dailyRecord", tags = "日结接口")
 @RestController
 public class JwDailyRecordController {
 
@@ -39,19 +39,19 @@ public class JwDailyRecordController {
     private JwDailyRecordService jwDailyRecordService;
 
     @ApiOperation(value = "新增 - 盘点信息")
-    @PostMapping("/daily/add")
+    @PostMapping("/dailyRecord/add")
     public ResponseResult<JwDailyRecord> add(@Valid @RequestBody @ApiParam(name = "spec", value = "创建日结实体类") AddDailyRecordSpec spec){
         return new ResponseResult(jwDailyRecordService.add(spec));
     }
 
     @ApiOperation(value = "查询 - 根据ID查询盘点详情")
-    @GetMapping("/daily/get/{id}")
+    @GetMapping("/dailyRecord/get/{id}")
     public ResponseResult<JwDailyRecordDTO> getById(@PathVariable("id") @ApiParam(name = "id", value = "日结ID") String id){
         return new ResponseResult(jwDailyRecordService.details(id));
     }
 
     @ApiOperation(value = "查询 - 分页信息")
-    @PostMapping("/daily/search")
+    @PostMapping("/dailyRecord/search")
     public ResponseResult<IPage<JwDailyRecordDTO>> search(@RequestBody JwDailyRecordSpec spec){
         return new ResponseResult(jwDailyRecordService.search(spec));
     }

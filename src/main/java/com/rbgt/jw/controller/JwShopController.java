@@ -1,6 +1,7 @@
 package com.rbgt.jw.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.rbgt.jw.base.spec.shop.AddShopSpec;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.configuration.JwConfigurationUser;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司
@@ -40,8 +43,8 @@ public class JwShopController {
 
     @ApiOperation(value = "新增 - 门店信息")
     @PostMapping("/shop/add")
-    public ResponseResult<JwConfigurationUser> add(@RequestBody @ApiParam(name = "jwShopSpec", value = "创建门店实体类")JwShopSpec jwShopSpec){
-        return new ResponseResult(jwShopService.addOrUpdate(jwShopSpec));
+    public ResponseResult<JwConfigurationUser> add(@Valid @RequestBody @ApiParam(name = "addShopSpec", value = "创建门店实体类") AddShopSpec addShopSpec){
+        return new ResponseResult(jwShopService.add(addShopSpec));
     }
 
     @ApiOperation(value = "查询 - 门店详情信息")

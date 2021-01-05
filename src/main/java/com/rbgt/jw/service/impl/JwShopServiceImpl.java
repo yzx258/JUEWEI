@@ -1,11 +1,18 @@
 package com.rbgt.jw.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.base.dto.JwShopDTO;
+import com.rbgt.jw.base.enums.ResponseCode;
+import com.rbgt.jw.base.spec.shop.AddShopSpec;
+import com.rbgt.jw.config.handler.BaseException;
 import com.rbgt.jw.dao.JwShopDao;
 import com.rbgt.jw.entity.JwShop;
 import com.rbgt.jw.service.JwShopService;
@@ -14,6 +21,8 @@ import com.rbgt.jw.base.spec.JwShopSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 门店信息表 业务逻辑接口实现类
@@ -30,17 +39,27 @@ public class JwShopServiceImpl extends ServiceImpl<JwShopDao, JwShop> implements
 
     /**
      * 新增/修改门店配置
-     * @param shopSpec
+     * @param addShopSpec
      * @return
      */
     @Override
-    public JwShop addOrUpdate(JwShopSpec shopSpec) {
+    public JwShop add(AddShopSpec addShopSpec) {
         JwShop jwShop = new JwShop();
-        if(StrUtil.isNotBlank(shopSpec.getId())){
-            jwShop = this.getBaseMapper().selectById(shopSpec.getId());
+        QueryWrapper<JwShop> qw = new QueryWrapper<>();
+        qw.eq("shop_no",addShopSpec.getShopNo());
+        List<JwShop> jwShops = this.baseMapper.selectList(qw);
+        if(CollectionUtil.isNotEmpty(jwShops)){
+            throw new BaseException(ResponseCode.SHOP_NOT_ERROR1);
         }
-        BeanUtil.copyProperties(shopSpec,jwShop,true);
-        jwShop.insertOrUpdate();
+        // 手机号
+        if(!Validator.isMobile(addShopSpec.getCommissionerMobile())){
+            throw new BaseException(ResponseCode.SHOP_NOT_ERROR2);
+        }
+        if(Validator.isMobile(addShopSpec.getShopManagerMobile())){
+            throw new BaseException(ResponseCode.SHOP_NOT_ERROR3);
+        }
+        BeanUtil.copyProperties(addShopSpec,jwShop,true);
+        jwShop.insert();
         return jwShop;
     }
 

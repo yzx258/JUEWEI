@@ -64,6 +64,11 @@ public class AddProductSpec {
     @ApiModelProperty("产品口味")
     @NotNull(message = "产品口味不能为空")
     private ProductTasteTypeEnum productTaste;
+
+    @ApiModelProperty("保质期")
+    @NotNull(message = "保质期不能为空")
+    private int shelfLife;
+
     /**
      * 进货价格
      */

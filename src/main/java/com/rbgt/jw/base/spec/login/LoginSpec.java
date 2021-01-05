@@ -2,7 +2,8 @@ package com.rbgt.jw.base.spec.login;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import javax.validation.constraints.NotNull;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司
@@ -19,13 +20,13 @@ public class LoginSpec {
      * 用户账号
      */
     @ApiModelProperty("用户账号")
-    @NotNull(message = "用户账号不能为空")
+    @NotBlank(message = "用户账号不能为空")
     private String userAccount;
     /**
      * 用户密码 用户密码
      */
     @ApiModelProperty("用户密码")
-    @NotNull(message = "用户密码不能为空")
+    @NotBlank(message = "用户密码不能为空")
     private String userPwd;
 
 }

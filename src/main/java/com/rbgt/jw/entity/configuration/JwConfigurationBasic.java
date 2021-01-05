@@ -88,6 +88,11 @@ public class JwConfigurationBasic extends Model<JwConfigurationBasic> {
     @ApiModelProperty("配置值")
     private String basicValue;
 
+    /**
+     * 配置值
+     */
+    @ApiModelProperty("备注")
+    private String note;
 
     /**
      * 是否删除

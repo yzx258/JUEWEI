@@ -44,6 +44,15 @@ public enum ResponseCode {
      * 门店信息
      */
     SHOP_NOT_ERROR(300001, "找不到门店信息"),
+    SHOP_NOT_ERROR1(300002, "门店编号已存在，请重新编辑"),
+    SHOP_NOT_ERROR2(300003, "专员手机号，格式不正确"),
+    SHOP_NOT_ERROR3(300004, "店长手机号，格式不正确"),
+
+    /**
+     * 日结配置错误信息
+     */
+    DAILY_ERROR(400001,"日结配置信息为空"),
+
     ;
     /**
      * 状态码

@@ -1,10 +1,13 @@
 package com.rbgt.jw.base.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.product.ProductPackTypeEnum;
+import com.rbgt.jw.base.enums.product.ProductTasteTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -67,12 +70,16 @@ public class JwProductDTO {
      * 产品包装
      */
     @ApiModelProperty("产品包装")
-    private int productPack;
+    private ProductPackTypeEnum productPack;
     /**
      * 产品口味
      */
     @ApiModelProperty("产品口味")
-    private int productTaste;
+    private ProductTasteTypeEnum productTaste;
+
+    @ApiModelProperty("保质期")
+    private int shelfLife;
+
     /**
      * 进货价格
      */
@@ -83,10 +90,4 @@ public class JwProductDTO {
      */
     @ApiModelProperty("零售价格")
     private BigDecimal retailPrice;
-    /**
-     * 是否删除
-     */
-    @ApiModelProperty("是否删除")
-    private int isDel;
-
 }
