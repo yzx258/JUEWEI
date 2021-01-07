@@ -55,7 +55,7 @@ public class JwShopServiceImpl extends ServiceImpl<JwShopDao, JwShop> implements
         if(!Validator.isMobile(addShopSpec.getCommissionerMobile())){
             throw new BaseException(ResponseCode.SHOP_NOT_ERROR2);
         }
-        if(Validator.isMobile(addShopSpec.getShopManagerMobile())){
+        if(!Validator.isMobile(addShopSpec.getShopManagerMobile())){
             throw new BaseException(ResponseCode.SHOP_NOT_ERROR3);
         }
         BeanUtil.copyProperties(addShopSpec,jwShop,true);
