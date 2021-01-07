@@ -52,7 +52,7 @@ public class JwBreakageInfoController {
 
     @ApiOperation(value = "查询 - 分页报损信息")
     @PostMapping("/breakage/search")
-    public ResponseResult<IPage<JwBreakageInfoDTO>> search(@RequestBody BreakageInfoSearchSpec spec){
+    public ResponseResult<IPage<JwBreakageInfoDTO>> search(@ApiParam(name = "spec", value = "spec") @RequestBody BreakageInfoSearchSpec spec){
         return new ResponseResult(jwBreakageInfoService.search(spec));
     }
 

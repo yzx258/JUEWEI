@@ -47,7 +47,7 @@ public class JwProductController {
     @ApiOperation(value = "新增 - 产品信息")
     @PostMapping("/product/add")
     public ResponseResult<JwProduct> add(@RequestBody @ApiParam(name = "addProductSpec", value = "创建产品实体类") AddProductSpec addProductSpec){
-        return new ResponseResult(jwProductService.addOrUpdate(addProductSpec));
+        return new ResponseResult(jwProductService.add(addProductSpec));
     }
 
     @ApiOperation(value = "查询 - 根据门店ID查询信息")

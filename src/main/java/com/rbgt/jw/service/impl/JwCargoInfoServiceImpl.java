@@ -75,7 +75,7 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
             BeanUtil.copyProperties(byId,jwCargoInfoDTO,true);
             // 获取进货产品
             QueryWrapper<JwProductRecord> qw = new QueryWrapper<>();
-            qw.eq("purchase_id",byId.getId());
+            qw.eq("purchase_id",byId.getId()).eq("is_del",0);
             List<JwProductRecord> list = jwProductRecordService.list(qw);
             jwCargoInfoDTO.setJwProductRecordList(list);
         }

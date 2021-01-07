@@ -6,10 +6,13 @@ import cn.hutool.core.date.DateUnit;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.rbgt.jw.config.handler.BaseException;
+import com.rbgt.jw.entity.configuration.JwConfigurationRole;
 import com.rbgt.jw.entity.configuration.JwConfigurationUser;
 import com.rbgt.jw.entity.JwShop;
 import com.rbgt.jw.base.enums.ResponseCode;
+import com.rbgt.jw.entity.configuration.JwConfigurationUserRole;
 import com.rbgt.jw.service.configuration.JwConfigurationRoleService;
+import com.rbgt.jw.service.configuration.JwConfigurationUserRoleService;
 import com.rbgt.jw.service.configuration.JwConfigurationUserService;
 import com.rbgt.jw.service.JwShopService;
 import com.rbgt.jw.service.login.LoginService;
@@ -24,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司
@@ -45,6 +49,8 @@ public class LoginServiceImpl implements LoginService {
     private JwShopService jwShopService;
     @Autowired
     private JwConfigurationRoleService jwConfigurationRoleService;
+    @Autowired
+    private JwConfigurationUserRoleService jwConfigurationUserRoleService;
 
     @Override
     public LoginDTO login(LoginSpec loginSpec) {
@@ -74,7 +80,19 @@ public class LoginServiceImpl implements LoginService {
             // 设置缓存信息
             loginDTO.setToken(token);
             // 获取角色信息
-            loginDTO.setList(jwConfigurationRoleService.findByUserId(jwConfigurationUserDTO.getId()));
+            QueryWrapper<JwConfigurationUserRole> qwUr = new QueryWrapper<>();
+            qwUr.eq("user_id",jwConfigurationUserDTO.getId()).eq("is_del",0);
+            List<JwConfigurationUserRole> jwConfigurationUserRoles = jwConfigurationUserRoleService.getBaseMapper().selectList(qwUr);
+            if(CollectionUtil.isNotEmpty(jwConfigurationUserRoles)){
+                List<String> collect = jwConfigurationUserRoles.stream().map(JwConfigurationUserRole::getRoleId).collect(Collectors.toList());
+                // 判断是否存在角色ID
+                if(CollectionUtil.isNotEmpty(collect)){
+                    QueryWrapper<JwConfigurationRole> qwRl = new QueryWrapper<>();
+                    qwRl.in("id",collect).eq("is_del",0);
+                    List<JwConfigurationRole> jwConfigurationRoles = jwConfigurationRoleService.getBaseMapper().selectList(qwRl);
+                    loginDTO.setList(jwConfigurationRoles);
+                }
+            }
             cacheUtils.saveCache(token, JSON.toJSONString(loginDTO), DateUnit.HOUR.getMillis() * 24);
             cacheUtils.saveCache(loginSpec.getUserAccount(),token);
             return loginDTO;
@@ -90,5 +108,14 @@ public class LoginServiceImpl implements LoginService {
         cacheUtils.del(token);
         cacheUtils.del(loginDTO.getJwConfigurationUserDTO().getUserAccount());
         return true;
+    }
+
+    @Override
+    public LoginDTO loginToken(String token) {
+        LoginDTO loginDTO = new LoginDTO();
+        // 从缓存取数据
+        log.info("登录信息从缓存取：{}",cacheUtils.getCache(token));
+        loginDTO = JSON.parseObject(cacheUtils.getCache(token), LoginDTO.class);
+        return loginDTO;
     }
 }

@@ -25,7 +25,7 @@ public interface JwProductService extends IService<JwProduct>  {
      * @param addProductSpec
      * @return
      */
-    JwProduct addOrUpdate(AddProductSpec addProductSpec);
+    JwProduct add(AddProductSpec addProductSpec);
 
     /**
      * 分页查询产品信息

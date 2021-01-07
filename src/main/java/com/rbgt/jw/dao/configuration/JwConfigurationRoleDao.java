@@ -30,13 +30,6 @@ public interface JwConfigurationRoleDao extends BaseMapper<JwConfigurationRole> 
     JwConfigurationRole findByRoleLabel(String roleLabel);
 
     /**
-     * 根据用户ID，查询所有角色
-     * @param userId
-     * @return
-     */
-    List<JwConfigurationRole> findByUserId(String userId);
-
-    /**
      * 分页查角色店信息
      * @param param
      * @param page

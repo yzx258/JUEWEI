@@ -10,8 +10,4 @@
     <select id="search" resultType="com.rbgt.jw.base.dto.JwConfigurationRoleDTO">
         select jr.* from jw_configuration_role jr
     </select>
-    <!-- 根据用户ID，查询所有角色 -->
-    <select id="findByUserId" resultType="com.rbgt.jw.entity.configuration.JwConfigurationRole">
-        select jr.* from jw_configuration_role jr where jr.role_label = #{userId}
-    </select>
 </mapper>

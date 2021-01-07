@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.base.dto.product.ShopProductDTO;
 import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
+import com.rbgt.jw.base.enums.ResponseCode;
+import com.rbgt.jw.config.handler.BaseException;
 import com.rbgt.jw.dao.JwProductDao;
 import com.rbgt.jw.entity.JwProduct;
 import com.rbgt.jw.service.JwProductService;
@@ -39,11 +41,14 @@ public class JwProductServiceImpl extends ServiceImpl<JwProductDao, JwProduct> i
      * @return
      */
     @Override
-    public JwProduct addOrUpdate(AddProductSpec addProductSpec) {
-        JwProduct jwProduct = new JwProduct();
-        if(StrUtil.isNotBlank(addProductSpec.getId())){
-            jwProduct = this.baseMapper.selectById(addProductSpec.getId());
+    public JwProduct add(AddProductSpec addProductSpec) {
+        QueryWrapper<JwProduct> qw = new QueryWrapper<>();
+        qw.eq("product_no",addProductSpec.getProductNo()).eq("shop_id",addProductSpec.getShopId()).eq("is_del",0);
+        JwProduct jwProduct = this.baseMapper.selectOne(qw);
+        if(ObjectUtil.isNotNull(jwProduct)){
+            throw new BaseException(ResponseCode.PRODUCT_ERROR);
         }
+        jwProduct = new JwProduct();
         BeanUtil.copyProperties(addProductSpec,jwProduct,true);
         jwProduct.insertOrUpdate();
         return jwProduct;

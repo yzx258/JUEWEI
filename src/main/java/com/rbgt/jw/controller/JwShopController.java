@@ -37,7 +37,7 @@ public class JwShopController {
 
     @ApiOperation(value = "查询 - 分页门店信息")
     @PostMapping("/shop/search")
-    public ResponseResult<IPage<JwShopDTO>> search(@RequestBody JwShopSpec spec){
+    public ResponseResult<IPage<JwShopDTO>> search(@ApiParam(name = "spec", value = "门店分页擦查询体类") @RequestBody JwShopSpec spec){
         return new ResponseResult(jwShopService.search(spec));
     }
 
@@ -49,7 +49,7 @@ public class JwShopController {
 
     @ApiOperation(value = "查询 - 门店详情信息")
     @PostMapping("/shop/details/{id}")
-    public ResponseResult<JwShopDTO> details(@PathVariable("id") @RequestBody String id){
+    public ResponseResult<JwShopDTO> details(@PathVariable("id") @ApiParam(name = "id", value = "id") @RequestBody String id){
         return new ResponseResult(jwShopService.details(id));
     }
 

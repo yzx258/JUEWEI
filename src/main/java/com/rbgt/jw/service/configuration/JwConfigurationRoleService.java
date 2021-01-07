@@ -26,13 +26,6 @@ public interface JwConfigurationRoleService extends IService<JwConfigurationRole
     JwConfigurationRole findByRoleLabel(String roleLabel);
 
     /**
-     * 根据用户ID，查询所有角色
-     * @param userId
-     * @return
-     */
-    List<JwConfigurationRole> findByUserId(String userId);
-
-    /**
      * 新增/修改角色信息
      * @param spec
      * @return

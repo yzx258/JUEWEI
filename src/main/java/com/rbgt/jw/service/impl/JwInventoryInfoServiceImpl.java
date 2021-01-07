@@ -78,7 +78,7 @@ public class JwInventoryInfoServiceImpl  extends ServiceImpl<JwInventoryInfoDao,
             BeanUtil.copyProperties(byId,inventoryInfoDTO,true);
             // 获取进货产品
             QueryWrapper<JwProductRecord> qw = new QueryWrapper<>();
-            qw.eq("purchase_id",byId.getId());
+            qw.eq("purchase_id",byId.getId()).eq("is_del",0);
             List<JwProductRecord> list = jwProductRecordService.list(qw);
             inventoryInfoDTO.setJwProductRecordList(list);
         }

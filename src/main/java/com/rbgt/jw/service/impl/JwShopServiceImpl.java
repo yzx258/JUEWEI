@@ -46,7 +46,7 @@ public class JwShopServiceImpl extends ServiceImpl<JwShopDao, JwShop> implements
     public JwShop add(AddShopSpec addShopSpec) {
         JwShop jwShop = new JwShop();
         QueryWrapper<JwShop> qw = new QueryWrapper<>();
-        qw.eq("shop_no",addShopSpec.getShopNo());
+        qw.eq("shop_no",addShopSpec.getShopNo()).eq("is_del",0);
         List<JwShop> jwShops = this.baseMapper.selectList(qw);
         if(CollectionUtil.isNotEmpty(jwShops)){
             throw new BaseException(ResponseCode.SHOP_NOT_ERROR1);

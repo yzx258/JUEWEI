@@ -47,6 +47,13 @@ public class JwConfigurationDailyServiceImpl extends ServiceImpl<JwConfiguration
     @Override
     @Transactional(rollbackFor = Exception.class)
     public JwConfigurationDaily add(AddDailySpec addDailySpec) {
+        // 判断该门店是否存在日结配置，每家店只允许一份日结配置
+        QueryWrapper<JwConfigurationDaily> qwJcd = new QueryWrapper<>();
+        qwJcd.eq("shop_id",addDailySpec.getShopId()).eq("is_del",0);
+        JwConfigurationDaily jwConfigurationDaily1 = this.baseMapper.selectOne(qwJcd);
+        if(ObjectUtil.isNotNull(jwConfigurationDaily1)){
+            throw new BaseException(ResponseCode.DAILY_ERROR1);
+        }
         log.info("插入日结配置信息开始 -> {}", JSON.toJSONString(addDailySpec));
         JwConfigurationDaily jwConfigurationDaily = new JwConfigurationDaily();
         // 拷贝数据
@@ -76,7 +83,7 @@ public class JwConfigurationDailyServiceImpl extends ServiceImpl<JwConfiguration
     public JwConfigurationDailyDTO details(String shopId) {
         JwConfigurationDailyDTO jwConfigurationDailyDTO = new JwConfigurationDailyDTO();
         QueryWrapper<JwConfigurationDaily> qw = new QueryWrapper<>();
-        qw.eq("shop_id",shopId);
+        qw.eq("shop_id",shopId).eq("is_del",0);
         JwConfigurationDaily jwConfigurationDaily = this.baseMapper.selectOne(qw);
         if(ObjectUtil.isNull(jwConfigurationDaily)){
             throw new BaseException(ResponseCode.DAILY_ERROR);
@@ -85,7 +92,7 @@ public class JwConfigurationDailyServiceImpl extends ServiceImpl<JwConfiguration
         jwConfigurationDailyDTO.setJwConfigurationDaily(jwConfigurationDaily);
         //设置日结明细信息
         QueryWrapper<JwConfigurationDailyDetail> qw1 = new QueryWrapper<>();
-        qw1.eq("daily_id",jwConfigurationDaily.getId());
+        qw1.eq("daily_id",jwConfigurationDaily.getId()).eq("is_del",0);
         jwConfigurationDailyDTO.setDailyDetails(jwConfigurationDailyDetailService.getBaseMapper().selectList(qw1));
         return jwConfigurationDailyDTO;
     }

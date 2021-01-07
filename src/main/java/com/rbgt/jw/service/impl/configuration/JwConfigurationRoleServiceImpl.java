@@ -43,16 +43,6 @@ public class JwConfigurationRoleServiceImpl extends ServiceImpl<JwConfigurationR
     }
 
     /**
-     * 根据用户ID，查询所有角色
-     * @param userId
-     * @return
-     */
-    @Override
-    public List<JwConfigurationRole> findByUserId(String userId) {
-        return this.baseMapper.findByUserId(userId);
-    }
-
-    /**
      * 新增/修改角色信息
      * @param spec
      * @return

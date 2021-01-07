@@ -27,4 +27,11 @@ public interface LoginService {
      */
     Boolean logout(String token);
 
+
+    /**
+     * 根据token获取用户信息
+     * @param token
+     * @return
+     */
+    LoginDTO loginToken(String token);
 }

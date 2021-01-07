@@ -56,4 +56,5 @@ public class JwConfigurationUserController {
     public ResponseResult<JwConfigurationUser> delete(@PathVariable("userId") @ApiParam(name = "userId", value = "用户ID") String userId){
         return new ResponseResult(jwConfigurationUserService.delete(userId));
     }
+
 }

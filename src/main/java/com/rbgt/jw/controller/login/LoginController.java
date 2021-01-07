@@ -1,11 +1,15 @@
 package com.rbgt.jw.controller.login;
 
+import com.alibaba.fastjson.JSON;
+import com.rbgt.jw.base.dto.login.LoginDTO;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
+import com.rbgt.jw.entity.configuration.JwConfigurationUser;
 import com.rbgt.jw.service.login.LoginService;
 import com.rbgt.jw.base.spec.login.LoginSpec;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,5 +41,11 @@ public class LoginController {
     @GetMapping("/logout/{token}")
     public ResponseResult<Object> logout(@PathVariable("token") String token) {
         return new ResponseResult(loginService.logout(token));
+    }
+
+    @ApiOperation(value = "查询 - 根据token查询用户信息")
+    @GetMapping("/login/get/{token}")
+    public ResponseResult<JwConfigurationUser> add(@PathVariable("token") @ApiParam(name = "token", value = "token") String token){
+        return new ResponseResult(loginService.loginToken(token));
     }
 }

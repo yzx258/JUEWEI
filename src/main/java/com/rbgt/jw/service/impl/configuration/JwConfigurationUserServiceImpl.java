@@ -63,11 +63,25 @@ public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationU
      */
     @Override
     public JwConfigurationUser add(AddUserSpec addUserSpec) {
+        // 判断用户编号是否存在
+        QueryWrapper<JwConfigurationUser> qe = new QueryWrapper<>();
+        qe.eq("user_no",addUserSpec.getUserNo()).eq("is_del",0);
+        JwConfigurationUser jwConfigurationUser = this.baseMapper.selectOne(qe);
+        if(ObjectUtil.isNotNull(jwConfigurationUser)){
+            throw new BaseException(ResponseCode.USER_NOT_ERROR3);
+        }
+        // 判断登录账号
+        qe.clear();
+        qe.eq("user_account",addUserSpec.getUserAccount()).eq("is_del",0);
+        jwConfigurationUser = this.baseMapper.selectOne(qe);
+        if(ObjectUtil.isNotNull(jwConfigurationUser)){
+            throw new BaseException(ResponseCode.USER_NOT_ERROR4);
+        }
         // 判断门店是否存在
         if (ObjectUtil.isNull(jwShopService.getById(addUserSpec.getShopId()))) {
             throw new BaseException(ResponseCode.SHOP_NOT_ERROR);
         }
-        JwConfigurationUser jwConfigurationUser = new JwConfigurationUser();
+        jwConfigurationUser = new JwConfigurationUser();
         BeanUtil.copyProperties(addUserSpec, jwConfigurationUser, true);
         // 新增用户信息
         jwConfigurationUser.insert();
