@@ -31,7 +31,7 @@ public enum ResponseCode {
     /**
      * TOKEN无效
      */
-    TOKEN_INVALID_ERROR(100003, "无效的TOKEN"),
+    TOKEN_INVALID_ERROR(100004, "无效的TOKEN"),
     // 用户信息异常
     /**
      * 找不到用户信息
