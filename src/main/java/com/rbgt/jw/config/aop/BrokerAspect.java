@@ -7,6 +7,7 @@ import com.rbgt.jw.base.utils.CacheUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -14,6 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司
@@ -47,6 +49,7 @@ public class BrokerAspect {
      */
     @Before("BrokerAspect()")
     public void doBefore(JoinPoint joinPoint) {
+        MDC.put("R_LOG_ID", UUID.randomUUID().toString().replace("-",""));
         log.info("进来了AOP");
         if(joinPoint.getSignature().getName().equals("login")){
             log.info("免鉴权接口："+joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
@@ -78,5 +81,6 @@ public class BrokerAspect {
     public void doAfterReturning(Object ret)  {
         // 处理完请求，返回内容
         log.info("RESPONSE : " + ret);
+        MDC.remove("R_LOG_ID");
     }
 }
