@@ -3,6 +3,7 @@ package com.rbgt.jw.service.impl.login;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.rbgt.jw.config.handler.BaseException;
@@ -57,7 +58,7 @@ public class LoginServiceImpl implements LoginService {
         LoginDTO loginDTO = new LoginDTO();
         // 判断之前是否登录过
         String token = cacheUtils.getCache(loginSpec.getUserAccount());
-        if(null != cacheUtils.getCache(loginSpec.getUserAccount())){
+        if(StrUtil.isNotBlank(token) && StrUtil.isNotBlank(cacheUtils.getCache(token))){
             // 从缓存取数据
             log.info("登录信息从缓存取：{}",cacheUtils.getCache(token));
             loginDTO = JSON.parseObject(cacheUtils.getCache(token), LoginDTO.class);
