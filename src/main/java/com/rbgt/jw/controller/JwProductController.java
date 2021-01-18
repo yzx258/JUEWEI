@@ -1,6 +1,7 @@
 package com.rbgt.jw.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.rbgt.jw.base.dto.product.ShopProductDTO;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwProduct;
@@ -52,7 +53,7 @@ public class JwProductController {
 
     @ApiOperation(value = "查询 - 根据门店ID查询信息")
     @GetMapping("/product/shopId/{shopId}")
-    public ResponseResult<List<JwProduct>> findByShopId(@PathVariable("shopId") String shopId){
+    public ResponseResult<List<ShopProductDTO>> findByShopId(@PathVariable("shopId") String shopId){
         return new ResponseResult(jwProductService.findByShopId(shopId));
     }
 
