@@ -1,11 +1,15 @@
-package com.rbgt.jw.base.dto;
+package com.rbgt.jw.base.dto.check;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.product.ProductRecordAddTypeEnum;
+import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
+import com.rbgt.jw.entity.JwProductRecord;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * jw_purchase_check表的DTO
@@ -47,6 +51,15 @@ public class JwPurchaseCheckDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
+
+    @ApiModelProperty("插入类型")
+    private ProductRecordAddTypeEnum productRecordAddType = ProductRecordAddTypeEnum.STOCK;
+
+    /**
+     * 进货状态
+     */
+    @ApiModelProperty("进货状态")
+    private PurchaseTypeEnum shopStatus;
     /**
      * 门店ID
      */
@@ -69,15 +82,14 @@ public class JwPurchaseCheckDTO {
      */
     @ApiModelProperty("收货人ID")
     private String responsibleId;
+
     /**
      * 收货人名称
      */
     @ApiModelProperty("收货人名称")
     private String responsibleName;
-    /**
-     * 是否删除
-     */
-    @ApiModelProperty("是否删除")
-    private int isDel;
+
+    @ApiModelProperty("进货产品记录")
+    List<JwProductRecord> jwProductRecords;
 
 }

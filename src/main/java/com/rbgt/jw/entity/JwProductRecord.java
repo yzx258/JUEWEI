@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rbgt.jw.base.enums.product.ProductPackTypeEnum;
+import com.rbgt.jw.base.enums.product.ProductRecordAddTypeEnum;
 import com.rbgt.jw.base.enums.product.ProductRecordTypeEnum;
 import com.rbgt.jw.base.enums.product.ProductTasteTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
@@ -74,15 +75,14 @@ public class JwProductRecord extends Model<JwProductRecord> {
     @ApiModelProperty("是否核对")
     private ProductRecordTypeEnum productRecordType = ProductRecordTypeEnum.WAIT_CHECK;
 
+    @ApiModelProperty("插入类型")
+    private ProductRecordAddTypeEnum productRecordAddType;
+
+    @ApiModelProperty("门店ID")
+    private String shopId;
 
     @ApiModelProperty("进货/调货/盘点ID")
     private String purchaseId;
-
-    /**
-     * 门店ID
-     */
-    @ApiModelProperty("门店ID")
-    private String shopId;
 
     /**
      * 产品编号

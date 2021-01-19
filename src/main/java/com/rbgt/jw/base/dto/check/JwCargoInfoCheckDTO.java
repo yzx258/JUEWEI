@@ -1,32 +1,30 @@
-package com.rbgt.jw.entity;
+package com.rbgt.jw.base.dto.check;
 
-import com.baomidou.mybatisplus.annotation.*;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.product.ProductRecordAddTypeEnum;
 import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
+import com.rbgt.jw.entity.JwProductRecord;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
- * 调货信息表 的实体类
+ * jw_cargo_info表的DTO
  *
  * @author ： huangdefu@yiautos.com
- * @description ：调货信息表 的实体类
- * @date ： 2020-12-16 18:24:01
- * @Version ：1.0
+ * @date : 2020-12-16 18:24:01
+ * @description ：jw_cargo_info表的DTO
+ * @Version 1.0
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@TableName("jw_cargo_info")
-public class JwCargoInfo extends Model<JwCargoInfo> {
-
-    private static final long serialVersionUID = 1L;
+public class JwCargoInfoCheckDTO {
 
     @ApiModelProperty("主ID")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
@@ -69,11 +67,14 @@ public class JwCargoInfo extends Model<JwCargoInfo> {
     private Date updateTime;
 
 
+    @ApiModelProperty("插入类型")
+    private ProductRecordAddTypeEnum productRecordAddType = ProductRecordAddTypeEnum.CARGO;
+
     /**
      * 调货状态
      */
     @ApiModelProperty("调货状态")
-    private PurchaseTypeEnum cargoStatus = PurchaseTypeEnum.STAY_CONFIRM;
+    private PurchaseTypeEnum cargoStatus;
 
 
     /**
@@ -126,12 +127,7 @@ public class JwCargoInfo extends Model<JwCargoInfo> {
     @ApiModelProperty("负责人名称")
     private String responsibleName;
 
-
-    /**
-     * 是否删除
-     */
-    @ApiModelProperty("是否删除")
-    private int isDel;
-
+    @ApiModelProperty("进货产品记录")
+    List<JwProductRecord> jwProductRecords;
 
 }

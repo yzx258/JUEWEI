@@ -1,17 +1,24 @@
 package com.rbgt.jw.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.base.dto.JwCargoInfoDTO;
+import com.rbgt.jw.base.enums.ResponseCode;
+import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
 import com.rbgt.jw.base.spec.cargo.AddCargoInfoSpec;
 import com.rbgt.jw.base.spec.cargo.CargoInfoSearchSpec;
+import com.rbgt.jw.config.handler.BaseException;
 import com.rbgt.jw.dao.JwCargoInfoDao;
 import com.rbgt.jw.entity.JwCargoInfo;
 import com.rbgt.jw.entity.JwProductRecord;
+import com.rbgt.jw.entity.JwPurchaseInfo;
 import com.rbgt.jw.service.JwCargoInfoService;
 import com.rbgt.jw.service.JwProductRecordService;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +53,12 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
     @Override
     public JwCargoInfo add(AddCargoInfoSpec addCargoInfoSpec) {
         JwCargoInfo jwCargoInfo = new JwCargoInfo();
+        // 判断今日是否存在进货，或者是否存在未审核的进货数据
+        LambdaQueryWrapper<JwCargoInfo> eq = Wrappers.<JwCargoInfo>lambdaQuery().eq(JwCargoInfo::getCargoShopId,addCargoInfoSpec.getCargoShopId()).eq(JwCargoInfo::getCargoStatus, PurchaseTypeEnum.STAY_CONFIRM);
+        List<JwCargoInfo> jwCargoInfos = this.baseMapper.selectList(eq);
+        if(CollectionUtil.isNotEmpty(jwCargoInfos)){
+            throw new BaseException(ResponseCode.CARGO_ERROR);
+        }
         // 拷贝进货数据
         BeanUtil.copyProperties(addCargoInfoSpec,jwCargoInfo,true);
         jwCargoInfo.insert();
