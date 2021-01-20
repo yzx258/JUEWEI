@@ -3,9 +3,14 @@
 
 <mapper namespace="com.rbgt.jw.dao.JwPurchaseInfoDao">
 
-
     <!-- 分页查询数据 -->
-    <select id="search" resultType="com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO">
+    <select id="search" resultType="com.rbgt.jw.base.dto.check.JwPurchaseCheckDTO">
         select * from jw_purchase_info jpi
+        <where>
+            <if test="param.shopId != null and param.shopId != ''">
+                jpi.shop_id = #{param.shopId}
+            </if>
+            and jpi.is_del = 0
+        </where>
     </select>
 </mapper>

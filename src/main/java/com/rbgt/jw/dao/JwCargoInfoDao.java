@@ -3,7 +3,7 @@ package com.rbgt.jw.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.rbgt.jw.base.dto.JwCargoInfoDTO;
+import com.rbgt.jw.base.dto.check.JwCargoInfoCheckDTO;
 import com.rbgt.jw.base.spec.cargo.CargoInfoSearchSpec;
 import com.rbgt.jw.entity.JwCargoInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -26,6 +26,6 @@ public interface JwCargoInfoDao extends BaseMapper<JwCargoInfo> {
      * @param page
      * @return
      */
-    IPage<JwCargoInfoDTO> search(@Param("param") CargoInfoSearchSpec param, Page<JwCargoInfo> page);
+    IPage<JwCargoInfoCheckDTO> search(@Param("param") CargoInfoSearchSpec param, Page<JwCargoInfo> page);
 	
 }

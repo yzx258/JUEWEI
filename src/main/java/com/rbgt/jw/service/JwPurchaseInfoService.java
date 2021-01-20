@@ -1,13 +1,11 @@
 package com.rbgt.jw.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
+import com.rbgt.jw.base.dto.check.JwPurchaseCheckDTO;
 import com.rbgt.jw.base.spec.JwPurchaseInfoSpec;
 import com.rbgt.jw.base.spec.purchase.AddPurchaseInfoSpec;
 import com.rbgt.jw.entity.JwPurchaseInfo;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 进货信息表 接口业务逻辑接口
@@ -31,12 +29,12 @@ public interface JwPurchaseInfoService extends IService<JwPurchaseInfo> {
      * @param id
      * @return
      */
-    JwPurchaseInfoDTO details(String id);
+    JwPurchaseCheckDTO details(String id);
 
     /**
      * 分页查询信息
      * @param spec
      * @return
      */
-    IPage<JwPurchaseInfoDTO> search(JwPurchaseInfoSpec spec);
+    IPage<JwPurchaseCheckDTO> search(JwPurchaseInfoSpec spec);
 }

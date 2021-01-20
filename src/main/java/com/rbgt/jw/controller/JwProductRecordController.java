@@ -1,6 +1,5 @@
 package com.rbgt.jw.controller;
 
-import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwProductRecord;
@@ -36,5 +35,4 @@ public class JwProductRecordController {
     public ResponseResult<List<List<JwProductRecord>>> findByShopId(@PathVariable("shopId") @ApiParam(name = "shopId", value = "门店ID") String shopId){
         return new ResponseResult(jwProductRecordService.findByShopId(shopId));
     }
-
 }

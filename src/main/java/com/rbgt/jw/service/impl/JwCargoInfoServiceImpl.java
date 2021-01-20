@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.base.dto.JwCargoInfoDTO;
+import com.rbgt.jw.base.dto.check.JwCargoInfoCheckDTO;
 import com.rbgt.jw.base.enums.ResponseCode;
 import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
 import com.rbgt.jw.base.spec.cargo.AddCargoInfoSpec;
@@ -67,6 +68,7 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
             JwProductRecord jpr = new JwProductRecord();
             BeanUtil.copyProperties(pr,jpr,true);
             jpr.setPurchaseId(jwCargoInfo.getId());
+            jpr.setShopId(jwCargoInfo.getCargoShopId());
             list.add(jpr);
         });
         // 批量插入
@@ -80,8 +82,8 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
      * @return
      */
     @Override
-    public JwCargoInfoDTO details(String id) {
-        JwCargoInfoDTO jwCargoInfoDTO = new JwCargoInfoDTO();
+    public JwCargoInfoCheckDTO details(String id) {
+        JwCargoInfoCheckDTO jwCargoInfoDTO = new JwCargoInfoCheckDTO();
         JwCargoInfo byId = this.getById(id);
         if(ObjectUtil.isNotNull(byId) && StrUtil.isNotBlank(byId.getId())){
             // 拷贝数据
@@ -90,7 +92,7 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
             QueryWrapper<JwProductRecord> qw = new QueryWrapper<>();
             qw.eq("purchase_id",byId.getId()).eq("is_del",0);
             List<JwProductRecord> list = jwProductRecordService.list(qw);
-            jwCargoInfoDTO.setJwProductRecordList(list);
+            jwCargoInfoDTO.setJwProductRecords(list);
         }
         return jwCargoInfoDTO;
     }
@@ -101,8 +103,12 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
      * @return
      */
     @Override
-    public IPage<JwCargoInfoDTO> search(CargoInfoSearchSpec spec) {
-        return this.baseMapper.search(spec,spec.getPage());
+    public IPage<JwCargoInfoCheckDTO> search(CargoInfoSearchSpec spec) {
+        IPage<JwCargoInfoCheckDTO> search = this.baseMapper.search(spec, spec.getPage());
+        search.getRecords().stream().forEach(r -> {
+            r.setJwProductRecords(jwProductRecordService.getBaseMapper().selectList(Wrappers.lambdaQuery(JwProductRecord.class).eq(JwProductRecord::getPurchaseId,r.getId()).eq(JwProductRecord::getIsDel,0)));
+        });
+        return search;
     }
 }
 

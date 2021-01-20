@@ -5,7 +5,13 @@
 
 
     <!-- 分页查询数据 -->
-    <select id="search" resultType="com.rbgt.jw.base.dto.inventory.InventoryInfoDTO">
+    <select id="search" resultType="com.rbgt.jw.base.dto.check.JwInventoryInfoDTO">
         select * from jw_inventory_info jii
+        <where>
+            <if test="param.shopId != null and param.shopId != ''">
+                jii.shop_id = #{param.shopId}
+            </if>
+            and jii.is_del = 0
+        </where>
     </select>
 </mapper>

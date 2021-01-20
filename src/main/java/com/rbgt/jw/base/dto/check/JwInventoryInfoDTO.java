@@ -1,10 +1,11 @@
-package com.rbgt.jw.entity;
+package com.rbgt.jw.base.dto.check;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.rbgt.jw.base.enums.inventory.InventoryStatusTypeEnum;
+import com.rbgt.jw.base.enums.product.ProductRecordAddTypeEnum;
 import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
+import com.rbgt.jw.entity.JwProductRecord;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,6 +13,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司
@@ -22,16 +24,12 @@ import java.util.Date;
  * @description: 盘点信息
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@TableName("jw_inventory_info")
-public class JwInventoryInfo extends Model<JwInventoryInfo> {
+public class JwInventoryInfoDTO {
 
-    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主ID")
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
+
 
     /**
      * 创建人 创建人
@@ -39,6 +37,7 @@ public class JwInventoryInfo extends Model<JwInventoryInfo> {
     @ApiModelProperty("创建人 创建人")
     @TableField(fill = FieldFill.INSERT)
     private String createBy;
+
 
     /**
      * 创建时间 创建时间
@@ -49,12 +48,14 @@ public class JwInventoryInfo extends Model<JwInventoryInfo> {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
+
     /**
      * 更新人 更新人
      */
     @ApiModelProperty("更新人 更新人")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String lastModifiedBy;
+
 
     /**
      * 更新时间 更新时间
@@ -65,11 +66,14 @@ public class JwInventoryInfo extends Model<JwInventoryInfo> {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
+    @ApiModelProperty("插入类型")
+    private ProductRecordAddTypeEnum productRecordAddType = ProductRecordAddTypeEnum.INVENTORY;
+
     /**
      * 盘点状态
      */
     @ApiModelProperty("盘点状态")
-    private PurchaseTypeEnum inventoryStatusType = PurchaseTypeEnum.STAY_CONFIRM;
+    private PurchaseTypeEnum inventoryStatusType;
 
     /**
      * 门店ID
@@ -138,9 +142,7 @@ public class JwInventoryInfo extends Model<JwInventoryInfo> {
     @ApiModelProperty("复盘人名称")
     private String analysePeopleName;
 
-    /**
-     * 是否删除
-     */
-    @ApiModelProperty("是否删除")
-    private int isDel;
+    @ApiModelProperty("进货产品记录")
+    List<JwProductRecord> jwProductRecords;
+
 }

@@ -23,35 +23,10 @@ public class InventorySearchSpec {
     private String createBy;
 
     /**
-     * 盘点状态
-     */
-    @ApiModelProperty("盘点状态")
-    private InventoryStatusTypeEnum inventoryStatusType ;
-
-    /**
      * 门店ID
      */
     @ApiModelProperty("门店ID")
-    private String inventoryShopId;
-
-    /**
-     * 门店名称
-     */
-    @ApiModelProperty("门店名称")
-    private String inventoryShopName;
-
-
-    /**
-     * 盘点人Id
-     */
-    @ApiModelProperty("盘点人Id")
-    private String inventoryPeopleId;
-
-    /**
-     * 盘点人名称
-     */
-    @ApiModelProperty("盘点人名称")
-    private String inventoryPeopleName;
+    private String shopId;
 
 
     /**

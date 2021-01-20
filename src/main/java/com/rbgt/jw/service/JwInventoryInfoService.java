@@ -1,9 +1,8 @@
 package com.rbgt.jw.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.rbgt.jw.base.dto.inventory.InventoryInfoDTO;
+import com.rbgt.jw.base.dto.check.JwInventoryInfoDTO;
 import com.rbgt.jw.base.spec.inventory.AddInventoryInfoSpec;
 import com.rbgt.jw.base.spec.inventory.InventorySearchSpec;
 import com.rbgt.jw.entity.JwInventoryInfo;
@@ -31,12 +30,12 @@ public interface JwInventoryInfoService extends IService<JwInventoryInfo> {
      * @param id
      * @return
      */
-    InventoryInfoDTO details(String id);
+    JwInventoryInfoDTO details(String id);
 
     /**
      * 分页查询信息
      * @param spec
      * @return
      */
-    IPage<InventoryInfoDTO> search(@Param("param") InventorySearchSpec spec);
+    IPage<JwInventoryInfoDTO> search(@Param("param") InventorySearchSpec spec);
 }

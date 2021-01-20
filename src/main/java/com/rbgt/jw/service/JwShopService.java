@@ -3,10 +3,8 @@ package com.rbgt.jw.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rbgt.jw.base.dto.JwShopDTO;
-import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
 import com.rbgt.jw.base.spec.shop.AddShopSpec;
 import com.rbgt.jw.entity.JwShop;
-import com.rbgt.jw.base.dto.JwConfigurationUserDTO;
 import com.rbgt.jw.base.spec.JwShopSpec;
 
 /**

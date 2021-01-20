@@ -1,19 +1,13 @@
 package com.rbgt.jw.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.rbgt.jw.base.dto.JwCargoInfoDTO;
 import com.rbgt.jw.base.dto.JwDailyRecordDTO;
-import com.rbgt.jw.base.dto.inventory.InventoryInfoDTO;
 import com.rbgt.jw.base.spec.JwDailyRecordSpec;
-import com.rbgt.jw.base.spec.cargo.CargoInfoSearchSpec;
 import com.rbgt.jw.base.spec.daily.AddDailyRecordSpec;
-import com.rbgt.jw.base.spec.inventory.AddInventoryInfoSpec;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwDailyRecord;
-import com.rbgt.jw.entity.JwInventoryInfo;
 import com.rbgt.jw.service.JwDailyRecordService;
-import com.rbgt.jw.service.JwInventoryInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

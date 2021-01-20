@@ -1,10 +1,8 @@
 package com.rbgt.jw.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.rbgt.jw.base.dto.inventory.InventoryInfoDTO;
-import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
+import com.rbgt.jw.base.dto.check.JwPurchaseCheckDTO;
 import com.rbgt.jw.base.spec.JwPurchaseInfoSpec;
-import com.rbgt.jw.base.spec.inventory.InventorySearchSpec;
 import com.rbgt.jw.base.spec.purchase.AddPurchaseInfoSpec;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
@@ -42,13 +40,13 @@ public class JwPurchaseInfoController {
 
     @ApiOperation(value = "查询 - 根据ID查询进货详情")
     @GetMapping("/purchase/get/{id}")
-    public ResponseResult<JwPurchaseInfoDTO> getById(@PathVariable("id") @ApiParam(name = "id", value = "进货ID") String id){
+    public ResponseResult<JwPurchaseCheckDTO> getById(@PathVariable("id") @ApiParam(name = "id", value = "进货ID") String id){
         return new ResponseResult(jwPurchaseInfoService.details(id));
     }
 
     @ApiOperation(value = "查询 - 分页信息")
     @PostMapping("/purchase/search")
-    public ResponseResult<IPage<JwPurchaseInfoDTO>> search(@RequestBody JwPurchaseInfoSpec spec){
+    public ResponseResult<IPage<JwPurchaseCheckDTO>> search(@RequestBody JwPurchaseInfoSpec spec){
         return new ResponseResult(jwPurchaseInfoService.search(spec));
     }
 

@@ -27,7 +27,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("jw_product_record")
+@TableName(value = "jw_product_record")
 public class JwProductRecord extends Model<JwProductRecord> {
 
     private static final long serialVersionUID = 1L;

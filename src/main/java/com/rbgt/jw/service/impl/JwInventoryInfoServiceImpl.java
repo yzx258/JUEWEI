@@ -5,15 +5,14 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.rbgt.jw.base.dto.inventory.InventoryInfoDTO;
-import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
+import com.rbgt.jw.base.dto.check.JwInventoryInfoDTO;
 import com.rbgt.jw.base.spec.inventory.AddInventoryInfoSpec;
 import com.rbgt.jw.base.spec.inventory.InventorySearchSpec;
 import com.rbgt.jw.dao.JwInventoryInfoDao;
 import com.rbgt.jw.entity.JwInventoryInfo;
 import com.rbgt.jw.entity.JwProductRecord;
-import com.rbgt.jw.entity.JwPurchaseInfo;
 import com.rbgt.jw.service.JwInventoryInfoService;
 import com.rbgt.jw.service.JwProductRecordService;
 import lombok.RequiredArgsConstructor;
@@ -49,14 +48,15 @@ public class JwInventoryInfoServiceImpl  extends ServiceImpl<JwInventoryInfoDao,
     public JwInventoryInfo add(AddInventoryInfoSpec spec) {
         JwInventoryInfo jwInventoryInfo = new JwInventoryInfo();
         BeanUtil.copyProperties(spec,jwInventoryInfo,true);
-        // 插入进货数据
+        // 插入盘点数据
         jwInventoryInfo.insert();
-        // 插入进货产品信息
+        // 插入盘点产品信息
         List<JwProductRecord> list = new ArrayList<>();
         spec.getAddProductRecordSpecs().forEach(pr -> {
             JwProductRecord jpr = new JwProductRecord();
             BeanUtil.copyProperties(pr,jpr,true);
             jpr.setPurchaseId(jwInventoryInfo.getId());
+            jpr.setShopId(jwInventoryInfo.getInventoryShopId());
             list.add(jpr);
         });
         // 批量插入
@@ -70,8 +70,8 @@ public class JwInventoryInfoServiceImpl  extends ServiceImpl<JwInventoryInfoDao,
      * @return
      */
     @Override
-    public InventoryInfoDTO details(String id) {
-        InventoryInfoDTO inventoryInfoDTO = new InventoryInfoDTO();
+    public JwInventoryInfoDTO details(String id) {
+        JwInventoryInfoDTO inventoryInfoDTO = new JwInventoryInfoDTO();
         JwInventoryInfo byId = this.getById(id);
         if(ObjectUtil.isNotNull(byId) && StrUtil.isNotBlank(byId.getId())){
             // 拷贝数据
@@ -80,7 +80,7 @@ public class JwInventoryInfoServiceImpl  extends ServiceImpl<JwInventoryInfoDao,
             QueryWrapper<JwProductRecord> qw = new QueryWrapper<>();
             qw.eq("purchase_id",byId.getId()).eq("is_del",0);
             List<JwProductRecord> list = jwProductRecordService.list(qw);
-            inventoryInfoDTO.setJwProductRecordList(list);
+            inventoryInfoDTO.setJwProductRecords(list);
         }
         return inventoryInfoDTO;
     }
@@ -91,7 +91,11 @@ public class JwInventoryInfoServiceImpl  extends ServiceImpl<JwInventoryInfoDao,
      * @return
      */
     @Override
-    public IPage<InventoryInfoDTO> search(InventorySearchSpec spec) {
-        return this.baseMapper.search(spec,spec.getPage());
+    public IPage<JwInventoryInfoDTO> search(InventorySearchSpec spec) {
+        IPage<JwInventoryInfoDTO> search = this.baseMapper.search(spec, spec.getPage());
+        search.getRecords().stream().forEach(r -> {
+            r.setJwProductRecords(jwProductRecordService.getBaseMapper().selectList(Wrappers.lambdaQuery(JwProductRecord.class).eq(JwProductRecord::getPurchaseId,r.getId()).eq(JwProductRecord::getIsDel,0)));
+        });
+        return search;
     }
 }

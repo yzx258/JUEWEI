@@ -5,7 +5,13 @@
 
 
     <!-- 分页查询数据 -->
-    <select id="search" resultType="com.rbgt.jw.base.dto.JwCargoInfoDTO">
+    <select id="search" resultType="com.rbgt.jw.base.dto.check.JwCargoInfoCheckDTO">
         select * from jw_cargo_info jci
+        <where>
+            <if test="param.shopId != null and param.shopId != ''">
+                jci.shop_id = #{param.shopId}
+            </if>
+            and jci.is_del = 0
+        </where>
     </select>
 </mapper>

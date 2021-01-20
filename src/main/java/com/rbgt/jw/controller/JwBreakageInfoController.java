@@ -2,18 +2,12 @@ package com.rbgt.jw.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.rbgt.jw.base.dto.JwBreakageInfoDTO;
-import com.rbgt.jw.base.dto.JwShopDTO;
-import com.rbgt.jw.base.dto.inventory.InventoryInfoDTO;
-import com.rbgt.jw.base.spec.JwShopSpec;
 import com.rbgt.jw.base.spec.breakage.AddBreakageInfoSpec;
 import com.rbgt.jw.base.spec.breakage.BreakageInfoSearchSpec;
-import com.rbgt.jw.base.spec.inventory.AddInventoryInfoSpec;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwBreakageInfo;
-import com.rbgt.jw.entity.JwInventoryInfo;
 import com.rbgt.jw.service.JwBreakageInfoService;
-import com.rbgt.jw.service.JwInventoryInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

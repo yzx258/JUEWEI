@@ -25,30 +25,10 @@ public class CargoInfoSearchSpec {
     private String createBy;
 
     /**
-     * 调货状态
-     */
-    @ApiModelProperty("调货状态")
-    private PurchaseTypeEnum cargoStatus;
-    /**
      * 调出门店ID
      */
-    @ApiModelProperty("调出门店ID")
-    private String cargoShopId;
-    /**
-     * 调出门店名称
-     */
-    @ApiModelProperty("调出门店名称")
-    private String cargoShopName;
-    /**
-     * 调入门店ID
-     */
-    @ApiModelProperty("调入门店ID")
-    private String callInShopId;
-    /**
-     * 调入门店名称
-     */
-    @ApiModelProperty("调入门店名称")
-    private String callInShopName;
+    @ApiModelProperty("门店ID")
+    private String shopId;
 
     /**
      * 负责人ID

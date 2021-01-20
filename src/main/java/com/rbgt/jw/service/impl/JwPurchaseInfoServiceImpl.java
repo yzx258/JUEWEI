@@ -4,13 +4,12 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.rbgt.jw.base.dto.purchase.JwPurchaseInfoDTO;
+import com.rbgt.jw.base.dto.check.JwPurchaseCheckDTO;
 import com.rbgt.jw.base.enums.ResponseCode;
 import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
 import com.rbgt.jw.base.spec.JwPurchaseInfoSpec;
@@ -68,6 +67,7 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
             JwProductRecord jpr = new JwProductRecord();
             BeanUtil.copyProperties(pr,jpr,true);
             jpr.setPurchaseId(jwPurchaseInfo.getId());
+            jpr.setShopId(jwPurchaseInfo.getShopId());
             list.add(jpr);
         });
         // 批量插入
@@ -81,8 +81,8 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
      * @return
      */
     @Override
-    public JwPurchaseInfoDTO details(String id) {
-        JwPurchaseInfoDTO jwPurchaseInfoDTO = new JwPurchaseInfoDTO();
+    public JwPurchaseCheckDTO details(String id) {
+        JwPurchaseCheckDTO jwPurchaseInfoDTO = new JwPurchaseCheckDTO();
         JwPurchaseInfo byId = this.getById(id);
         if(ObjectUtil.isNotNull(byId) && StrUtil.isNotBlank(byId.getId())){
             // 拷贝数据
@@ -91,7 +91,7 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
             QueryWrapper<JwProductRecord> qw = new QueryWrapper<>();
             qw.eq("purchase_id",byId.getId()).eq("is_del",0);
             List<JwProductRecord> list = jwProductRecordService.list(qw);
-            jwPurchaseInfoDTO.setJwProductRecordList(list);
+            jwPurchaseInfoDTO.setJwProductRecords(list);
         }
         return jwPurchaseInfoDTO;
     }
@@ -102,7 +102,11 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
      * @return
      */
     @Override
-    public IPage<JwPurchaseInfoDTO> search(JwPurchaseInfoSpec spec) {
-        return this.baseMapper.search(spec,spec.getPage());
+    public IPage<JwPurchaseCheckDTO> search(JwPurchaseInfoSpec spec) {
+        IPage<JwPurchaseCheckDTO> search = this.baseMapper.search(spec, spec.getPage());
+        search.getRecords().stream().forEach(r -> {
+            r.setJwProductRecords(jwProductRecordService.getBaseMapper().selectList(Wrappers.lambdaQuery(JwProductRecord.class).eq(JwProductRecord::getPurchaseId,r.getId()).eq(JwProductRecord::getIsDel,0)));
+        });
+        return search;
     }
 }

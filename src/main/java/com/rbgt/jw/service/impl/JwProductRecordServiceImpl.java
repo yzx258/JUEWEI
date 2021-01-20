@@ -7,14 +7,17 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.base.dto.check.JwCargoInfoCheckDTO;
+import com.rbgt.jw.base.dto.check.JwInventoryInfoDTO;
 import com.rbgt.jw.base.dto.check.JwPurchaseCheckDTO;
 import com.rbgt.jw.base.enums.product.ProductRecordAddTypeEnum;
 import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
 import com.rbgt.jw.dao.JwProductRecordDao;
 import com.rbgt.jw.entity.JwCargoInfo;
+import com.rbgt.jw.entity.JwInventoryInfo;
 import com.rbgt.jw.entity.JwProductRecord;
 import com.rbgt.jw.entity.JwPurchaseInfo;
 import com.rbgt.jw.service.JwCargoInfoService;
+import com.rbgt.jw.service.JwInventoryInfoService;
 import com.rbgt.jw.service.JwProductRecordService;
 import com.rbgt.jw.service.JwPurchaseInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +43,8 @@ public class JwProductRecordServiceImpl extends ServiceImpl<JwProductRecordDao, 
     private JwPurchaseInfoService jwPurchaseInfoService;
     @Autowired
     private JwCargoInfoService jwCargoInfoService;
+    @Autowired
+    private JwInventoryInfoService jwInventoryInfoService;
     /**
      * 根据门店ID，查询待审核数据
      * @param shopId
@@ -72,6 +77,22 @@ public class JwProductRecordServiceImpl extends ServiceImpl<JwProductRecordDao, 
             // 拷贝数据
             BeanUtil.copyProperties(jwCargoInfo,jwCargoInfoCheckDTO,true);
             // 调货核对数据
+            eq1.clear();
+            eq1 = Wrappers.lambdaQuery(JwProductRecord.class).eq(JwProductRecord::getShopId, shopId).eq(JwProductRecord::getProductRecordAddType, ProductRecordAddTypeEnum.CARGO.getCode()).eq(JwProductRecord::getIsDel, 0);
+            List<JwProductRecord> jh = this.baseMapper.selectList(eq1);
+            if(CollectionUtil.isNotEmpty(jh)){
+                jwCargoInfoCheckDTO.setJwProductRecords(jh);
+            }
+            list.add(jwCargoInfoCheckDTO);
+        }
+        // 盘点
+        LambdaQueryWrapper<JwInventoryInfo> eqi = Wrappers.lambdaQuery(JwInventoryInfo.class).eq(JwInventoryInfo::getInventoryShopId, shopId).eq(JwInventoryInfo::getInventoryStatusType, PurchaseTypeEnum.STAY_CONFIRM.getCode()).eq(JwInventoryInfo::getIsDel, 0);
+        JwInventoryInfo jwInventoryInfo = jwInventoryInfoService.getBaseMapper().selectOne(eqi);
+        if(ObjectUtil.isNotNull(jwInventoryInfo)){
+            JwInventoryInfoDTO jwCargoInfoCheckDTO = new JwInventoryInfoDTO();
+            // 拷贝数据
+            BeanUtil.copyProperties(jwInventoryInfo,jwCargoInfoCheckDTO,true);
+            // 盘点核对数据
             eq1.clear();
             eq1 = Wrappers.lambdaQuery(JwProductRecord.class).eq(JwProductRecord::getShopId, shopId).eq(JwProductRecord::getProductRecordAddType, ProductRecordAddTypeEnum.CARGO.getCode()).eq(JwProductRecord::getIsDel, 0);
             List<JwProductRecord> jh = this.baseMapper.selectList(eq1);
