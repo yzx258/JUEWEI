@@ -9,7 +9,7 @@
         select * from jw_inventory_info jii
         <where>
             <if test="param.shopId != null and param.shopId != ''">
-                jii.shop_id = #{param.shopId}
+                jii.inventory_shop_id = #{param.shopId}
             </if>
             and jii.is_del = 0
         </where>

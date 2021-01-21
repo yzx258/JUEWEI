@@ -84,15 +84,16 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
     public JwPurchaseCheckDTO details(String id) {
         JwPurchaseCheckDTO jwPurchaseInfoDTO = new JwPurchaseCheckDTO();
         JwPurchaseInfo byId = this.getById(id);
-        if(ObjectUtil.isNotNull(byId) && StrUtil.isNotBlank(byId.getId())){
-            // 拷贝数据
-            BeanUtil.copyProperties(byId,jwPurchaseInfoDTO,true);
-            // 获取进货产品
-            QueryWrapper<JwProductRecord> qw = new QueryWrapper<>();
-            qw.eq("purchase_id",byId.getId()).eq("is_del",0);
-            List<JwProductRecord> list = jwProductRecordService.list(qw);
-            jwPurchaseInfoDTO.setJwProductRecords(list);
+        if(ObjectUtil.isNull(byId)){
+            throw new BaseException(ResponseCode.PURCHASE_ERROR1);
         }
+        // 拷贝数据
+        BeanUtil.copyProperties(byId,jwPurchaseInfoDTO,true);
+        // 获取进货产品
+        QueryWrapper<JwProductRecord> qw = new QueryWrapper<>();
+        qw.eq("purchase_id",byId.getId()).eq("is_del",0);
+        List<JwProductRecord> list = jwProductRecordService.list(qw);
+        jwPurchaseInfoDTO.setJwProductRecords(list);
         return jwPurchaseInfoDTO;
     }
 

@@ -9,7 +9,7 @@
         select * from jw_cargo_info jci
         <where>
             <if test="param.shopId != null and param.shopId != ''">
-                jci.shop_id = #{param.shopId}
+                jci.call_in_shop_id = #{param.shopId}
             </if>
             and jci.is_del = 0
         </where>

@@ -65,6 +65,7 @@ public enum ResponseCode {
      * 进货信息错误码
      */
     PURCHASE_ERROR(600001,"门店存在进货未核对信息，请检查"),
+    PURCHASE_ERROR1(600002,"门店不存在进货未核对信息，请检查"),
 
     /**
      * 调货信息错误码
