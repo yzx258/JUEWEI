@@ -7,6 +7,7 @@ import com.rbgt.jw.base.spec.inventory.AddInventoryInfoSpec;
 import com.rbgt.jw.base.spec.inventory.InventorySearchSpec;
 import com.rbgt.jw.entity.JwInventoryInfo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 /**
  * 产品信息表 接口业务逻辑接口
@@ -37,5 +38,12 @@ public interface JwInventoryInfoService extends IService<JwInventoryInfo> {
      * @param spec
      * @return
      */
-    IPage<JwInventoryInfoDTO> search(@Param("param") InventorySearchSpec spec);
+    IPage<JwInventoryInfoDTO> search(InventorySearchSpec spec);
+
+    /**
+     * 导出盘点数据
+     * @param spec
+     * @return
+     */
+    SXSSFWorkbook exportListExcel(InventorySearchSpec spec);
 }

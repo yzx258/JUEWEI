@@ -1,6 +1,7 @@
 package com.rbgt.jw.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -17,6 +18,12 @@ import com.rbgt.jw.service.JwInventoryInfoService;
 import com.rbgt.jw.service.JwProductRecordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -97,5 +104,44 @@ public class JwInventoryInfoServiceImpl  extends ServiceImpl<JwInventoryInfoDao,
             r.setJwProductRecords(jwProductRecordService.getBaseMapper().selectList(Wrappers.lambdaQuery(JwProductRecord.class).eq(JwProductRecord::getPurchaseId,r.getId()).eq(JwProductRecord::getIsDel,0)));
         });
         return search;
+    }
+
+    /**
+     * 导出盘点数据
+     * @param spec
+     * @return
+     */
+    @Override
+    public SXSSFWorkbook exportListExcel(InventorySearchSpec spec) {
+        List<JwInventoryInfo> list = this.baseMapper.selectList(null);
+        // 声明一个工作薄
+        SXSSFWorkbook workBook = new SXSSFWorkbook();
+        // 生成一个表格
+        SXSSFSheet sheet = workBook.createSheet();
+        sheet.createFreezePane(0, 1, 0, 1);
+        workBook.setSheetName(0, "盘点数据");
+        CellStyle style = workBook.createCellStyle();
+        Font font = workBook.getFontAt((short) 0);
+        font.setCharSet(HSSFFont.DEFAULT_CHARSET);
+        //更改默认字体大小
+        font.setFontHeightInPoints((short) 12);
+        font.setFontName("宋体");
+        style.setFont(font);
+        // 创建表格标题行 第一行
+        SXSSFRow titleRow = sheet.createRow(0);
+        titleRow.createCell(0).setCellValue("创建时间");
+        titleRow.createCell(1).setCellValue("门店名称");
+        titleRow.createCell(2).setCellValue("盘点日期");
+        titleRow.createCell(3).setCellValue("盘点人");
+
+        for (int i = 0; i < list.size(); i++) {
+            JwInventoryInfo jwInventoryInfo = list.get(i);
+            SXSSFRow titleRowNext = sheet.createRow(i + 1);
+            titleRowNext.createCell(0).setCellValue(DateUtil.formatDate(jwInventoryInfo.getCreateTime()));
+            titleRowNext.createCell(1).setCellValue(String.valueOf(jwInventoryInfo.getAnalyseShopName()));
+            titleRowNext.createCell(2).setCellValue(DateUtil.formatDate(jwInventoryInfo.getInventoryTime()));
+            titleRowNext.createCell(3).setCellValue(String.valueOf(jwInventoryInfo.getInventoryPeopleName()));
+        }
+        return workBook;
     }
 }
