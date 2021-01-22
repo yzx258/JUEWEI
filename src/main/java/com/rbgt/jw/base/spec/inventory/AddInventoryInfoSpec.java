@@ -26,12 +26,6 @@ import java.util.List;
 public class AddInventoryInfoSpec {
 
     /**
-     * 盘点状态
-     */
-    @ApiModelProperty("盘点状态")
-    private InventoryStatusTypeEnum inventoryStatusType = InventoryStatusTypeEnum.NOT_INVENTORY;
-
-    /**
      * 门店ID
      */
     @ApiModelProperty("门店ID")

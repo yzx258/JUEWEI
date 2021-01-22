@@ -30,13 +30,7 @@ public class AddBreakageInfoSpec {
      */
     @ApiModelProperty("门店名称")
     private String shopName;
-    /**
-     * 报损日期
-     */
-    @ApiModelProperty("报损日期")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date breakageTime;
+
     /**
      * 负责人ID
      */

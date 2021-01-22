@@ -2,6 +2,7 @@ package com.rbgt.jw.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -25,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,7 +57,10 @@ public class JwProductRecordServiceImpl extends ServiceImpl<JwProductRecordDao, 
         List<Object> list = new ArrayList<>();
         LambdaQueryWrapper<JwProductRecord> eq1 = new LambdaQueryWrapper<>();
         // 进货
-        LambdaQueryWrapper<JwPurchaseInfo> eq = Wrappers.lambdaQuery(JwPurchaseInfo.class).eq(JwPurchaseInfo::getShopId, shopId).eq(JwPurchaseInfo::getShopStatus, PurchaseTypeEnum.STAY_CONFIRM.getCode()).eq(JwPurchaseInfo::getIsDel, 0);
+        LambdaQueryWrapper<JwPurchaseInfo> eq = Wrappers.lambdaQuery(JwPurchaseInfo.class)
+                .eq(JwPurchaseInfo::getShopId, shopId)
+                .eq(JwPurchaseInfo::getShopStatus, PurchaseTypeEnum.STAY_CONFIRM.getCode())
+                .eq(JwPurchaseInfo::getIsDel, 0);
         JwPurchaseInfo jwPurchaseInfo = jwPurchaseInfoService.getBaseMapper().selectOne(eq);
         if(ObjectUtil.isNotNull(jwPurchaseInfo)){
             JwPurchaseCheckDTO jwPurchaseCheckDTO = new JwPurchaseCheckDTO();

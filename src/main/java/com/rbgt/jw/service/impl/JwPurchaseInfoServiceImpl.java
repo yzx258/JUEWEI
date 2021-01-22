@@ -53,7 +53,10 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
     public JwPurchaseInfo add(AddPurchaseInfoSpec spec) {
         JwPurchaseInfo jwPurchaseInfo = new JwPurchaseInfo();
         // 判断今日是否存在进货，或者是否存在未审核的进货数据
-        LambdaQueryWrapper<JwPurchaseInfo> eq = Wrappers.<JwPurchaseInfo>lambdaQuery().eq(JwPurchaseInfo::getShopId,spec.getShopId()).eq(JwPurchaseInfo::getShopStatus, PurchaseTypeEnum.STAY_CONFIRM);
+        LambdaQueryWrapper<JwPurchaseInfo> eq = Wrappers.<JwPurchaseInfo>lambdaQuery()
+                .eq(JwPurchaseInfo::getShopId,spec.getShopId())
+                .eq(JwPurchaseInfo::getShopStatus, PurchaseTypeEnum.STAY_CONFIRM)
+                .eq(JwPurchaseInfo::getIsDel,0);
         List<JwPurchaseInfo> jwPurchaseInfos = this.baseMapper.selectList(eq);
         if(CollectionUtil.isNotEmpty(jwPurchaseInfos)){
             throw new BaseException(ResponseCode.PURCHASE_ERROR);
@@ -83,6 +86,7 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
     @Override
     public JwPurchaseCheckDTO details(String id) {
         JwPurchaseCheckDTO jwPurchaseInfoDTO = new JwPurchaseCheckDTO();
+        // 判断当前是否存在待审核数据
         JwPurchaseInfo byId = this.getById(id);
         if(ObjectUtil.isNull(byId)){
             throw new BaseException(ResponseCode.PURCHASE_ERROR1);

@@ -55,7 +55,10 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
     public JwCargoInfo add(AddCargoInfoSpec addCargoInfoSpec) {
         JwCargoInfo jwCargoInfo = new JwCargoInfo();
         // 判断今日是否存在进货，或者是否存在未审核的进货数据
-        LambdaQueryWrapper<JwCargoInfo> eq = Wrappers.<JwCargoInfo>lambdaQuery().eq(JwCargoInfo::getCargoShopId,addCargoInfoSpec.getCargoShopId()).eq(JwCargoInfo::getCargoStatus, PurchaseTypeEnum.STAY_CONFIRM);
+        LambdaQueryWrapper<JwCargoInfo> eq = Wrappers.<JwCargoInfo>lambdaQuery()
+                .eq(JwCargoInfo::getCargoShopId,addCargoInfoSpec.getCargoShopId())
+                .eq(JwCargoInfo::getCargoStatus, PurchaseTypeEnum.STAY_CONFIRM)
+                .eq(JwCargoInfo::getIsDel,0);
         List<JwCargoInfo> jwCargoInfos = this.baseMapper.selectList(eq);
         if(CollectionUtil.isNotEmpty(jwCargoInfos)){
             throw new BaseException(ResponseCode.CARGO_ERROR);

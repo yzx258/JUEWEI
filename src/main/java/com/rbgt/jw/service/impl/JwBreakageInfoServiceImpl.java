@@ -1,6 +1,7 @@
 package com.rbgt.jw.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -47,6 +48,7 @@ public class JwBreakageInfoServiceImpl extends ServiceImpl<JwBreakageInfoDao, Jw
     public JwBreakageInfo add(AddBreakageInfoSpec spec) {
         JwBreakageInfo jwBreakageInfo = new JwBreakageInfo();
         BeanUtil.copyProperties(spec,jwBreakageInfo,true);
+        jwBreakageInfo.setBreakageTime(DateUtil.date());
         // 插入进货数据
         jwBreakageInfo.insert();
         // 插入进货产品信息

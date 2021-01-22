@@ -1,17 +1,23 @@
 package com.rbgt.jw.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.base.dto.check.JwInventoryInfoDTO;
+import com.rbgt.jw.base.enums.ResponseCode;
+import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
 import com.rbgt.jw.base.spec.inventory.AddInventoryInfoSpec;
 import com.rbgt.jw.base.spec.inventory.InventorySearchSpec;
+import com.rbgt.jw.config.handler.BaseException;
 import com.rbgt.jw.dao.JwInventoryInfoDao;
+import com.rbgt.jw.entity.JwCargoInfo;
 import com.rbgt.jw.entity.JwInventoryInfo;
 import com.rbgt.jw.entity.JwProductRecord;
 import com.rbgt.jw.service.JwInventoryInfoService;
@@ -53,6 +59,15 @@ public class JwInventoryInfoServiceImpl  extends ServiceImpl<JwInventoryInfoDao,
      */
     @Override
     public JwInventoryInfo add(AddInventoryInfoSpec spec) {
+        // 判断是否存在盘点，位确认数据
+        LambdaQueryWrapper<JwInventoryInfo> eq = Wrappers.<JwInventoryInfo>lambdaQuery()
+                .eq(JwInventoryInfo::getInventoryShopId,spec.getInventoryShopId())
+                .eq(JwInventoryInfo::getInventoryStatusType, PurchaseTypeEnum.STAY_CONFIRM)
+                .eq(JwInventoryInfo::getIsDel,0);
+        List<JwInventoryInfo> jwInventoryInfos = this.baseMapper.selectList(eq);
+        if(CollectionUtil.isNotEmpty(jwInventoryInfos)){
+            throw new BaseException(ResponseCode.PD_ERROR);
+        }
         JwInventoryInfo jwInventoryInfo = new JwInventoryInfo();
         BeanUtil.copyProperties(spec,jwInventoryInfo,true);
         // 插入盘点数据
