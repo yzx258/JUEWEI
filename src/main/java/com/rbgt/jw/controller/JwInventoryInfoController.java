@@ -51,6 +51,12 @@ public class JwInventoryInfoController {
         return new ResponseResult(jwInventoryInfoService.details(id));
     }
 
+    @ApiOperation(value = "查询 - 根据门店ID查询盘点详情")
+    @GetMapping("/inventory/get/shopId/{id}")
+    public ResponseResult<JwInventoryInfoDTO> getCheckInfo(@PathVariable("id") @ApiParam(name = "id", value = "门店ID") String id) {
+        return new ResponseResult(jwInventoryInfoService.getCheckInfo(id));
+    }
+
     @ApiOperation(value = "查询 - 分页信息")
     @PostMapping("/inventory/search")
     public ResponseResult<IPage<JwInventoryInfoDTO>> search(@RequestBody InventorySearchSpec spec) {

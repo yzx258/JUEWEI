@@ -34,6 +34,13 @@ public interface JwInventoryInfoService extends IService<JwInventoryInfo> {
     JwInventoryInfoDTO details(String id);
 
     /**
+     * 根据门店ID获取盘点详情
+     * @param id
+     * @return
+     */
+    JwInventoryInfoDTO getCheckInfo(String id);
+
+    /**
      * 分页查询信息
      * @param spec
      * @return

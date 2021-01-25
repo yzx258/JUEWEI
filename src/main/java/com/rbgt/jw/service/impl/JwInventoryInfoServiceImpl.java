@@ -107,6 +107,25 @@ public class JwInventoryInfoServiceImpl  extends ServiceImpl<JwInventoryInfoDao,
         return inventoryInfoDTO;
     }
 
+    @Override
+    public JwInventoryInfoDTO getCheckInfo(String id) {
+        List<JwInventoryInfo> jwInventoryInfos = this.baseMapper.selectList(Wrappers.lambdaQuery(JwInventoryInfo.class)
+                .eq(JwInventoryInfo::getInventoryShopId, id).eq(JwInventoryInfo::getInventoryStatusType, PurchaseTypeEnum.STAY_CONFIRM.getCode()
+                ).eq(JwInventoryInfo::getIsDel, 0));
+        if(CollectionUtil.isEmpty(jwInventoryInfos)){
+            throw new BaseException(ResponseCode.PD_ERROR1);
+        }
+        JwInventoryInfoDTO jwInventoryInfoDTO = new JwInventoryInfoDTO();
+        // 拷贝数据
+        BeanUtil.copyProperties(jwInventoryInfos.get(0),jwInventoryInfoDTO,true);
+        // 获取进货产品
+        QueryWrapper<JwProductRecord> qw = new QueryWrapper<>();
+        qw.eq("purchase_id",jwInventoryInfos.get(0).getId()).eq("is_del",0);
+        List<JwProductRecord> list = jwProductRecordService.list(qw);
+        jwInventoryInfoDTO.setJwProductRecords(list);
+        return jwInventoryInfoDTO;
+    }
+
     /**
      * 分页查询信息
      * @param spec

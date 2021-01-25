@@ -32,6 +32,13 @@ public interface JwCargoInfoService extends IService<JwCargoInfo>  {
     JwCargoInfoCheckDTO details(String id);
 
     /**
+     * 根据门店ID获取调货详情
+     * @param id
+     * @return
+     */
+    JwCargoInfoCheckDTO getCheckInfo(String id);
+
+    /**
      * 分页查询数据
      * @param spec
      * @return

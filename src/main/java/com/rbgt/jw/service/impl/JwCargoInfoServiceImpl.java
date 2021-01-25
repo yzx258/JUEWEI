@@ -100,6 +100,26 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
         return jwCargoInfoDTO;
     }
 
+    @Override
+    public JwCargoInfoCheckDTO getCheckInfo(String id) {
+        List<JwCargoInfo> jwCargoInfos = this.baseMapper.selectList(Wrappers.lambdaQuery(JwCargoInfo.class)
+                .eq(JwCargoInfo::getCargoShopId, id)
+                .eq(JwCargoInfo::getCargoStatus, PurchaseTypeEnum.STAY_CONFIRM.getCode())
+                .eq(JwCargoInfo::getIsDel, 0));
+        if(CollectionUtil.isEmpty(jwCargoInfos)){
+            throw new BaseException(ResponseCode.CARGO_ERROR);
+        }
+        JwCargoInfoCheckDTO jwCargoInfoCheckDTO = new JwCargoInfoCheckDTO();
+        // 拷贝数据
+        BeanUtil.copyProperties(jwCargoInfos.get(0),jwCargoInfoCheckDTO,true);
+        // 获取进货产品
+        QueryWrapper<JwProductRecord> qw = new QueryWrapper<>();
+        qw.eq("purchase_id",jwCargoInfos.get(0).getId()).eq("is_del",0);
+        List<JwProductRecord> list = jwProductRecordService.list(qw);
+        jwCargoInfoCheckDTO.setJwProductRecords(list);
+        return jwCargoInfoCheckDTO;
+    }
+
     /**
      * 分页查询数据
      * @param spec

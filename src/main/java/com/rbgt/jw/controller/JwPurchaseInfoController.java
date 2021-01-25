@@ -40,8 +40,14 @@ public class JwPurchaseInfoController {
 
     @ApiOperation(value = "查询 - 根据ID查询进货详情")
     @GetMapping("/purchase/get/{id}")
-    public ResponseResult<JwPurchaseCheckDTO> getById(@PathVariable("id") @ApiParam(name = "id", value = "进货ID") String id){
+    public ResponseResult<JwPurchaseCheckDTO> details(@PathVariable("id") @ApiParam(name = "id", value = "进货ID") String id){
         return new ResponseResult(jwPurchaseInfoService.details(id));
+    }
+
+    @ApiOperation(value = "查询 - 根据门店ID查询进货详情")
+    @GetMapping("/purchase/get/shopId/{shopId}")
+    public ResponseResult<JwPurchaseCheckDTO> getCheckInfo(@PathVariable("shopId") @ApiParam(name = "shopId", value = "门店ID") String shopId){
+        return new ResponseResult(jwPurchaseInfoService.getCheckInfo(shopId));
     }
 
     @ApiOperation(value = "查询 - 分页信息")

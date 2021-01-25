@@ -68,7 +68,7 @@ public class CheckServiceImpl implements CheckService {
             byId.setAnalysePeopleId(spec.getCheckId());
             byId.setAnalysePeopleName(spec.getCheckName());
             byId.setAnalyseShopId(spec.getCheckShopId());
-            byId.setAnalysePeopleName(spec.getCheckShopName());
+            byId.setAnalyseShopName(spec.getCheckShopName());
             byId.insertOrUpdate();
         }
         // 修改审核商品
@@ -77,6 +77,7 @@ public class CheckServiceImpl implements CheckService {
             // 判断是否有误
             if(ObjectUtil.isNull(j.getNewProductValue())){
                 j.setProductRecordType(ProductRecordTypeEnum.CORRECT);
+                j.setNewProductValue(j.getProductValue());
             }else{
                 j.setProductRecordType(ProductRecordTypeEnum.WRONG);
             }

@@ -75,7 +75,10 @@ public class JwProductRecordServiceImpl extends ServiceImpl<JwProductRecordDao, 
             list.add(jwPurchaseCheckDTO);
         }
         // 调货
-        LambdaQueryWrapper<JwCargoInfo> eqc = Wrappers.lambdaQuery(JwCargoInfo.class).eq(JwCargoInfo::getCallInShopId, shopId).eq(JwCargoInfo::getCargoStatus, PurchaseTypeEnum.STAY_CONFIRM.getCode()).eq(JwCargoInfo::getIsDel, 0);
+        LambdaQueryWrapper<JwCargoInfo> eqc = Wrappers.lambdaQuery(JwCargoInfo.class)
+                .eq(JwCargoInfo::getCargoShopId, shopId)
+                .eq(JwCargoInfo::getCargoStatus, PurchaseTypeEnum.STAY_CONFIRM.getCode())
+                .eq(JwCargoInfo::getIsDel, 0);
         JwCargoInfo jwCargoInfo = jwCargoInfoService.getBaseMapper().selectOne(eqc);
         if(ObjectUtil.isNotNull(jwCargoInfo)){
             JwCargoInfoCheckDTO jwCargoInfoCheckDTO = new JwCargoInfoCheckDTO();

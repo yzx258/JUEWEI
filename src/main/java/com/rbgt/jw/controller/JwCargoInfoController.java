@@ -44,6 +44,12 @@ public class JwCargoInfoController {
         return new ResponseResult(jwCargoInfoService.details(id));
     }
 
+    @ApiOperation(value = "查询 - 根据门店ID查询调货详情")
+    @GetMapping("/cargo/get/shopId/{id}")
+    public ResponseResult<JwCargoInfoCheckDTO> getCheckInfo(@PathVariable("id") @ApiParam(name = "id", value = "门店ID") String id){
+        return new ResponseResult(jwCargoInfoService.getCheckInfo(id));
+    }
+
     @ApiOperation(value = "查询 - 分页信息")
     @PostMapping("/cargo/search")
     public ResponseResult<IPage<JwCargoInfoCheckDTO>> search(@RequestBody CargoInfoSearchSpec spec){

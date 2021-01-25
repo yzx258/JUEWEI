@@ -32,6 +32,13 @@ public interface JwPurchaseInfoService extends IService<JwPurchaseInfo> {
     JwPurchaseCheckDTO details(String id);
 
     /**
+     * 根据门店ID获取待审核进货详情
+     * @param id
+     * @return
+     */
+    JwPurchaseCheckDTO getCheckInfo(String id);
+
+    /**
      * 分页查询信息
      * @param spec
      * @return

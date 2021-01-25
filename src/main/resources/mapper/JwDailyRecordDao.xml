@@ -7,5 +7,11 @@
     <!-- 分页查询数据 -->
     <select id="search" resultType="com.rbgt.jw.base.dto.JwDailyRecordDTO">
         select * from jw_daily_record jdr
+        <where>
+            <if test="param.shopId != null and param.shopId != ''">
+                jdr.shop_id = #{param.shopId}
+            </if>
+            and jdr.is_del = 0
+        </where>
     </select>
 </mapper>

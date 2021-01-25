@@ -102,6 +102,31 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
     }
 
     /**
+     * 根据门店ID获取待审核进货详情
+     * @param id
+     * @return
+     */
+    @Override
+    public JwPurchaseCheckDTO getCheckInfo(String id) {
+        List<JwPurchaseInfo> jwPurchaseInfos = this.baseMapper.selectList(Wrappers.lambdaQuery(JwPurchaseInfo.class)
+                .eq(JwPurchaseInfo::getShopId, id)
+                .eq(JwPurchaseInfo::getShopStatus, PurchaseTypeEnum.STAY_CONFIRM.getCode())
+                .eq(JwPurchaseInfo::getIsDel, 0));
+        if(CollectionUtil.isEmpty(jwPurchaseInfos)){
+            throw new BaseException(ResponseCode.PURCHASE_ERROR1);
+        }
+        JwPurchaseCheckDTO jwPurchaseCheckDTO = new JwPurchaseCheckDTO();
+        // 拷贝数据
+        BeanUtil.copyProperties(jwPurchaseInfos.get(0),jwPurchaseCheckDTO,true);
+        // 获取进货产品
+        QueryWrapper<JwProductRecord> qw = new QueryWrapper<>();
+        qw.eq("purchase_id",jwPurchaseInfos.get(0).getId()).eq("is_del",0);
+        List<JwProductRecord> list = jwProductRecordService.list(qw);
+        jwPurchaseCheckDTO.setJwProductRecords(list);
+        return jwPurchaseCheckDTO;
+    }
+
+    /**
      * 分页查询信息
      * @param spec
      * @return
