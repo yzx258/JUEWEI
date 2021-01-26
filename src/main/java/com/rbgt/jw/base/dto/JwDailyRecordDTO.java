@@ -48,11 +48,7 @@ public class JwDailyRecordDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
-    /**
-     * 日结记录ID
-     */
-    @ApiModelProperty("日结记录ID")
-    private String daliyRecordId;
+
     /**
      * 门店ID
      */
@@ -67,8 +63,8 @@ public class JwDailyRecordDTO {
      * 交班日期
      */
     @ApiModelProperty("交班日期")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date successionTime;
     /**
      * 收银员ID
@@ -138,7 +134,7 @@ public class JwDailyRecordDTO {
     /**
      * 店POS商家优惠
      */
-    @ApiModelProperty("店POS外卖满减卷")
+    @ApiModelProperty("店POS商家优惠")
     private BigDecimal posMerchantsPreferentialAmount = new BigDecimal("0.00");
 
     /**

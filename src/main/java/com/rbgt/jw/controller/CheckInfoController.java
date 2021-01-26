@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * @company： 厦门宜车时代信息技术有限公司
  * @copyright： Copyright (C), 2021
@@ -32,7 +34,7 @@ public class CheckInfoController {
 
     @ApiOperation(value = "修改 - 核对数据")
     @PostMapping(value = "/check")
-    public ResponseResult check(@ApiParam(name = "spec", value = "核对实体类") @RequestBody CheckSpec spec){
+    public ResponseResult check(@Valid @ApiParam(name = "spec", value = "核对实体类") @RequestBody CheckSpec spec){
         checkService.checkInfo(spec);
         return new ResponseResult(true);
     }

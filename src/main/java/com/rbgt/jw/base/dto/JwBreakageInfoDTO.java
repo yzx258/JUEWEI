@@ -1,6 +1,7 @@
 package com.rbgt.jw.base.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
 import com.rbgt.jw.entity.JwProductRecord;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -49,6 +50,10 @@ public class JwBreakageInfoDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
+
+    @ApiModelProperty("报损状态")
+    private PurchaseTypeEnum status;
+
     /**
      * 门店ID
      */

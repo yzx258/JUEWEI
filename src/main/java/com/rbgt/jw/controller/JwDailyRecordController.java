@@ -40,7 +40,7 @@ public class JwDailyRecordController {
 
     @ApiOperation(value = "查询 - 根据ID查询盘点详情")
     @GetMapping("/dailyRecord/get/{id}")
-    public ResponseResult<JwDailyRecordDTO> getById(@PathVariable("id") @ApiParam(name = "id", value = "日结ID") String id){
+    public ResponseResult<JwDailyRecordDTO> details(@PathVariable("id") @ApiParam(name = "id", value = "日结ID") String id){
         return new ResponseResult(jwDailyRecordService.details(id));
     }
 

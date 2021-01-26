@@ -3,6 +3,7 @@ package com.rbgt.jw.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -62,6 +63,12 @@ public class JwBreakageInfo extends Model<JwBreakageInfo> {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
+
+    /**
+     * 报损状态
+     */
+    @ApiModelProperty("报损状态")
+    private PurchaseTypeEnum status = PurchaseTypeEnum.HAS_CONFIRM;
 
     /**
      * 门店ID

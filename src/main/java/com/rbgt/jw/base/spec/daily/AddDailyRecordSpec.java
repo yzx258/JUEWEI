@@ -108,7 +108,7 @@ public class AddDailyRecordSpec {
     /**
      * 店POS商家优惠
      */
-    @ApiModelProperty("店POS外卖满减卷")
+    @ApiModelProperty("店POS商家优惠")
     private BigDecimal posMerchantsPreferentialAmount = new BigDecimal("0.00");
 
     /**
