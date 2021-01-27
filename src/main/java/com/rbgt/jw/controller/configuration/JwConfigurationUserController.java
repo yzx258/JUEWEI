@@ -1,6 +1,7 @@
 package com.rbgt.jw.controller.configuration;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.rbgt.jw.base.dto.user.AddUserDTO;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.configuration.JwConfigurationUser;
@@ -37,6 +38,12 @@ public class JwConfigurationUserController {
     @GetMapping("/user/get/all")
     public ResponseResult<List<JwConfigurationUser>> getAll(){
         return new ResponseResult(jwConfigurationUserService.queryAll());
+    }
+
+    @ApiOperation(value = "查询 - 根据ID查询用户信息")
+    @GetMapping("/user/get/{id}")
+    public ResponseResult<AddUserDTO> details(@PathVariable("id") @ApiParam(name="id",value = "用户ID") String id){
+        return new ResponseResult(jwConfigurationUserService.details(id));
     }
 
     @ApiOperation(value = "查询 - 分页用户信息")

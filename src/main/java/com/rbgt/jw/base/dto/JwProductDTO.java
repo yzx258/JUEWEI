@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -56,6 +55,13 @@ public class JwProductDTO {
      */
     @ApiModelProperty("产品编号")
     private String productNo;
+
+    /**
+     * 产品编号
+     */
+    @ApiModelProperty("门店名称")
+    private String shopName;
+
     /**
      * 产品名称
      */

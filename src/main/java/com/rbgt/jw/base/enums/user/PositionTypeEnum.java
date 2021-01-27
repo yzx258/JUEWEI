@@ -1,4 +1,4 @@
-package com.rbgt.jw.base.enums.role;
+package com.rbgt.jw.base.enums.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -10,12 +10,12 @@ import lombok.Getter;
  * @author： yucw
  * @date： 2020/12/15 16:54
  * @version： 1.0
- * @description: 角色类型枚举
+ * @description: 职位
  */
 @Getter
 @AllArgsConstructor
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum RoleTypeEnum {
+public enum PositionTypeEnum {
 
     Z(0,"无"),
     SHOP_ASSISTANT(1,"门店员工"),

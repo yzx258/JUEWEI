@@ -18,6 +18,12 @@ import javax.validation.constraints.NotNull;
 public class AddShopSpec {
 
     /**
+     * 门店ID
+     */
+    @ApiModelProperty("门店ID")
+    private String id;
+
+    /**
      * 门店编号
      */
     @ApiModelProperty("门店编号")

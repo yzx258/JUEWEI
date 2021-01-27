@@ -1,6 +1,7 @@
 package com.rbgt.jw.base.enums.daily;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.basic.BasicType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -17,7 +18,7 @@ import lombok.Getter;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum DailyTypeEnum {
 
-    Z(0,"无"),
+    GUEST_FOLIO(0,"客单数"),
     OFFICIAL_RECEIPTS_AMOUNT(1,"实收金额"),
     WS_EASY_PAY_AMOUNT(2,"微商易付金额"),
     POS_WX_AMOUNT(3,"店POS微信"),
@@ -41,4 +42,17 @@ public enum DailyTypeEnum {
     private int code;
     private String msg;
 
+    /**
+     * 枚举转换
+     * @param code
+     * @return
+     */
+    public static DailyTypeEnum getDailyTypeEnum(int code){
+        for(DailyTypeEnum dailyTypeEnum : DailyTypeEnum.values()){
+            if(code == dailyTypeEnum.getCode()){
+                return dailyTypeEnum;
+            }
+        }
+        return null;
+    }
 }

@@ -6,6 +6,7 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -44,6 +45,17 @@ public class JwShopServiceImpl extends ServiceImpl<JwShopDao, JwShop> implements
      */
     @Override
     public JwShop add(AddShopSpec addShopSpec) {
+        // 更新门店信息
+        if(StrUtil.isNotBlank(addShopSpec.getId())){
+            log.info("修改门店信息 -> {}", JSON.toJSONString(addShopSpec));
+            JwShop jwShop = this.baseMapper.selectById(addShopSpec.getId());
+            // 拷贝数据
+            BeanUtil.copyProperties(addShopSpec,jwShop,true);
+            jwShop.insertOrUpdate();
+            return jwShop;
+        }
+        // 新增门店
+        log.info("新增门店信息 -> {}",JSON.toJSONString(addShopSpec));
         JwShop jwShop = new JwShop();
         QueryWrapper<JwShop> qw = new QueryWrapper<>();
         qw.eq("shop_no",addShopSpec.getShopNo()).eq("is_del",0);

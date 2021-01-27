@@ -3,12 +3,14 @@ package com.rbgt.jw.entity.configuration;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.user.PositionTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -67,6 +69,8 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
+    @ApiModelProperty("职位")
+    private PositionTypeEnum positionType;
 
     /**
      * 门店ID
@@ -74,6 +78,11 @@ public class JwConfigurationUser extends Model<JwConfigurationUser> {
     @ApiModelProperty("门店ID")
     private String shopId;
 
+    /**
+     * 门店名称
+     */
+    @ApiModelProperty("门店名称")
+    private String shopName;
 
     /**
      * 用户名称 用户名称

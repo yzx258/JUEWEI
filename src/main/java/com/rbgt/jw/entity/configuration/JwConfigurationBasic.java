@@ -3,6 +3,7 @@ package com.rbgt.jw.entity.configuration;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.basic.BasicType;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -67,6 +68,12 @@ public class JwConfigurationBasic extends Model<JwConfigurationBasic> {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
+
+    /**
+     * 目标编号
+     */
+    @ApiModelProperty("目标编号")
+    private String targetNo;
 
     /**
      * 配置名称

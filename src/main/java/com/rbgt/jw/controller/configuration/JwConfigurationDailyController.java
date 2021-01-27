@@ -12,8 +12,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 /**
  * @company： 厦门宜车时代信息技术有限公司
  * @copyright： Copyright (C), 2021
@@ -36,10 +34,9 @@ public class JwConfigurationDailyController {
         return new ResponseResult(jwConfigurationDailyService.add(addDailySpec));
     }
 
-    @ApiOperation(value = "新增 - 日结配置")
+    @ApiOperation(value = "查询 - 日结详情")
     @GetMapping("/daily/details/{shopId}")
     public ResponseResult<JwConfigurationDailyDTO> details(@PathVariable("shopId") @ApiParam(name="shopId",value = "门店ID") String shopId){
         return new ResponseResult(jwConfigurationDailyService.details(shopId));
     }
-
 }

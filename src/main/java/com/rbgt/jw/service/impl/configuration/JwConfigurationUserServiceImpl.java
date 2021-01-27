@@ -4,10 +4,13 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.rbgt.jw.base.enums.role.RoleTypeEnum;
+import com.rbgt.jw.base.dto.user.AddUserDTO;
+import com.rbgt.jw.base.enums.user.PositionTypeEnum;
 import com.rbgt.jw.config.handler.BaseException;
 import com.rbgt.jw.dao.configuration.JwConfigurationUserDao;
 import com.rbgt.jw.entity.configuration.JwConfigurationRole;
@@ -63,6 +66,27 @@ public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationU
      */
     @Override
     public JwConfigurationUser add(AddUserSpec addUserSpec) {
+        // 判断是否更新操作
+        if(StrUtil.isNotBlank(addUserSpec.getId())){
+            log.info("更新用户信息 -> {}", JSON.toJSONString(addUserSpec));
+            JwConfigurationUser jwConfigurationUser = this.baseMapper.selectById(addUserSpec.getId());
+            if(ObjectUtil.isNull(jwConfigurationUser)){
+                throw new BaseException(ResponseCode.USER_NOT_ERROR);
+            }
+            BeanUtil.copyProperties(addUserSpec,jwConfigurationUser,true);
+            jwConfigurationUser.insertOrUpdate();
+            // 清空角色
+            jwConfigurationUserRoleService.remove(Wrappers.lambdaQuery(JwConfigurationUserRole.class)
+                    .eq(JwConfigurationUserRole::getUserId,jwConfigurationUser.getId()));
+            // 新增角色信息
+            List<JwConfigurationUserRole> list = new ArrayList<>();
+            // 判断是否有权限
+            setUserRole(jwConfigurationUser,addUserSpec,list);
+            // 批量插入角色信息
+            jwConfigurationUserRoleService.batchAdd(list);
+            return jwConfigurationUser;
+        }
+        log.info("新增用户信息 -> {}", JSON.toJSONString(addUserSpec));
         // 判断用户编号是否存在
         QueryWrapper<JwConfigurationUser> qe = new QueryWrapper<>();
         qe.eq("user_no",addUserSpec.getUserNo()).eq("is_del",0);
@@ -102,7 +126,7 @@ public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationU
      */
     private void setUserRole(JwConfigurationUser jwConfigurationUser, AddUserSpec addUserSpec, List<JwConfigurationUserRole> list) {
         // 是否店长
-        if (RoleTypeEnum.SHOP_MANAGER.equals(addUserSpec.getRoleType())) {
+        if (PositionTypeEnum.SHOP_MANAGER.equals(addUserSpec.getPositionType())) {
             // 店长
             JwConfigurationRole byRoleLabel = jwConfigurationRoleService.findByRoleLabel(RoleConstantEnum.SHOP_MANAGER.getCode());
             if (ObjectUtil.isNotNull(byRoleLabel) && StrUtil.isNotBlank(byRoleLabel.getId())) {
@@ -111,7 +135,7 @@ public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationU
                 rl.setUserId(jwConfigurationUser.getId());
                 list.add(rl);
             }
-        }else if(RoleTypeEnum.SHOP_ASSISTANT.equals(addUserSpec.getRoleType())){
+        }else if(PositionTypeEnum.SHOP_ASSISTANT.equals(addUserSpec.getPositionType())){
             // 店员
             JwConfigurationRole byRoleLabel = jwConfigurationRoleService.findByRoleLabel(RoleConstantEnum.SHOP_ASSISTANT.getCode());
             if (ObjectUtil.isNotNull(byRoleLabel) && StrUtil.isNotBlank(byRoleLabel.getId())) {
@@ -120,7 +144,7 @@ public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationU
                 rl.setUserId(jwConfigurationUser.getId());
                 list.add(rl);
             }
-        }else if(RoleTypeEnum.ADMINISTRATOR.equals(addUserSpec.getRoleType())){
+        }else if(PositionTypeEnum.ADMINISTRATOR.equals(addUserSpec.getPositionType())){
             // 区域管理员
             JwConfigurationRole byRoleLabel = jwConfigurationRoleService.findByRoleLabel(RoleConstantEnum.ADMINISTRATOR.getCode());
             if (ObjectUtil.isNotNull(byRoleLabel) && StrUtil.isNotBlank(byRoleLabel.getId())) {
@@ -249,6 +273,43 @@ public class JwConfigurationUserServiceImpl extends ServiceImpl<JwConfigurationU
             byId.insertOrUpdate();
         }
         return byId;
+    }
+
+    /**
+     * 根据用户ID获取详情
+     * @param id
+     * @return
+     */
+    @Override
+    public AddUserDTO details(String id) {
+        AddUserDTO addUserDTO = new AddUserDTO();
+        JwConfigurationUser jwConfigurationUser = this.baseMapper.selectById(id);
+        // 拷贝数据
+        BeanUtil.copyProperties(jwConfigurationUser,addUserDTO,true);
+        // 设置角色信息
+        if(PositionTypeEnum.SHOP_ASSISTANT.equals(jwConfigurationUser.getPositionType()) || PositionTypeEnum.SHOP_MANAGER.equals(jwConfigurationUser.getPositionType())){
+            // 店员或店长
+            addUserDTO.setIsStock(true);
+            addUserDTO.setIsCargo(true);
+            addUserDTO.setIsCheck(true);
+            addUserDTO.setIsInventory(true);
+            addUserDTO.setIsInventoryCheck(true);
+            addUserDTO.setIsBreakage(true);
+            addUserDTO.setIsDaily(true);
+            addUserDTO.setIsData(true);
+        }else if(PositionTypeEnum.ADMINISTRATOR.equals(jwConfigurationUser.getPositionType())){
+            // 区域管理员
+            addUserDTO.setIsConfiguration(true);
+            addUserDTO.setIsStock(true);
+            addUserDTO.setIsCargo(true);
+            addUserDTO.setIsCheck(true);
+            addUserDTO.setIsInventory(true);
+            addUserDTO.setIsInventoryCheck(true);
+            addUserDTO.setIsBreakage(true);
+            addUserDTO.setIsDaily(true);
+            addUserDTO.setIsData(true);
+        }
+        return addUserDTO;
     }
 }
 

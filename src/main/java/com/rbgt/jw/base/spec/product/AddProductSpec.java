@@ -35,6 +35,13 @@ public class AddProductSpec {
     private String shopId;
 
     /**
+     * 门店名称
+     */
+    @ApiModelProperty("门店名称")
+    @NotNull(message = "门店名称")
+    private String shopName;
+
+    /**
      * 产品编号
      */
     @ApiModelProperty("产品编号")

@@ -32,13 +32,13 @@ public class JwDailyRecordController {
     @Autowired
     private JwDailyRecordService jwDailyRecordService;
 
-    @ApiOperation(value = "新增 - 盘点信息")
+    @ApiOperation(value = "新增 - 日结信息")
     @PostMapping("/dailyRecord/add")
     public ResponseResult<JwDailyRecord> add(@Valid @RequestBody @ApiParam(name = "spec", value = "创建日结实体类") AddDailyRecordSpec spec){
         return new ResponseResult(jwDailyRecordService.add(spec));
     }
 
-    @ApiOperation(value = "查询 - 根据ID查询盘点详情")
+    @ApiOperation(value = "查询 - 根据ID查询日结详情")
     @GetMapping("/dailyRecord/get/{id}")
     public ResponseResult<JwDailyRecordDTO> details(@PathVariable("id") @ApiParam(name = "id", value = "日结ID") String id){
         return new ResponseResult(jwDailyRecordService.details(id));

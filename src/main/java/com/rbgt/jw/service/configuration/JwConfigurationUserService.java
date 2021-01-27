@@ -2,6 +2,7 @@ package com.rbgt.jw.service.configuration;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rbgt.jw.base.dto.user.AddUserDTO;
 import com.rbgt.jw.entity.configuration.JwConfigurationUser;
 import com.rbgt.jw.base.dto.JwConfigurationUserDTO;
 import com.rbgt.jw.base.spec.configuration.JwConfigurationUserSpec;
@@ -53,5 +54,12 @@ public interface JwConfigurationUserService extends IService<JwConfigurationUser
      * @return
      */
     JwConfigurationUser updateUserPwd(UpdateUserPwdSpec spec);
+
+    /**
+     * 根据用户ID获取详情
+     * @param id
+     * @return
+     */
+    AddUserDTO details(String id);
 }
 

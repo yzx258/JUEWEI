@@ -3,6 +3,7 @@ package com.rbgt.jw.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -41,6 +42,17 @@ public class JwProductServiceImpl extends ServiceImpl<JwProductDao, JwProduct> i
      */
     @Override
     public JwProduct add(AddProductSpec addProductSpec) {
+        // 更新产品
+        if(StrUtil.isNotBlank(addProductSpec.getId())){
+            log.info("更新产品信息 -> {}", JSON.toJSONString(addProductSpec));
+            JwProduct jwProduct = this.baseMapper.selectById(addProductSpec.getId());
+            // 拷贝数据
+            BeanUtil.copyProperties(addProductSpec,jwProduct,true);
+            jwProduct.insertOrUpdate();
+            return jwProduct;
+        }
+        // 新增产品
+        log.info("新增产品信息 -> {}",JSON.toJSONString(addProductSpec));
         QueryWrapper<JwProduct> qw = new QueryWrapper<>();
         qw.eq("product_no",addProductSpec.getProductNo()).eq("shop_id",addProductSpec.getShopId()).eq("is_del",0);
         JwProduct jwProduct = this.baseMapper.selectOne(qw);

@@ -77,6 +77,12 @@ public class JwProduct extends Model<JwProduct> {
     private String shopId;
 
     /**
+     * 门店名称
+     */
+    @ApiModelProperty("门店名称")
+    private String shopName;
+
+    /**
      * 产品编号
      */
     @ApiModelProperty("产品编号")
@@ -124,6 +130,8 @@ public class JwProduct extends Model<JwProduct> {
     @ApiModelProperty("零售价格")
     private BigDecimal retailPrice;
 
+    @ApiModelProperty("保质期")
+    private int shelfLife;
 
     /**
      * 是否删除

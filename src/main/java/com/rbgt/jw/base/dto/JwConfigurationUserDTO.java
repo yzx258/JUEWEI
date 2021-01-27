@@ -1,6 +1,7 @@
 package com.rbgt.jw.base.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rbgt.jw.base.enums.user.PositionTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -47,11 +48,19 @@ public class JwConfigurationUserDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
-        /**
+
+    /**
      * 门店ID
      */
     @ApiModelProperty("门店ID")
     private String shopId;
+
+    /**
+     * 门店名称
+     */
+    @ApiModelProperty("门店名称")
+    private String shopName;
+
         /**
      * 用户名称 用户名称
      */
@@ -77,10 +86,7 @@ public class JwConfigurationUserDTO {
      */
     @ApiModelProperty("用户密码 用户密码")
     private String userPwd;
-        /**
-     * 是否删除 是否删除
-     */
-    @ApiModelProperty("是否删除 是否删除")
-    private int isDel;
-    
+
+    @ApiModelProperty("职位")
+    private PositionTypeEnum positionType;
 }

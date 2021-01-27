@@ -1,4 +1,4 @@
-package com.rbgt.jw.base.spec.user;
+package com.rbgt.jw.base.dto.user;
 
 import com.rbgt.jw.base.enums.user.PositionTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * @description: 新增用户信息
  */
 @Data
-public class AddUserSpec {
+public class AddUserDTO {
 
     /**
      * ID
@@ -72,8 +72,8 @@ public class AddUserSpec {
     @NotNull(message = "用户密码不能为空")
     private String userPwd;
 
-    @ApiModelProperty("职位")
-    private PositionTypeEnum positionType = PositionTypeEnum.SHOP_ASSISTANT;
+    @ApiModelProperty("职位：角色职位类型")
+    private PositionTypeEnum positionType;
 
     @ApiModelProperty("配置权：有权限[true],无权限[false]")
     private Boolean isConfiguration = false;

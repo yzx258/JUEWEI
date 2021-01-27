@@ -1,5 +1,6 @@
-package com.rbgt.jw.base.enums.daily;
+package com.rbgt.jw.base.enums.basic;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,16 +11,15 @@ import lombok.Getter;
  * @author： yucw
  * @date： 2020/12/21 17:03
  * @version： 1.0
- * @description: 日结占比类型枚举
+ * @description: 基础配置类型
  */
 @Getter
 @AllArgsConstructor
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum DailyAccountedTypeEnum {
+public enum BasicType {
 
     Z(0,"无"),
-    ADMINISTRATOR_EFFECTIVE_PROPORTION(1,"管理者有效占比"),
-    EFFECTIVE_INCOME_PROPORTION(2,"有效进账比"),
+    DAILY(1,"日结配置")
     ;
 
     private int code;
@@ -30,12 +30,13 @@ public enum DailyAccountedTypeEnum {
      * @param code
      * @return
      */
-    public static DailyAccountedTypeEnum getDailyAccountedTypeEnum(int code){
-        for(DailyAccountedTypeEnum dailyAccountedTypeEnum : DailyAccountedTypeEnum.values()){
-            if(code == dailyAccountedTypeEnum.getCode()){
-                return dailyAccountedTypeEnum;
+    public static BasicType getSexEnumByCode(int code){
+        for(BasicType sexEnum : BasicType.values()){
+            if(code == sexEnum.getCode()){
+                return sexEnum;
             }
         }
         return null;
     }
+
 }
