@@ -2,7 +2,7 @@ package com.rbgt.jw.base.spec.cargo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
-import com.rbgt.jw.base.spec.purchase.AddProductRecordSpec;
+import com.rbgt.jw.entity.JwProductRecord;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,6 +21,12 @@ import java.util.List;
  */
 @Data
 public class AddCargoInfoSpec {
+
+    /**
+     * id
+     */
+    @ApiModelProperty("id")
+    private String id;
 
     /**
      * 调货状态
@@ -84,5 +90,5 @@ public class AddCargoInfoSpec {
 
 
     @ApiModelProperty("进货产品记录信息")
-    List<AddProductRecordSpec> addProductRecordSpecs;
+    List<JwProductRecord> addProductRecordSpecs;
 }

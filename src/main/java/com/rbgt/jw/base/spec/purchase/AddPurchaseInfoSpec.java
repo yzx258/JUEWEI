@@ -2,6 +2,7 @@ package com.rbgt.jw.base.spec.purchase;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rbgt.jw.base.enums.purchase.PurchaseTypeEnum;
+import com.rbgt.jw.entity.JwProductRecord;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +21,12 @@ import java.util.List;
  */
 @Data
 public class AddPurchaseInfoSpec {
+
+    /**
+     * ID
+     */
+    @ApiModelProperty("ID")
+    private String id;
 
     /**
      * 进货状态
@@ -64,5 +71,5 @@ public class AddPurchaseInfoSpec {
     private String responsibleName;
 
     @ApiModelProperty("进货产品记录信息")
-    List<AddProductRecordSpec> addProductRecordSpecs;
+    List<JwProductRecord> addProductRecordSpecs;
 }

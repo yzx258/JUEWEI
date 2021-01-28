@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -53,6 +54,17 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
      */
     @Override
     public JwCargoInfo add(AddCargoInfoSpec addCargoInfoSpec) {
+        // 更新操作
+        if(StrUtil.isNotBlank(addCargoInfoSpec.getId())){
+            log.info("更新调货信息 -> {}", JSON.toJSONString(addCargoInfoSpec));
+            JwCargoInfo jwCargoInfo = this.baseMapper.selectById(addCargoInfoSpec.getId());
+            // 拷贝数据
+            BeanUtil.copyProperties(addCargoInfoSpec,jwCargoInfo,true);
+            jwCargoInfo.insertOrUpdate();
+            // 批量更新产品
+            jwProductRecordService.updateBatchById(addCargoInfoSpec.getAddProductRecordSpecs());
+            return jwCargoInfo;
+        }
         JwCargoInfo jwCargoInfo = new JwCargoInfo();
         // 判断今日是否存在进货，或者是否存在未审核的进货数据
         LambdaQueryWrapper<JwCargoInfo> eq = Wrappers.<JwCargoInfo>lambdaQuery()
@@ -66,16 +78,12 @@ public class JwCargoInfoServiceImpl extends ServiceImpl<JwCargoInfoDao, JwCargoI
         // 拷贝进货数据
         BeanUtil.copyProperties(addCargoInfoSpec,jwCargoInfo,true);
         jwCargoInfo.insert();
-        List<JwProductRecord> list = new ArrayList<>();
         addCargoInfoSpec.getAddProductRecordSpecs().forEach(pr -> {
-            JwProductRecord jpr = new JwProductRecord();
-            BeanUtil.copyProperties(pr,jpr,true);
-            jpr.setPurchaseId(jwCargoInfo.getId());
-            jpr.setShopId(jwCargoInfo.getCargoShopId());
-            list.add(jpr);
+            pr.setPurchaseId(jwCargoInfo.getId());
+            pr.setShopId(jwCargoInfo.getCargoShopId());
         });
         // 批量插入
-        jwProductRecordService.saveBatch(list);
+        jwProductRecordService.saveBatch(addCargoInfoSpec.getAddProductRecordSpecs());
         return jwCargoInfo;
     }
 

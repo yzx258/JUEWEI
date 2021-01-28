@@ -1,12 +1,9 @@
 package com.rbgt.jw.base.spec.inventory;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.rbgt.jw.base.enums.inventory.InventoryStatusTypeEnum;
-import com.rbgt.jw.base.spec.purchase.AddProductRecordSpec;
+import com.rbgt.jw.entity.JwProductRecord;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,6 +21,12 @@ import java.util.List;
  */
 @Data
 public class AddInventoryInfoSpec {
+
+    /**
+     * id
+     */
+    @ApiModelProperty("id")
+    private String id;
 
     /**
      * 门店ID
@@ -62,5 +65,5 @@ public class AddInventoryInfoSpec {
      * 进货产品记录信息
      */
     @ApiModelProperty("进货产品记录信息")
-    List<AddProductRecordSpec> addProductRecordSpecs;
+    List<JwProductRecord> addProductRecordSpecs;
 }

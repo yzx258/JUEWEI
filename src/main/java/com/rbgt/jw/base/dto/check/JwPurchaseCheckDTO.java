@@ -70,6 +70,15 @@ public class JwPurchaseCheckDTO {
      */
     @ApiModelProperty("门店名称")
     private String shopName;
+
+    /**
+     * 下单日期
+     */
+    @ApiModelProperty("下单日期")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date purchaseTime;
+
     /**
      * 到货日期
      */

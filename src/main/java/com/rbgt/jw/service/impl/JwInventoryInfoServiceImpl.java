@@ -5,6 +5,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -59,6 +60,19 @@ public class JwInventoryInfoServiceImpl  extends ServiceImpl<JwInventoryInfoDao,
      */
     @Override
     public JwInventoryInfo add(AddInventoryInfoSpec spec) {
+        // 更新盘点数据
+        if(StrUtil.isNotBlank(spec.getId())){
+            log.info("更新盘点信息 -> {}", JSON.toJSONString(spec));
+            JwInventoryInfo jwInventoryInfo = this.baseMapper.selectById(spec.getId());
+            // 拷贝数据
+            BeanUtil.copyProperties(spec,jwInventoryInfo,true);
+            jwInventoryInfo.insertOrUpdate();
+            // 批量更新产品
+            jwProductRecordService.updateBatchById(spec.getAddProductRecordSpecs());
+            return jwInventoryInfo;
+        }
+        // 新增盘点信息
+        log.info("新增盘点信息 -> {}",JSON.toJSONString(spec));
         // 判断是否存在盘点，位确认数据
         LambdaQueryWrapper<JwInventoryInfo> eq = Wrappers.<JwInventoryInfo>lambdaQuery()
                 .eq(JwInventoryInfo::getInventoryShopId,spec.getInventoryShopId())
@@ -73,16 +87,12 @@ public class JwInventoryInfoServiceImpl  extends ServiceImpl<JwInventoryInfoDao,
         // 插入盘点数据
         jwInventoryInfo.insert();
         // 插入盘点产品信息
-        List<JwProductRecord> list = new ArrayList<>();
         spec.getAddProductRecordSpecs().forEach(pr -> {
-            JwProductRecord jpr = new JwProductRecord();
-            BeanUtil.copyProperties(pr,jpr,true);
-            jpr.setPurchaseId(jwInventoryInfo.getId());
-            jpr.setShopId(jwInventoryInfo.getInventoryShopId());
-            list.add(jpr);
+            pr.setPurchaseId(jwInventoryInfo.getId());
+            pr.setShopId(jwInventoryInfo.getInventoryShopId());
         });
         // 批量插入
-        jwProductRecordService.saveBatch(list);
+        jwProductRecordService.saveBatch(spec.getAddProductRecordSpecs());
         return jwInventoryInfo;
     }
 

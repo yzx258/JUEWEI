@@ -55,6 +55,8 @@ public enum ResponseCode {
      */
     DAILY_ERROR(400001,"日结配置信息为空"),
     DAILY_ERROR1(400002,"该门店，日结配置信息已存在"),
+    DAILY_ERROR2(400003,"日结配置信息超过一天，不允许修改"),
+
 
     /**
      * 配置产品错误信息

@@ -40,7 +40,7 @@ public class JwCargoInfoController {
 
     @ApiOperation(value = "查询 - 根据ID查询调货详情")
     @GetMapping("/cargo/get/{id}")
-    public ResponseResult<JwCargoInfoCheckDTO> getById(@PathVariable("id") @ApiParam(name = "id", value = "调货ID") String id){
+    public ResponseResult<JwCargoInfoCheckDTO> details(@PathVariable("id") @ApiParam(name = "id", value = "调货ID") String id){
         return new ResponseResult(jwCargoInfoService.details(id));
     }
 

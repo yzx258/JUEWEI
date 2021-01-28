@@ -28,14 +28,12 @@ public class DailySearchDTO {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-
     /**
      * 创建人 创建人
      */
     @ApiModelProperty("创建人 创建人")
     @TableField(fill = FieldFill.INSERT)
     private String createBy;
-
 
     /**
      * 创建时间 创建时间
@@ -54,7 +52,6 @@ public class DailySearchDTO {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String lastModifiedBy;
 
-
     /**
      * 更新时间 更新时间
      */
@@ -64,13 +61,11 @@ public class DailySearchDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
-
     /**
      * 门店ID
      */
     @ApiModelProperty("门店ID")
     private String shopId;
-
 
     /**
      * 门店名称
@@ -78,19 +73,24 @@ public class DailySearchDTO {
     @ApiModelProperty("门店名称")
     private String shopName;
 
-
     /**
      * 收银员ID
      */
     @ApiModelProperty("收银员ID")
     private String responsibleId;
 
-
     /**
      * 收银员名称
      */
     @ApiModelProperty("收银员名称")
     private String responsibleName;
+
+    /**
+     * 是否超过一天
+     */
+    @ApiModelProperty("是否超过一天：1是，0不是")
+    private int isMoreTime = 0;
+
 
     @ApiModelProperty("日结明细")
     private List<JwConfigurationDailyDetail> dailyDetails;

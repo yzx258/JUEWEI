@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -51,6 +52,17 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
     @Override
     @Transactional(rollbackFor = Exception.class)
     public JwPurchaseInfo add(AddPurchaseInfoSpec spec) {
+        // 更新进货数据
+        if(StrUtil.isNotBlank(spec.getId())){
+            log.info("更新进货数据 -> {}", JSON.toJSONString(spec));
+            JwPurchaseInfo jwPurchaseInfo = this.baseMapper.selectById(spec.getId());
+            // 拷贝数据
+            BeanUtil.copyProperties(spec,jwPurchaseInfo,true);
+            jwPurchaseInfo.insertOrUpdate();
+            // 批量更新产品数据
+            jwProductRecordService.updateBatchById(spec.getAddProductRecordSpecs());
+            return jwPurchaseInfo;
+        }
         JwPurchaseInfo jwPurchaseInfo = new JwPurchaseInfo();
         // 判断今日是否存在进货，或者是否存在未审核的进货数据
         LambdaQueryWrapper<JwPurchaseInfo> eq = Wrappers.<JwPurchaseInfo>lambdaQuery()
@@ -65,16 +77,12 @@ public class JwPurchaseInfoServiceImpl extends ServiceImpl<JwPurchaseInfoDao, Jw
         // 插入进货数据
         jwPurchaseInfo.insert();
         // 插入进货产品信息
-        List<JwProductRecord> list = new ArrayList<>();
         spec.getAddProductRecordSpecs().forEach(pr -> {
-            JwProductRecord jpr = new JwProductRecord();
-            BeanUtil.copyProperties(pr,jpr,true);
-            jpr.setPurchaseId(jwPurchaseInfo.getId());
-            jpr.setShopId(jwPurchaseInfo.getShopId());
-            list.add(jpr);
+            pr.setPurchaseId(jwPurchaseInfo.getId());
+            pr.setShopId(jwPurchaseInfo.getShopId());
         });
         // 批量插入
-        jwProductRecordService.saveBatch(list);
+        jwProductRecordService.saveBatch(spec.getAddProductRecordSpecs());
         return jwPurchaseInfo;
     }
 
