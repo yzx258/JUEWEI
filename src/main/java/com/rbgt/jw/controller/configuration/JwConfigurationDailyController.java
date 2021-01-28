@@ -1,7 +1,12 @@
 package com.rbgt.jw.controller.configuration;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.rbgt.jw.base.dto.JwBreakageInfoDTO;
 import com.rbgt.jw.base.dto.JwConfigurationDailyDTO;
+import com.rbgt.jw.base.dto.daily.DailySearchDTO;
+import com.rbgt.jw.base.spec.breakage.BreakageInfoSearchSpec;
 import com.rbgt.jw.base.spec.daily.AddDailySpec;
+import com.rbgt.jw.base.spec.daily.DailySearchSpec;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.configuration.JwConfigurationDaily;
@@ -34,9 +39,15 @@ public class JwConfigurationDailyController {
         return new ResponseResult(jwConfigurationDailyService.add(addDailySpec));
     }
 
-    @ApiOperation(value = "查询 - 日结详情")
-    @GetMapping("/daily/details/{shopId}")
-    public ResponseResult<JwConfigurationDailyDTO> details(@PathVariable("shopId") @ApiParam(name="shopId",value = "门店ID") String shopId){
-        return new ResponseResult(jwConfigurationDailyService.details(shopId));
+    @ApiOperation(value = "查询 - 日结配置详情")
+    @GetMapping("/daily/details/{id}")
+    public ResponseResult<DailySearchDTO> details(@PathVariable("id") @ApiParam(name="id",value = "id") String id){
+        return new ResponseResult(jwConfigurationDailyService.details(id));
+    }
+
+    @ApiOperation(value = "查询 - 分页日结配置信息")
+    @PostMapping("/daily/search")
+    public ResponseResult<IPage<DailySearchDTO>> search(@ApiParam(name = "spec", value = "spec") @RequestBody DailySearchSpec spec){
+        return new ResponseResult(jwConfigurationDailyService.search(spec));
     }
 }

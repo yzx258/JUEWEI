@@ -31,7 +31,9 @@ public class JwConfigurationBasicServiceImpl extends ServiceImpl<JwConfiguration
      */
     @Override
     public List<JwConfigurationBasic> findByTargetNo(String targetNo) {
-        List<JwConfigurationBasic> jwConfigurationBasics = this.baseMapper.selectList(Wrappers.lambdaQuery(JwConfigurationBasic.class).eq(JwConfigurationBasic::getTargetNo, targetNo).eq(JwConfigurationBasic::getIsDel, 0));
+        List<JwConfigurationBasic> jwConfigurationBasics = this.baseMapper.selectList(Wrappers.lambdaQuery(JwConfigurationBasic.class)
+                .eq(JwConfigurationBasic::getTargetNo, targetNo)
+                .eq(JwConfigurationBasic::getIsDel, 0));
         return jwConfigurationBasics;
     }
 }

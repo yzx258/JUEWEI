@@ -1,6 +1,7 @@
 package com.rbgt.jw.service.impl.configuration;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rbgt.jw.base.enums.basic.BasicType;
@@ -34,6 +35,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwConfigurationDailyDetailServiceImpl extends ServiceImpl<JwConfigurationDailyDetailDao, JwConfigurationDailyDetail> implements JwConfigurationDailyDetailService {
 
+    /**
+     * 查询日结配置
+     */
+    private final String targetNo = "RBGT0000000001";
+
     @Autowired
     private JwConfigurationBasicService jwConfigurationBasicService;
 
@@ -43,15 +49,20 @@ public class JwConfigurationDailyDetailServiceImpl extends ServiceImpl<JwConfigu
      */
     @Override
     public List<JwConfigurationDailyDetail> getList() {
-        List<JwConfigurationBasic> list = jwConfigurationBasicService.findByTargetNo("RBGT0000000001");
-        log.info("查询出来的配置数据 -> {}", JSON.toJSONString(list));
+        List<JwConfigurationBasic> list = jwConfigurationBasicService.findByTargetNo(targetNo);
         List<JwConfigurationDailyDetail> ls = new ArrayList<>();
+        final int[] i = {1};
         list.stream().forEach(l -> {
-            JwConfigurationDailyDetail jwConfigurationDailyDetail = new JwConfigurationDailyDetail();
-            jwConfigurationDailyDetail.setDailyKey(l.getBasicKey());
-            jwConfigurationDailyDetail.setDailyType(DailyTypeEnum.getDailyTypeEnum(Integer.parseInt(l.getBasicValue())));
-            jwConfigurationDailyDetail.setDailyAccountedType(DailyAccountedTypeEnum.getDailyAccountedTypeEnum(l.getBasicType()));
-            ls.add(jwConfigurationDailyDetail);
+            list.stream().forEach(lls -> {
+                if(Integer.parseInt(lls.getId()) == i[0]){
+                    JwConfigurationDailyDetail jwConfigurationDailyDetail = new JwConfigurationDailyDetail();
+                    jwConfigurationDailyDetail.setDailyKey(lls.getBasicKey());
+                    jwConfigurationDailyDetail.setDailyType(DailyTypeEnum.getDailyTypeEnum(Integer.parseInt(lls.getBasicValue())));
+                    jwConfigurationDailyDetail.setDailyAccountedType(DailyAccountedTypeEnum.getDailyAccountedTypeEnum(lls.getBasicType()));
+                    ls.add(jwConfigurationDailyDetail);
+                }
+            });
+            i[0] = i[0] +1;
         });
         return ls;
     }

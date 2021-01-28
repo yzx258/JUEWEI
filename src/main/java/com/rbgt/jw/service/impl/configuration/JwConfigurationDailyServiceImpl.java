@@ -2,12 +2,17 @@ package com.rbgt.jw.service.impl.configuration;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rbgt.jw.base.dto.JwConfigurationDailyDTO;
+import com.rbgt.jw.base.dto.daily.DailySearchDTO;
 import com.rbgt.jw.base.enums.ResponseCode;
 import com.rbgt.jw.base.spec.daily.AddDailySpec;
+import com.rbgt.jw.base.spec.daily.DailySearchSpec;
 import com.rbgt.jw.config.handler.BaseException;
 import com.rbgt.jw.dao.configuration.JwConfigurationDailyDao;
 import com.rbgt.jw.entity.configuration.JwConfigurationDaily;
@@ -47,6 +52,19 @@ public class JwConfigurationDailyServiceImpl extends ServiceImpl<JwConfiguration
     @Override
     @Transactional(rollbackFor = Exception.class)
     public JwConfigurationDaily add(AddDailySpec addDailySpec) {
+        // 更新数据
+        if(StrUtil.isNotBlank(addDailySpec.getId())){
+            log.info("更新日结配置 -> {}",JSON.toJSONString(addDailySpec));
+            JwConfigurationDaily jwConfigurationDaily = this.baseMapper.selectById(addDailySpec.getId());
+            // 拷贝数据
+            BeanUtil.copyProperties(addDailySpec,jwConfigurationDaily,true);
+            jwConfigurationDaily.insertOrUpdate();
+            // 批量更行
+            jwConfigurationDailyDetailService.updateBatchById(addDailySpec.getAddDailyDetailList());
+            return jwConfigurationDaily;
+        }
+        // 新增日结配置
+        log.info("新增日结配置 -> {}",JSON.toJSONString(addDailySpec));
         // 判断该门店是否存在日结配置，每家店只允许一份日结配置
         QueryWrapper<JwConfigurationDaily> qwJcd = new QueryWrapper<>();
         qwJcd.eq("shop_id",addDailySpec.getShopId()).eq("is_del",0);
@@ -60,41 +78,50 @@ public class JwConfigurationDailyServiceImpl extends ServiceImpl<JwConfiguration
         BeanUtil.copyProperties(addDailySpec,jwConfigurationDaily,true);
         // 插入数据
         jwConfigurationDaily.insert();
-        List<JwConfigurationDailyDetail> list = new ArrayList<JwConfigurationDailyDetail>();
-        addDailySpec.getAddDailyDetailList().stream().forEach(d -> {
-            JwConfigurationDailyDetail jwConfigurationDailyDetail = new JwConfigurationDailyDetail();
-            // 拷贝数据
-            BeanUtil.copyProperties(d,jwConfigurationDailyDetail,true);
-            jwConfigurationDailyDetail.setDailyId(jwConfigurationDaily.getId());
-            list.add(jwConfigurationDailyDetail);
-        });
         // 批量插入数据
-        jwConfigurationDailyDetailService.saveBatch(list);
+        addDailySpec.getAddDailyDetailList().stream().forEach(ad -> {
+            ad.setDailyId(jwConfigurationDaily.getId());
+        });
+        jwConfigurationDailyDetailService.saveBatch(addDailySpec.getAddDailyDetailList());
         log.info("插入日结配置信息完成");
         return jwConfigurationDaily;
     }
 
     /**
      * 根据门店ID查询日结配置信息
-     * @param shopId
+     * @param id
      * @return
      */
     @Override
-    public JwConfigurationDailyDTO details(String shopId) {
-        JwConfigurationDailyDTO jwConfigurationDailyDTO = new JwConfigurationDailyDTO();
-        QueryWrapper<JwConfigurationDaily> qw = new QueryWrapper<>();
-        qw.eq("shop_id",shopId).eq("is_del",0);
-        JwConfigurationDaily jwConfigurationDaily = this.baseMapper.selectOne(qw);
-        if(ObjectUtil.isNull(jwConfigurationDaily)){
+    public DailySearchDTO details(String id) {
+        DailySearchDTO jwConfigurationDailyDTO = new DailySearchDTO();
+        JwConfigurationDaily byId = this.getById(id);
+        if(ObjectUtil.isNull(byId)){
             throw new BaseException(ResponseCode.DAILY_ERROR);
         }
         // 设置日结信息
-        jwConfigurationDailyDTO.setJwConfigurationDaily(jwConfigurationDaily);
+        BeanUtil.copyProperties(byId,jwConfigurationDailyDTO,true);
         //设置日结明细信息
         QueryWrapper<JwConfigurationDailyDetail> qw1 = new QueryWrapper<>();
-        qw1.eq("daily_id",jwConfigurationDaily.getId()).eq("is_del",0);
+        qw1.eq("daily_id",byId.getId()).eq("is_del",0).orderByAsc("daily_type");
         jwConfigurationDailyDTO.setDailyDetails(jwConfigurationDailyDetailService.getBaseMapper().selectList(qw1));
         return jwConfigurationDailyDTO;
+    }
+
+    /**
+     * 分页获取日结配置
+     * @param spec
+     * @return
+     */
+    @Override
+    public IPage<DailySearchDTO> search(DailySearchSpec spec) {
+        IPage<DailySearchDTO> search = this.baseMapper.search(spec, spec.getPage());
+        search.getRecords().stream().forEach(ds -> {
+            ds.setDailyDetails(jwConfigurationDailyDetailService.getBaseMapper().selectList(Wrappers.lambdaQuery(JwConfigurationDailyDetail.class)
+                    .eq(JwConfigurationDailyDetail::getDailyId,ds.getId())
+                    .eq(JwConfigurationDailyDetail::getIsDel,0).orderByAsc(JwConfigurationDailyDetail::getDailyType)));
+        });
+        return search;
     }
 }
 

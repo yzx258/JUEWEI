@@ -3,5 +3,14 @@
 
 <mapper namespace="com.rbgt.jw.dao.configuration.JwConfigurationDailyDao">
 
-
+    <!-- 分页查询数据 -->
+    <select id="search" resultType="com.rbgt.jw.base.dto.daily.DailySearchDTO">
+        select * from jw_configuration_daily jcd
+        <where>
+            <if test="param.shopId != null and param.shopId != ''">
+                jcd.shop_id = #{param.shopId}
+            </if>
+            and jcd.is_del = 0
+        </where>
+    </select>
 </mapper>

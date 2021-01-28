@@ -1,5 +1,6 @@
 package com.rbgt.jw.base.spec.daily;
 
+import com.rbgt.jw.entity.configuration.JwConfigurationDailyDetail;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -15,6 +16,12 @@ import java.util.List;
  */
 @Data
 public class AddDailySpec {
+
+    /**
+     * ID
+     */
+    @ApiModelProperty("ID")
+    private String id;
 
     /**
      * 门店ID
@@ -38,5 +45,5 @@ public class AddDailySpec {
     private String responsibleName;
 
     @ApiModelProperty("日结明细")
-    List<AddDailyDetailSpec> addDailyDetailList;
+    List<JwConfigurationDailyDetail> addDailyDetailList;
 }
