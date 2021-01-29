@@ -62,6 +62,18 @@ public class AddInventoryInfoSpec {
     private String inventoryPeopleName;
 
     /**
+     * 复盘人Id
+     */
+    @ApiModelProperty("复盘人Id")
+    private String analysePeopleId;
+
+    /**
+     * 复盘人名称
+     */
+    @ApiModelProperty("复盘人名称")
+    private String analysePeopleName;
+
+    /**
      * 进货产品记录信息
      */
     @ApiModelProperty("进货产品记录信息")
