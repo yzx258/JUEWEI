@@ -22,11 +22,6 @@ import java.util.Date;
 public class ShopProductDTO {
 
     /**
-     * ID 唯一标识
-     */
-    @ApiModelProperty("ID 唯一标识")
-    private String id;
-    /**
      * 产品编号
      */
     @ApiModelProperty("产品编号")
