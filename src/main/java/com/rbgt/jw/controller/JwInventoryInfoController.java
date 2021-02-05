@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.rbgt.jw.base.dto.check.JwInventoryInfoDTO;
 import com.rbgt.jw.base.spec.inventory.AddInventoryInfoSpec;
 import com.rbgt.jw.base.spec.inventory.InventorySearchSpec;
+import com.rbgt.jw.base.utils.excel.ExcelHelper;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.entity.JwInventoryInfo;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @company： 厦门宜车时代信息技术有限公司
@@ -65,7 +67,14 @@ public class JwInventoryInfoController {
 
     @ApiOperation(value = "查询 - 分页信息")
     @PostMapping("/inventory/excel")
-    public void exportList(HttpServletRequest request, HttpServletResponse response,@RequestBody InventorySearchSpec spec) {
+    public void exportList(HttpServletResponse response,@RequestBody InventorySearchSpec spec) throws IOException {
+        List<JwInventoryInfo> list = jwInventoryInfoService.getBaseMapper().selectList(null);
+        ExcelHelper.export("excel/inventory-template.json", list, response);
+    }
+
+    @ApiOperation(value = "查询 - 分页信息")
+    @PostMapping("/inventory/excel1")
+    public void exportList1(HttpServletRequest request, HttpServletResponse response,@RequestBody InventorySearchSpec spec) {
         SXSSFWorkbook wb = jwInventoryInfoService.exportListExcel(spec);
         OutputStream os = null;
         String fileName = "工时统计表" + new SimpleDateFormat("yyyyMMdd").format(new Date());
