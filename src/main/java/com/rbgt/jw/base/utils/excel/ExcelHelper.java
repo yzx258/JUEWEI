@@ -118,14 +118,10 @@ public class ExcelHelper {
          * @param date 日期
          */
         public String formatDate1(Date date) {
-            log.info("我是转换的日期formatDate1");
             if (date == null) {
                 return "";
             }
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String format = formatter.format(date);
-            log.info("我是转换的日期:{}",format);
-            return format;
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
         }
 
         /**
@@ -134,13 +130,10 @@ public class ExcelHelper {
          * @param localDateTime 日期
          */
         public String formatDate(LocalDateTime localDateTime) {
-            log.info("我是转换的日期formatDate1");
             if (localDateTime == null) {
                 return "";
             }
-            String format = localDateTime.format(DEFAULT_DATE_TIME_FORMATTER);
-            log.info("我是转换的日期:{}",format);
-            return format;
+            return localDateTime.format(DEFAULT_DATE_TIME_FORMATTER);
         }
 
         /**
@@ -151,7 +144,6 @@ public class ExcelHelper {
          */
         @SneakyThrows
         public String formatDate(LocalDateTime localDateTime, String pattern) {
-            log.info("我是转换的日期formatDate2");
             if (localDateTime == null) {
                 return "";
             }
