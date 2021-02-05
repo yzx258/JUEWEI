@@ -1,5 +1,6 @@
 package com.rbgt.jw.base.utils.excel;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
@@ -121,7 +122,7 @@ public class ExcelHelper {
             if (date == null) {
                 return "";
             }
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+            return DateUtil.format(date,"yyyy年MM月dd日 hh时mm分ss秒");
         }
 
         /**
