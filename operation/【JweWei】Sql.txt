@@ -42,20 +42,22 @@ CREATE TABLE `jw_configuration_role` (
 
 -- 004用户表
 CREATE TABLE `jw_configuration_user` (
-  `id` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID 唯一标识',
-  `create_by` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建人 创建人',
+  `id` varchar(32) NOT NULL COMMENT 'ID 唯一标识',
+  `create_by` varchar(32) DEFAULT NULL COMMENT '创建人 创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间 创建时间',
-  `last_modified_by` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新人 更新人',
+  `last_modified_by` varchar(32) DEFAULT NULL COMMENT '更新人 更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间 更新时间',
-  `shop_id` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '门店ID',
-  `user_name` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '用户名称 用户名称',
-  `user_mobile` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '联系电话 联系电话',
-  `user_no` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '用户编号 用户编号',
-  `user_account` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '用户账号',
-  `user_pwd` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '用户密码 用户密码',
-  `is_del` int DEFAULT NULL COMMENT '是否删除 是否删除',
+  `shop_name` varchar(255) DEFAULT NULL COMMENT '门店名称',
+  `shop_id` varchar(32) DEFAULT NULL COMMENT '门店ID',
+  `user_name` varchar(32) DEFAULT NULL COMMENT '用户名称 用户名称',
+  `user_mobile` varchar(32) DEFAULT NULL COMMENT '联系电话 联系电话',
+  `user_no` varchar(32) DEFAULT NULL COMMENT '用户编号 用户编号',
+  `user_account` varchar(32) DEFAULT NULL COMMENT '用户账号',
+  `user_pwd` varchar(32) DEFAULT NULL COMMENT '用户密码 用户密码',
+  `is_del` int(11) DEFAULT NULL COMMENT '是否删除 是否删除',
+  `position_type` int(255) DEFAULT NULL COMMENT '职位类型',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户表 ';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表 ';
 
 -- 005用户角色表
 CREATE TABLE `jw_configuration_user_role` (
