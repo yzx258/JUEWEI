@@ -198,24 +198,26 @@ CREATE TABLE `jw_inventory_info` (
 
 -- 011产品信息表
 CREATE TABLE `jw_product` (
-  `id` varchar(32) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID 唯一标识',
-  `create_by` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建人 创建人',
+  `id` varchar(32) NOT NULL COMMENT 'ID 唯一标识',
+  `create_by` varchar(32) DEFAULT NULL COMMENT '创建人 创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间 创建时间',
-  `last_modified_by` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新人 更新人',
+  `last_modified_by` varchar(32) DEFAULT NULL COMMENT '更新人 更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间 更新时间',
-  `product_no` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '产品编号',
-  `product_name` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '产品名称',
-  `product_specifications` int DEFAULT NULL COMMENT '产品规格',
-  `product_pack` int DEFAULT NULL COMMENT '产品包装',
-  `product_taste` int DEFAULT NULL COMMENT '产品口味',
+  `product_no` varchar(32) DEFAULT NULL COMMENT '产品编号',
+  `product_name` varchar(32) DEFAULT NULL COMMENT '产品名称',
+  `product_specifications` int(11) DEFAULT NULL COMMENT '产品规格',
+  `product_pack` int(11) DEFAULT NULL COMMENT '产品包装',
+  `product_taste` int(11) DEFAULT NULL COMMENT '产品口味',
   `stock_price` decimal(12,2) DEFAULT NULL COMMENT '进货价格',
   `retail_price` decimal(12,2) DEFAULT NULL COMMENT '零售价格',
-  `is_del` int DEFAULT NULL COMMENT '是否删除',
-  `shop_id` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '门店ID',
+  `is_del` int(11) DEFAULT NULL COMMENT '是否删除',
+  `shop_id` varchar(32) DEFAULT NULL COMMENT '门店ID',
+  `shop_name` varchar(255) DEFAULT NULL COMMENT '门店名称',
+  `shelf_life` int(255) DEFAULT NULL COMMENT '保质期',
   PRIMARY KEY (`id`),
   KEY `shop_id_index` (`shop_id`),
   KEY `product_no_index` (`product_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='产品信息表 ';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='产品信息表 ';
 
 -- 012产品信息表
 CREATE TABLE `jw_product_record` (
