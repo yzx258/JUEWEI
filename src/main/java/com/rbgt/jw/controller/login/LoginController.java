@@ -1,6 +1,7 @@
 package com.rbgt.jw.controller.login;
 
 import com.alibaba.fastjson.JSON;
+import com.rbgt.jw.annotation.LockMethod;
 import com.rbgt.jw.base.dto.login.LoginDTO;
 import com.rbgt.jw.config.resoponse.ResponseResult;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
@@ -31,6 +32,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @LockMethod(mark = "true",expire = 3,kg = true)
     @ApiOperation(value = "查询 - 用户登录")
     @PostMapping("/login")
     public ResponseResult<?> login(@Valid @RequestBody LoginSpec loginSpec) {
