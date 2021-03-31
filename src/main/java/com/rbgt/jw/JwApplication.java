@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @Slf4j
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.rbgt.jw"})
 public class JwApplication {
 
     public static void main(String[] args) {
