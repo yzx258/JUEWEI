@@ -3,11 +3,10 @@ package com.rbgt.jw.controller;
 import com.rbgt.jw.config.handler.BaseException;
 import com.rbgt.jw.config.resoponse.target.BaseResponse;
 import com.rbgt.jw.base.enums.ResponseCode;
+import com.rbgt.jw.pattern.SimpleContext;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 俞春旺
@@ -20,6 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/test")
 public class TestController {
+
+    @Autowired
+    private SimpleContext simpleContext;
+
+    @GetMapping("/choose")
+    public String choose(@RequestParam String type){
+        return simpleContext.getResource(type);
+    }
 
     @GetMapping("/{userId}")
     public Object getUserById(@PathVariable Integer userId){
